@@ -34,4 +34,12 @@ router.put(
   }
 );
 
+// Update to add cause to causes table
+router.put(
+  '/',
+  (req: Request, res: Response, next: express.NextFunction): void => {
+    // POST route code here
+  }
+);
+
 module.exports = router;
