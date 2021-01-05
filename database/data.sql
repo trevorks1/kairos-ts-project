@@ -12,14 +12,14 @@ VALUES ('Arts & Crafts'),
 ('Packing'),
 ('Painting'),
 ('Reading'),
-('Sorting')
+('Sorting');
 
 INSERT INTO "ages" ("range")
 VALUES ('0-4'),
 ('5-12'),
 ('13-17'),
 ('Adult'),
-('Adult 55+')
+('Adult 55+');
 
 INSERT INTO "causes" ("cause")
 VALUES ('Animals & Pets'),
@@ -38,9 +38,9 @@ VALUES ('Animals & Pets'),
 ('Media & Journalism'),
 ('Re-entry & Criminal Justice'),
 ('Seniors & Caregivers'),
-('Sports & Recreation')
+('Sports & Recreation');
 
 INSERT INTO "access_level" ("title", "access_level")
 VALUES ('Admin', 10),
 ('Organization', 20),
-('Volunteer', 30)
+('Volunteer', 30);
