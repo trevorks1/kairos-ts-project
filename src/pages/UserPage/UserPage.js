@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import LogOutButton from '../LogOutButton/LogOutButton';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import LogOutButton from '../../components/LogOutButton/LogOutButton';
 
 class UserPage extends Component {
   // this component doesn't do much to start, just renders some user info to the DOM

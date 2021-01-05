@@ -125,38 +125,38 @@ CREATE TABLE "user_activity" (
   "activity_type_id" INT
 );
 
-ALTER TABLE "user" ADD FOREIGN KEY ("id") REFERENCES "organization" ("user_id");
+ALTER TABLE "organization" ADD FOREIGN KEY ("user_id") REFERENCES "user" ("id");
 
-ALTER TABLE "organization" ADD FOREIGN KEY ("id") REFERENCES "org_causes" ("org_id");
+ALTER TABLE "org_causes" ADD FOREIGN KEY ("org_id") REFERENCES "organization" ("id");
 
-ALTER TABLE "causes" ADD FOREIGN KEY ("id") REFERENCES "org_causes" ("cause_id");
+ALTER TABLE "org_causes" ADD FOREIGN KEY ("cause_id") REFERENCES "causes" ("id");
 
-ALTER TABLE "postings" ADD FOREIGN KEY ("id") REFERENCES "posting_ages" ("posting_id");
+ALTER TABLE "posting_ages" ADD FOREIGN KEY ("posting_id") REFERENCES "postings" ("id");
 
-ALTER TABLE "ages" ADD FOREIGN KEY ("id") REFERENCES "posting_ages" ("ages_id");
+ALTER TABLE "posting_ages" ADD FOREIGN KEY ("ages_id") REFERENCES "ages" ("id");
 
-ALTER TABLE "user" ADD FOREIGN KEY ("id") REFERENCES "user_ages" ("user_id");
+ALTER TABLE "user_ages" ADD FOREIGN KEY ("user_id") REFERENCES "user" ("id");
 
-ALTER TABLE "ages" ADD FOREIGN KEY ("id") REFERENCES "user_ages" ("ages_id");
+ALTER TABLE "user_ages" ADD FOREIGN KEY ("ages_id") REFERENCES "ages" ("id");
 
-ALTER TABLE "postings" ADD FOREIGN KEY ("id") REFERENCES "posting_volunteers" ("posting_id");
+ALTER TABLE "posting_volunteers" ADD FOREIGN KEY ("posting_id") REFERENCES "postings" ("id");
 
-ALTER TABLE "user" ADD FOREIGN KEY ("id") REFERENCES "posting_volunteers" ("user_id");
+ALTER TABLE "posting_volunteers" ADD FOREIGN KEY ("user_id") REFERENCES "user" ("id");
 
-ALTER TABLE "group" ADD FOREIGN KEY ("id") REFERENCES "posting_volunteers" ("group_id");
+ALTER TABLE "posting_volunteers" ADD FOREIGN KEY ("group_id") REFERENCES "group" ("id");
 
-ALTER TABLE "postings" ADD FOREIGN KEY ("id") REFERENCES "posting_activity" ("posting_id");
+ALTER TABLE "posting_activity" ADD FOREIGN KEY ("posting_id") REFERENCES "postings" ("id");
 
-ALTER TABLE "activity_type" ADD FOREIGN KEY ("id") REFERENCES "posting_activity" ("activity_type_id");
+ALTER TABLE "posting_activity" ADD FOREIGN KEY ("activity_type_id") REFERENCES "activity_type" ("id");
 
-ALTER TABLE "organization" ADD FOREIGN KEY ("id") REFERENCES "postings" ("org_id");
+ALTER TABLE "postings" ADD FOREIGN KEY ("org_id") REFERENCES "organization" ("id");
 
-ALTER TABLE "user" ADD FOREIGN KEY ("id") REFERENCES "user_activity" ("user_id");
+ALTER TABLE "user_activity" ADD FOREIGN KEY ("user_id") REFERENCES "user" ("id");
 
-ALTER TABLE "activity_type" ADD FOREIGN KEY ("id") REFERENCES "user_activity" ("activity_type_id");
+ALTER TABLE "user_activity" ADD FOREIGN KEY ("activity_type_id") REFERENCES "activity_type" ("id");
 
-ALTER TABLE "access_level" ADD FOREIGN KEY ("id") REFERENCES "user" ("access_level_id");
+ALTER TABLE "user" ADD FOREIGN KEY ("access_level_id") REFERENCES "access_level" ("id");
 
-ALTER TABLE "group" ADD FOREIGN KEY ("id") REFERENCES "group_members" ("group_id");
+ALTER TABLE "group_members" ADD FOREIGN KEY ("group_id") REFERENCES "group" ("id");
 
-ALTER TABLE "ages" ADD FOREIGN KEY ("id") REFERENCES "group_members" ("age_id");
+ALTER TABLE "group_members" ADD FOREIGN KEY ("age_id") REFERENCES "ages" ("id");
