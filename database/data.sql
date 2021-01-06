@@ -19,7 +19,8 @@ VALUES ('0-4'),
 ('5-12'),
 ('13-17'),
 ('Adult'),
-('Adult 55+');
+('Adult 55+'),
+('Prefer not to say');
 
 INSERT INTO "causes" ("cause")
 VALUES ('Animals & Pets'),
