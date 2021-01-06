@@ -1,5 +1,6 @@
 import { query, Request, Response } from 'express';
 import express from 'express';
+import rejectUnauthenticated from '../modules/authentication-middleware';
 import pool from '../modules/pool';
 
 const router: express.Router = express.Router();
@@ -26,13 +27,28 @@ router.get(
 );
 
 /**
- * TODO!!
- * POST new activity type
+ * POST new activity type (for use by admin user)
+ * TODO!!!
+ * need to ADD rejectUnauthenticated once we are capable of testing with logged in admin user!!
  */
 router.post(
   '/',
   (req: Request, res: Response, next: express.NextFunction): void => {
-    // POST route code here
+    // new activity to be saved into DB
+    const newActivity: string = req.body.activity_name;
+
+    const queryText: string = `INSERT INTO "activity_type" (activity_name)
+    VALUES ($1);`;
+
+    pool
+      .query(queryText, [newActivity])
+      .then(() => {
+        res.sendStatus(201);
+      })
+      .catch((err) => {
+        console.log('Could not add new activity!', err);
+        res.sendStatus(500);
+      });
   }
 );
 
