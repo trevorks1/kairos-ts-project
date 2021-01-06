@@ -69,8 +69,8 @@ router.post(
 router.post(
   '/save',
   (req: Request, res: Response, next: express.NextFunction): void => {
-    // preferred activity id to save in DB
-    // it needs to be added to DB as an id!
+    // preferred activity id to save in DB (user_activity table)
+    // it needs to be added to DB as an id! --> the id should be available on front end from the GET /all
     const activityToSave: string = req.body.activity_type_id;
 
     // STEP - query DB to add activityToSave to user_activity
