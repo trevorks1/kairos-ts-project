@@ -3,7 +3,11 @@ import bodyParser from 'body-parser';
 import sessionMiddleware from './modules/session-middleware';
 import passport from './strategies/user.strategy';
 import userRouter from './routes/user.router';
+<<<<<<< HEAD
 import causesRouter from './routes/causes.router';
+=======
+import adminRouter from './routes/admin.router';
+>>>>>>> dev-ts-adminrouter
 
 require('dotenv').config();
 
@@ -22,7 +26,11 @@ app.use(passport.session());
 
 /* Routes */
 app.use('/api/user', userRouter);
+<<<<<<< HEAD
 app.use('/api/causes', causesRouter);
+=======
+app.use('/api/admin', adminRouter);
+>>>>>>> dev-ts-adminrouter
 
 // Serve static files
 app.use(express.static('build'));
