@@ -12,7 +12,7 @@ router.get(
   '/all',
   (req: Request, res: Response, next: express.NextFunction): void => {
     const queryText: string =
-      'SELECT "activity_name" FROM "activity_type" ORDER BY "activity_name" ASC;';
+      'SELECT * FROM "activity_type" ORDER BY "activity_name" ASC;';
 
     pool
       .query(queryText)
@@ -66,6 +66,16 @@ router.post(
  * TODO!!
  * POST a preferred activity for a logged in volunteer user
  */
+router.post(
+  '/save',
+  (req: Request, res: Response, next: express.NextFunction): void => {
+    // preferred activity id to save in DB
+    // it needs to be added to DB as an id!
+    const activityToSave: string = req.body.activity_type_id;
+
+    // STEP - query DB to add activityToSave to user_activity
+  }
+);
 
 /*
  * TODO!!
