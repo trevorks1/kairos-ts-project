@@ -12,6 +12,7 @@ router.get('/', rejectUnauthenticated, (req: Request, res: Response): void => {
 });
 
 router.post(
+<<<<<<< HEAD
   '/register/vol',
   (req: Request, res: Response, next: express.NextFunction): void => {
     try {
@@ -84,10 +85,26 @@ router.post(
       console.log(`Error saving user to database: ${err}`);
       res.sendStatus(500);
     }
+=======
+  '/register',
+  (req: Request, res: Response, next: express.NextFunction): void => {
+    const username: string | null = <string>req.body.username;
+    const password: string | null = encryptPassword(req.body.password);
+
+    const queryText: string = `INSERT INTO "user" (username, password) VALUES ($1, $2) RETURNING id`;
+    pool
+      .query(queryText, [username, password])
+      .then(() => res.sendStatus(201))
+      .catch((err) => {
+        console.log(`Error saving user to database: ${err}`);
+        res.sendStatus(500);
+      });
+>>>>>>> 47abd9dbaf9885ace06d8e6e98c7a6153a216014
   }
 );
 
 router.post(
+<<<<<<< HEAD
   '/register/org',
   (req: Request, res: Response, next: express.NextFunction): void => {
     try {
@@ -169,6 +186,8 @@ router.post(
 );
 
 router.post(
+=======
+>>>>>>> 47abd9dbaf9885ace06d8e6e98c7a6153a216014
   '/login',
   userStrategy.authenticate('local'),
   (req: Request, res: Response): void => {
