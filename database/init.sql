@@ -8,7 +8,7 @@
 --     "username" VARCHAR (80) UNIQUE NOT NULL,
 --     "password" VARCHAR (1000) NOT NULL
 -- );
-
+ 
 
 CREATE TABLE "user" (
   "id" SERIAL PRIMARY KEY,
@@ -20,9 +20,9 @@ CREATE TABLE "user" (
   "phone_number" VARCHAR (40),
   "company" BOOLEAN,
   "company_name" VARCHAR (40),
-  "non_profit" BOOLEAN,
+  "volunteer" BOOLEAN,
   "active" BOOLEAN,
-  "access_level" INT
+  "access_level_id" INT
 );
 
 CREATE TABLE "access_level" (
@@ -155,7 +155,7 @@ ALTER TABLE "user_activity" ADD FOREIGN KEY ("user_id") REFERENCES "user" ("id")
 
 ALTER TABLE "user_activity" ADD FOREIGN KEY ("activity_type_id") REFERENCES "activity_type" ("id");
 
-ALTER TABLE "user" ADD FOREIGN KEY ("access_level") REFERENCES "access_level" ("access_level");
+ALTER TABLE "user" ADD FOREIGN KEY ("access_level_id") REFERENCES "access_level" ("id");
 
 ALTER TABLE "group_members" ADD FOREIGN KEY ("group_id") REFERENCES "group" ("id");
 
