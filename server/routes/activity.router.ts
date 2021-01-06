@@ -26,7 +26,8 @@ router.get(
 );
 
 /**
- * POST route template
+ * TODO!!
+ * POST new activity type
  */
 router.post(
   '/',
@@ -34,5 +35,25 @@ router.post(
     // POST route code here
   }
 );
+
+/*
+ * TODO!!
+ * GET saved preferred activities for a logged in volunteer user
+ */
+
+/*
+ * TODO!!
+ * DELETE saved preferred activity for a logged in volunteer user
+ */
+
+/*
+ * TODO!!
+ * POST a preferred activity for a logged in volunteer user
+ */
+
+/*
+ * TODO!!
+ * GET retrieve all postings filtered by logged in user's preferred activities
+ */
 
 export default router;
