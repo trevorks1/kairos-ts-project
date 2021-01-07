@@ -60,10 +60,11 @@ router.post(
 /*
  * TODO!!
  * POST a preferred activity for a logged in volunteer user
+ * circumventing TS error by using type of 'any' on req ---
  */
 router.post(
   '/save',
-  (req: Request, res: Response, next: express.NextFunction): void => {
+  (req: any, res: Response, next: express.NextFunction): void => {
     try {
       // preferred activity id to save in DB (user_activity table)
       // it needs to be added to DB as an id! --> the id should be available on front end from the GET /all
@@ -72,7 +73,7 @@ router.post(
       const activityToSave: number[] = req.body.activity_type_id;
       // empty array that the queries can be pushed into
       const arrayForPromise = [];
-      const volunteerId = req.user.id;
+      const volunteerId = req.user['id']; // req.user["id"]  ???
 
       for (let i = 0; i < activityToSave.length; i++) {
         const queryText: string = `INSERT INTO "user_activity" (user_id, activity_type_id)
