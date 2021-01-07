@@ -59,11 +59,6 @@ router.post(
 
 /*
  * TODO!!
- * DELETE saved preferred activity for a logged in volunteer user
- */
-
-/*
- * TODO!!
  * POST a preferred activity for a logged in volunteer user
  */
 router.post(
@@ -77,7 +72,7 @@ router.post(
       const activityToSave: number[] = req.body.activity_type_id;
       // empty array that the queries can be pushed into
       const arrayForPromise = [];
-      const volunteerId: number = req.user.id;
+      const volunteerId = req.user.id;
 
       for (let i = 0; i < activityToSave.length; i++) {
         const queryText: string = `INSERT INTO "user_activity" (user_id, activity_type_id)
@@ -90,14 +85,17 @@ router.post(
       Promise.all(arrayForPromise).then(() => {
         res.sendStatus(201);
       });
-
-      // STEP - query DB to add activityToSave to user_activity
     } catch (err) {
       console.log('could not save preferred activities', err);
       res.sendStatus(500);
     }
   }
 );
+
+/*
+ * TODO!!
+ * DELETE saved preferred activity for a logged in volunteer user
+ */
 
 /*
  * TODO!!
