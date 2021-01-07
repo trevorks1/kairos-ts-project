@@ -58,12 +58,12 @@ router.post(
  */
 
 /*
- * TODO!!
  * POST a preferred activity for a logged in volunteer user
  * circumventing TS error by using type of 'any' on req ---
  */
 router.post(
   '/save',
+  rejectUnauthenticated,
   (req: any, res: Response, next: express.NextFunction): void => {
     try {
       // preferred activity id to save in DB (user_activity table)
