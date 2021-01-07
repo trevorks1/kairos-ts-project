@@ -80,8 +80,16 @@ router.post(
       const volunteerId: number = req.user.id;
 
       for (let i = 0; i < activityToSave.length; i++) {
-        const queryText: string = '';
+        const queryText: string = `INSERT INTO "user_activity" (user_id, activity_type_id)
+        VALUES ($1, $2);`;
+        arrayForPromise.push(
+          pool.query(queryText, [volunteerId, activityToSave[i]])
+        );
       }
+
+      Promise.all(arrayForPromise).then(() => {
+        res.sendStatus(201);
+      });
 
       // STEP - query DB to add activityToSave to user_activity
     } catch (err) {
