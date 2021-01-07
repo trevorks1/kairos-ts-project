@@ -8,7 +8,7 @@
 --     "username" VARCHAR (80) UNIQUE NOT NULL,
 --     "password" VARCHAR (1000) NOT NULL
 -- );
-
+ 
 
 CREATE TABLE "user" (
   "id" SERIAL PRIMARY KEY,
@@ -20,7 +20,7 @@ CREATE TABLE "user" (
   "phone_number" VARCHAR (40),
   "company" BOOLEAN,
   "company_name" VARCHAR (40),
-  "non_profit" BOOLEAN,
+  "volunteer" BOOLEAN,
   "active" BOOLEAN,
   "access_level_id" INT
 );
