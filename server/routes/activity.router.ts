@@ -69,11 +69,25 @@ router.post(
 router.post(
   '/save',
   (req: Request, res: Response, next: express.NextFunction): void => {
-    // preferred activity id to save in DB (user_activity table)
-    // it needs to be added to DB as an id! --> the id should be available on front end from the GET /all
-    const activityToSave: string = req.body.activity_type_id;
+    try {
+      // preferred activity id to save in DB (user_activity table)
+      // it needs to be added to DB as an id! --> the id should be available on front end from the GET /all
 
-    // STEP - query DB to add activityToSave to user_activity
+      // data expected as an array of numbers! EVEN if it is a single number
+      const activityToSave: number[] = req.body.activity_type_id;
+      // empty array that the queries can be pushed into
+      const arrayForPromise = [];
+      const volunteerId: number = req.user.id;
+
+      for (let i = 0; i < activityToSave.length; i++) {
+        const queryText: string = '';
+      }
+
+      // STEP - query DB to add activityToSave to user_activity
+    } catch (err) {
+      console.log('could not save preferred activities', err);
+      res.sendStatus(500);
+    }
   }
 );
 
