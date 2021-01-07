@@ -94,7 +94,6 @@ router.post(
 );
 
 /*
- * TODO!!
  * DELETE saved preferred activity for a logged in volunteer user
  */
 router.delete(
