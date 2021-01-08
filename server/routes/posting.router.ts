@@ -84,4 +84,33 @@ router.post(
   }
 );
 
+router.put(
+  '/edit/:id',
+  (req: Request, res: Response, next: express.NextFunction): void => {
+    const queryText = `UPDATE "postings" SET "date_to_attend"=$1, "start_time"=$2, "end_time"=$3, 
+    "location"=$4, "description"=$5, "repeating"=$6, "frequency"=$7, "people_needed"=$8
+    WHERE "id"=$9;`;
+
+    pool
+      .query(queryText, [
+        req.body.date_to_attend,
+        req.body.start_time,
+        req.body.end_time,
+        req.body.location,
+        req.body.description,
+        req.body.repeating,
+        req.body.frequency,
+        req.body.people_needed,
+        req.params.id,
+      ])
+      .then((dbResponse) => {
+        res.sendStatus(200);
+      })
+      .catch((err) => {
+        console.log('#### PUT ROUTE ERROR: ', err);
+        res.sendStatus(500);
+      });
+  }
+);
+
 export default router;
