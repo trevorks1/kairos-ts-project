@@ -105,4 +105,10 @@ router.delete(
  * GET retrieve all postings filtered by logged in user's preferred activities
  */
 
+//   SELECT * FROM "postings"
+// JOIN "posting_activity" ON "postings".id = "posting_activity".posting_id
+// JOIN "user_activity" ON "posting_activity".activity_type_id = "user_activity".activity_type_id
+// JOIN "user" ON "user_activity".user_id = 1
+// WHERE  "posting_activity".activity_type_id = "user_activity".activity_type_id;
+
 export default router;
