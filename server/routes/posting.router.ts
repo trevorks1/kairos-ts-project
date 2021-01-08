@@ -114,7 +114,19 @@ router.put(
 
 router.put(
   '/active/:id',
-  (req: Request, res: Response, next: express.NextFunction): void => {}
+  (req: Request, res: Response, next: express.NextFunction): void => {
+    const queryText = `UPDATE "postings" SET "active"=FALSE WHERE "id"=$1;`;
+
+    pool
+      .query(queryText, [req.params.id])
+      .then((dbResponse) => {
+        res.sendStatus(200);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.sendStatus(500);
+      });
+  }
 );
 
 export default router;
