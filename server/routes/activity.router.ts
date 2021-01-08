@@ -1,27 +1,153 @@
-import { Request, Response } from 'express';
+import { query, Request, Response } from 'express';
 import express from 'express';
+import rejectUnauthenticated from '../modules/authentication-middleware';
 import pool from '../modules/pool';
 
 const router: express.Router = express.Router();
 
 /**
- * GET route template
+ * GET route retrieves all activities
  */
 router.get(
-  '/',
+  '/all',
   (req: Request, res: Response, next: express.NextFunction): void => {
-    // GET route code here
+    const queryText: string =
+      'SELECT * FROM "activity_type" ORDER BY "activity_name" ASC;';
+
+    pool
+      .query(queryText)
+      .then((dbResponse) => {
+        res.send(dbResponse.rows);
+      })
+      .catch((err) => {
+        console.log('Could not retrieve the list of activities!', err);
+        res.sendStatus(500);
+      });
   }
 );
 
-/**
- * POST route template
+/*
+ * GET saved preferred activities for a logged in volunteer user
+ */
+router.get(
+  '/get-preferred-activities',
+  rejectUnauthenticated,
+  (req: any, res: Response, next: express.NextFunction): void => {
+    const volunteerId = req.user['id'];
+    const queryText: string = `SELECT "activity_type_id", "activity_name" FROM "activity_type"
+    JOIN "user_activity" ON "activity_type".id = "user_activity".activity_type_id
+    JOIN "user" ON "user_activity".user_id = "user".id
+    WHERE "user".id = $1;`;
+
+    pool
+      .query(queryText, [volunteerId])
+      .then((dbResponse) => {
+        res.send(dbResponse.rows);
+      })
+      .catch((err) => {
+        console.log('could not get preferred activities', err);
+        res.sendStatus(500);
+      });
+  }
+);
+
+/*
+ * POST a preferred activity for a logged in volunteer user
+ * circumventing TS error by using type of 'any' on req ---
  */
 router.post(
-  '/',
-  (req: Request, res: Response, next: express.NextFunction): void => {
-    // POST route code here
+  '/save',
+  rejectUnauthenticated,
+  (req: any, res: Response, next: express.NextFunction): void => {
+    try {
+      // preferred activity id to save in DB (user_activity table)
+      // it needs to be added to DB as an id! --> the id should be available on front end from the GET /all
+
+      // data expected as an array of numbers! EVEN if it is a single number
+      const activityToSave: number[] = req.body.activity_type_id;
+      // empty array that the queries can be pushed into
+      const arrayForPromise = [];
+      const volunteerId = req.user['id']; // req.user["id"]  ???
+
+      for (let i = 0; i < activityToSave.length; i++) {
+        const queryText: string = `INSERT INTO "user_activity" (user_id, activity_type_id)
+        VALUES ($1, $2);`;
+        arrayForPromise.push(
+          pool.query(queryText, [volunteerId, activityToSave[i]])
+        );
+      }
+
+      Promise.all(arrayForPromise).then(() => {
+        res.sendStatus(201);
+      });
+    } catch (err) {
+      console.log('could not save preferred activities', err);
+      res.sendStatus(500);
+    }
   }
 );
 
-module.exports = router;
+/*
+ * DELETE saved preferred activity for a logged in volunteer user
+ */
+router.delete(
+  '/delete',
+  rejectUnauthenticated,
+  (req: any, res: Response, next: express.NextFunction): void => {
+    try {
+      // Promise.all me you love me
+
+      // data expected as an array of numbers! EVEN if it is a single number
+      const activityToDelete: number[] = req.body.activity_type_id;
+      // empty array that the queries can be pushed into
+      const arrayForPromise = [];
+      const volunteerId = req.user['id'];
+
+      for (let i = 0; i < activityToDelete.length; i++) {
+        const queryText: string = `DELETE FROM "user_activity" WHERE "user_id" = $1 AND "activity_type_id" = $2;`;
+        arrayForPromise.push(
+          pool.query(queryText, [volunteerId, activityToDelete[i]])
+        );
+      }
+
+      Promise.all(arrayForPromise).then(() => {
+        res.sendStatus(200);
+      });
+    } catch (err) {
+      console.log('could not delete preferred activities', err);
+      res.sendStatus(500);
+    }
+  }
+);
+
+/*
+ * GET retrieve all postings filtered by logged in user's preferred activities
+ */
+router.get(
+  '/postings-for-volunteer',
+  rejectUnauthenticated,
+  (req: any, res: Response, next: express.NextFunction): void => {
+    const volunteerId = req.user['id'];
+    // B.L. - we might want to further filter this down rather than selecting all ?
+    const queryText: string = `SELECT * FROM "postings"
+    JOIN "posting_activity" ON "postings".id = "posting_activity".posting_id
+    JOIN "user_activity" ON "posting_activity".activity_type_id = "user_activity".activity_type_id
+    JOIN "user" ON "user_activity".user_id = $1
+    WHERE  "posting_activity".activity_type_id = "user_activity".activity_type_id;`;
+
+    pool
+      .query(queryText, [volunteerId])
+      .then((dbResponse) => {
+        res.send(dbResponse.rows);
+      })
+      .catch((err) => {
+        console.log(
+          'could not retrieve all postings filtered by logged in user preferred activities',
+          err
+        );
+        res.sendStatus(500);
+      });
+  }
+);
+
+export default router;
