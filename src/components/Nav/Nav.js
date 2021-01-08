@@ -22,6 +22,13 @@ const Nav = (props) => {
         <h2 className="nav-title">Kairos</h2>
       </Link>
       <div className="nav-right">
+        {/* the About link for organization seems pointless because with 
+        auth redirect they end up getting directed to /user */}
+        {props.store.user.access_level_id === 2 && (
+          <Link className="nav-link" to="/home">
+            About
+          </Link>
+        )}
         {props.store.user.id == null && (
           <Link className="nav-link">Browse</Link>
         )}
@@ -44,9 +51,9 @@ const Nav = (props) => {
           </>
         )}
         {/* Always show this link since the about page is not protected */}
-        <Link className="nav-link" to="/about">
+        {/* <Link className="nav-link" to="/about">
           About
-        </Link>
+        </Link> */}
       </div>
     </div>
   );
