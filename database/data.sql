@@ -76,7 +76,7 @@ VALUES (2, 1),
 INSERT INTO "organization" ("organization_name", "contact_title", "address", "mission", "summary", "website", "organization_type", "user_id")
 VALUES ('The Prancing Pony', 'Wizard', '1 White Wizard Way, White Tower, Middle earth 77777', 'Make money, drink beer, smoke the shire herb', 'Its an Inn, what do you want?', 'prancingpony.com', 'Other', 4),
 ('Saurons Smithing', 'CEO', '1 Evil Wizard Way, Some Tower, Middle earth 77777', 'Kill hobbits, build armies, smoke the shire herb', 'All the evil', 'brokesmithy.org', 'Non-profit', 5),
-('Shelobs Spin Class & Yoga', 'PR Manager', 'A cave in the forest, Middle earth 77777', 'Be flexible, lots of spinning, avoid the light', 'Best hobbit smoothies in the world', 'livehealthy.net', 'Community Group', 5);
+('Shelobs Spin Class & Yoga', 'PR Manager', 'A cave in the forest, Middle earth 77777', 'Be flexible, lots of spinning, avoid the light', 'Best hobbit smoothies in the world', 'livehealthy.net', 'Community Group', 6);
 
 INSERT INTO "org_causes" ("org_id", "cause_id")
 VALUES (1, 2),
