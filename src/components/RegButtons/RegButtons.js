@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import { withRouter } from 'react-router-dom';
-import { Button } from '@material-ui/core';
+import { Button, Grid } from '@material-ui/core';
 
 class RegButtons extends Component {
   // On click event for Organization and Volunteer buttons
@@ -17,25 +17,31 @@ class RegButtons extends Component {
 
   render() {
     return (
-      <div className="formPanel">
-        <h2>Register now as an Organization or Volunteer.</h2>
-        <div>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={this.handleClickOrganization}
-          >
-            Organization
-          </Button>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={this.handleClickVolunteer}
-          >
-            Volunteer
-          </Button>
-        </div>
-      </div>
+      <Grid container spacing={3}>
+        <Grid item xs={12}>
+          <h2>Register now as an Organization or Volunteer.</h2>
+        </Grid>
+        <Grid container item xs={12} spacing={3}>
+          <Grid item xs={6}>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={this.handleClickOrganization}
+            >
+              Organization
+            </Button>
+          </Grid>
+          <Grid item xs={6}>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={this.handleClickVolunteer}
+            >
+              Volunteer
+            </Button>
+          </Grid>
+        </Grid>
+      </Grid>
     );
   }
 }
