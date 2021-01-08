@@ -101,14 +101,33 @@ router.delete(
 );
 
 /*
- * TODO!!
  * GET retrieve all postings filtered by logged in user's preferred activities
  */
+router.get(
+  '/postings-for-volunteer',
+  rejectUnauthenticated,
+  (req: any, res: Response, next: express.NextFunction): void => {
+    const volunteerId = req.user['id'];
+    // B.L. - we might want to further filter this down rather than selecting all ?
+    const queryText: string = `SELECT * FROM "postings"
+    JOIN "posting_activity" ON "postings".id = "posting_activity".posting_id
+    JOIN "user_activity" ON "posting_activity".activity_type_id = "user_activity".activity_type_id
+    JOIN "user" ON "user_activity".user_id = $1
+    WHERE  "posting_activity".activity_type_id = "user_activity".activity_type_id;`;
 
-//   SELECT * FROM "postings"
-// JOIN "posting_activity" ON "postings".id = "posting_activity".posting_id
-// JOIN "user_activity" ON "posting_activity".activity_type_id = "user_activity".activity_type_id
-// JOIN "user" ON "user_activity".user_id = 1
-// WHERE  "posting_activity".activity_type_id = "user_activity".activity_type_id;
+    pool
+      .query(queryText, [volunteerId])
+      .then((dbResponse) => {
+        res.send(dbResponse.rows);
+      })
+      .catch((err) => {
+        console.log(
+          'could not retrieve all postings filtered by logged in user preferred activities',
+          err
+        );
+        res.sendStatus(500);
+      });
+  }
+);
 
 export default router;
