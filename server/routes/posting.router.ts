@@ -27,7 +27,7 @@ router.post(
       const queryText: string = `INSERT INTO "postings" ("org_id", "date_posted", "date_to_attend", 
       "start_time", "end_time", "location", "description", "repeating", "frequency", "people_needed", 
       "active")
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, 't')
       RETURNING "id";`;
       const queryArray = [
         post.org_id,
@@ -40,7 +40,6 @@ router.post(
         post.repeating,
         post.frequency,
         post.people_needed,
-        post.active,
       ];
 
       pool.query(queryText, queryArray).then((dbResponse) => {
@@ -111,6 +110,11 @@ router.put(
         res.sendStatus(500);
       });
   }
+);
+
+router.put(
+  '/active/:id',
+  (req: Request, res: Response, next: express.NextFunction): void => {}
 );
 
 export default router;
