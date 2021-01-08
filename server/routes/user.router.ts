@@ -10,7 +10,7 @@ router.get('/', rejectUnauthenticated, (req: Request, res: Response): void => {
 });
 router.post(
   '/register/vol',
-  (req: Request, res: Response, next: express.NextFunction): void => {
+  (req: any, res: Response, next: express.NextFunction): void => {
     try {
       const username: string | null = <string>req.body.username;
       const password: string | null = encryptPassword(req.body.password);
