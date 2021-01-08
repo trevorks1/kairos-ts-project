@@ -3,14 +3,19 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import LogOutButton from '../../components/LogOutButton/LogOutButton';
 
+// CUSTOM COMPONENTS
+import AdminPanel from '../../components/AdminPanel/AdminPanel';
+import OrganizationProfile from '../../components/OrganizationProfile/OrganizationProfile';
+import VolunteerProfile from '../../components/VolunteerProfile/VolunteerProfile';
+
 class UserPage extends Component {
   // this component doesn't do much to start, just renders some user info to the DOM
   render() {
     return (
       <div>
-        <h1 id="welcome">Welcome, {this.props.store.user.username}!</h1>
-        <p>Your ID is: {this.props.store.user.id}</p>
-        <LogOutButton className="log-in" />
+        {this.props.store.user.access_level_id === 1 && <AdminPanel />}
+        {this.props.store.user.access_level_id === 2 && <OrganizationProfile />}
+        {this.props.store.user.access_level_id === 3 && <VolunteerProfile />}
       </div>
     );
   }
