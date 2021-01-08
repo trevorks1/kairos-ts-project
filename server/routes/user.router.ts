@@ -40,13 +40,13 @@ router.post(
         .then((result) => {
           const newUserId = result.rows[0].id;
           const userToActivity = [];
-          for (let i = 0; i < req.body.activity_id.length; i++) {
+          for (let i = 0; i < req.body.activity_type_id.length; i++) {
             // looping through activity type array as they can select multiple
             const insertUserActivityQuery = `INSERT INTO "user_activity" ("activity_type_id", "user_id")
           VALUES ($1, $2);`;
             userToActivity.push(
               pool.query(insertUserActivityQuery, [
-                parseInt(req.body.activity_id[i]),
+                parseInt(req.body.activity_type_id[i]),
                 parseInt(newUserId),
               ])
             );
