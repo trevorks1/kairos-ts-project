@@ -27,9 +27,29 @@ router.get(
 );
 
 /*
- * TODO!!
  * GET saved preferred activities for a logged in volunteer user
  */
+router.get(
+  '/get-preferred-activities',
+  rejectUnauthenticated,
+  (req: any, res: Response, next: express.NextFunction): void => {
+    const volunteerId = req.user['id'];
+    const queryText: string = `SELECT "activity_type_id", "activity_name" FROM "activity_type"
+    JOIN "user_activity" ON "activity_type".id = "user_activity".activity_type_id
+    JOIN "user" ON "user_activity".user_id = "user".id
+    WHERE "user".id = $1;`;
+
+    pool
+      .query(queryText, [volunteerId])
+      .then((dbResponse) => {
+        res.send(dbResponse.rows);
+      })
+      .catch((err) => {
+        console.log('could not get preferred activities', err);
+        res.sendStatus(500);
+      });
+  }
+);
 
 /*
  * POST a preferred activity for a logged in volunteer user
