@@ -10,43 +10,53 @@ const router: express.Router = express.Router();
  */
 router.get(
   '/requested',
-  (req: Request, res: Response, next: express.NextFunction): void => {
+  rejectUnauthenticated,
+  (req: any, res: Response, next: express.NextFunction): void => {
     // GET route code here
-    const queryText = `SELECT * FROM "user" 
+    if (req.user['access_level_id'] == 1) {
+      const queryText = `SELECT * FROM "user" 
     JOIN "organization" ON "user".id = "organization".user_id 
     WHERE "user".active = false;`;
 
-    pool
-      .query(queryText)
-      .then((dbResponse) => {
-        console.log(dbResponse);
-        res.send(dbResponse.rows);
-      })
-      .catch((err) => {
-        console.log(err);
-        res.sendStatus(500);
-      });
+      pool
+        .query(queryText)
+        .then((dbResponse) => {
+          console.log(dbResponse);
+          res.send(dbResponse.rows);
+        })
+        .catch((err) => {
+          console.log(err);
+          res.sendStatus(500);
+        });
+      return;
+    }
+    res.sendStatus(403);
   }
 );
 
 router.get(
   '/approved',
-  (req: Request, res: Response, next: express.NextFunction): void => {
+  rejectUnauthenticated,
+  (req: any, res: Response, next: express.NextFunction): void => {
     // GET route code here
-    const queryText = `SELECT * FROM "user" 
+    if (req.user['access_level_id'] == 1) {
+      const queryText = `SELECT * FROM "user" 
     JOIN "organization" ON "user".id = "organization".user_id 
     WHERE "user".active = true;`;
 
-    pool
-      .query(queryText)
-      .then((dbResponse) => {
-        console.log(dbResponse);
-        res.send(dbResponse.rows);
-      })
-      .catch((err) => {
-        console.log(err);
-        res.sendStatus(500);
-      });
+      pool
+        .query(queryText)
+        .then((dbResponse) => {
+          console.log(dbResponse);
+          res.send(dbResponse.rows);
+        })
+        .catch((err) => {
+          console.log(err);
+          res.sendStatus(500);
+        });
+      return;
+    }
+    res.sendStatus(403);
   }
 );
 
