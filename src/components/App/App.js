@@ -18,7 +18,8 @@ import UserPage from '../../pages/UserPage/UserPage';
 import InfoPage from '../../pages/InfoPage/InfoPage';
 import LandingPage from '../../pages/LandingPage/LandingPage';
 import LoginPage from '../../pages/LoginPage/LoginPage';
-import RegisterPage from '../../pages/RegisterPage/RegisterPage';
+import RegisterOrganization from '../../pages/RegisterOrganization/RegisterOrganization';
+import RegisterVolunteer from '../../pages/RegisterVolunteer/RegisterVolunteer';
 
 import './App.css';
 
@@ -80,7 +81,16 @@ class App extends Component {
               // - else shows RegisterPage at "/registration"
               exact
               path="/registration"
-              component={RegisterPage}
+              component={RegisterOrganization}
+              authRedirect="/user"
+            />
+            <ProtectedRoute
+              // with authRedirect:
+              // - if logged in, redirects to "/user"
+              // - else shows RegisterPage at "/registration"
+              exact
+              path="/registration-volunteer"
+              component={RegisterVolunteer}
               authRedirect="/user"
             />
             <ProtectedRoute
