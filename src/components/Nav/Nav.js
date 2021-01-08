@@ -23,7 +23,8 @@ const Nav = (props) => {
       </Link>
       <div className="nav-right">
         {/* the About link for organization seems pointless because with 
-        auth redirect they end up getting directed to /user */}
+        auth redirect they end up getting directed to /user 
+        we might have address this*/}
         {props.store.user.access_level_id === 2 && (
           <Link className="nav-link" to="/home">
             About
