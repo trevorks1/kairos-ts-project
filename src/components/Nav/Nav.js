@@ -25,6 +25,9 @@ const Nav = (props) => {
         {props.store.user.id == null && (
           <Link className="nav-link">Browse</Link>
         )}
+        {props.store.user.access_level_id === 3 && (
+          <Link className="nav-link">Browse</Link>
+        )}
         <Link className="nav-link" to={loginLinkData.path}>
           {/* Show this link if they are logged in or not,
           but call this link 'Profile' if they are logged in,
