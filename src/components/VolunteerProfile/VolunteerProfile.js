@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import mapStoreToProps from '../../redux/mapStoreToProps';
 
 class VolunteerProfile extends Component {
   render() {
@@ -14,4 +16,4 @@ class VolunteerProfile extends Component {
   }
 }
 
-export default VolunteerProfile;
+export default connect(mapStoreToProps)(VolunteerProfile);

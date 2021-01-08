@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import mapStoreToProps from '../../redux/mapStoreToProps';
 
 class AdminPanel extends Component {
   render() {
@@ -13,4 +15,4 @@ class AdminPanel extends Component {
   }
 }
 
-export default AdminPanel;
+export default connect(mapStoreToProps)(AdminPanel);

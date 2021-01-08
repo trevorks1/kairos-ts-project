@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import mapStoreToProps from '../../redux/mapStoreToProps';
 
 class OrganizationProfile extends Component {
   render() {
@@ -14,4 +16,4 @@ class OrganizationProfile extends Component {
   }
 }
 
-export default OrganizationProfile;
+export default connect(mapStoreToProps)(OrganizationProfile);
