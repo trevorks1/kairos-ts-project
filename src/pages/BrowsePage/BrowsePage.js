@@ -20,14 +20,16 @@ class BrowsePage extends Component {
         <Grid container spacing={2}>
           {this.props.store.causes.map((item, index) => {
             return (
-              <Grid item key={index}>
-                <h4>{item.cause}</h4>
+              <Grid item key={index} xl={3}>
+                <Card>
+                  <CardContent>
+                    <h4>{item.cause}</h4>
+                  </CardContent>
+                </Card>
               </Grid>
             );
           })}
         </Grid>
-
-        {JSON.stringify(this.props.store.causes)}
       </div>
     );
   }
