@@ -3,7 +3,13 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 // MATERIAL-UI
-import { Grid, Card, CardContent, Container } from '@material-ui/core';
+import {
+  Grid,
+  Card,
+  CardContent,
+  CardActionArea,
+  Container,
+} from '@material-ui/core';
 
 class BrowsePage extends Component {
   componentDidMount() {
@@ -11,6 +17,10 @@ class BrowsePage extends Component {
       type: 'GET_CAUSES',
     });
   }
+
+  handleCauseClick = () => {
+    console.log('you clicked a cause!');
+  };
   render() {
     return (
       <div>
@@ -22,10 +32,12 @@ class BrowsePage extends Component {
             {this.props.store.causes.map((item, index) => {
               return (
                 <Grid item key={index} xl={3}>
-                  <Card>
-                    <CardContent>
-                      <h4>{item.cause}</h4>
-                    </CardContent>
+                  <Card onClick={this.handleCauseClick}>
+                    <CardActionArea>
+                      <CardContent>
+                        <h4>{item.cause}</h4>
+                      </CardContent>
+                    </CardActionArea>
                   </Card>
                 </Grid>
               );
