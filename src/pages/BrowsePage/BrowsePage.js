@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import mapStoreToProps from '../../redux/mapStoreToProps';
 
 class BrowsePage extends Component {
+  componentDidMount() {
+    this.props.dispatch({
+      type: 'GET_CAUSES',
+    });
+  }
   render() {
     return (
       <div>
@@ -12,4 +19,4 @@ class BrowsePage extends Component {
   }
 }
 
-export default BrowsePage;
+export default connect(mapStoreToProps)(BrowsePage);
