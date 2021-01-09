@@ -2,7 +2,13 @@ import React, { Component } from 'react';
 
 class BrowsePage extends Component {
   render() {
-    return <h1>Browse Page!</h1>;
+    return (
+      <div>
+        <div className="banner">
+          <h1>Find Your Cause</h1>
+        </div>
+      </div>
+    );
   }
 }
 
