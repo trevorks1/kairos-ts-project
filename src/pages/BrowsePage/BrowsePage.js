@@ -19,7 +19,7 @@ class BrowsePage extends Component {
   }
 
   handleCauseClick = () => {
-    console.log('you clicked a cause!');
+    console.log('you clicked a cause!', this.props.store.causes.cause);
   };
   render() {
     return (
