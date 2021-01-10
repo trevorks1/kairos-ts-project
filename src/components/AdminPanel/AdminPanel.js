@@ -5,7 +5,7 @@ import { connect, useDispatch } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 // Material-UI imports
-import { Tabs, Tab } from '@material-ui/core';
+import { Tabs, Tab, Container, Grid } from '@material-ui/core';
 
 function AdminPanel(props) {
   // BELOW IS HOW TO USE DISPATCH!!
@@ -24,18 +24,25 @@ function AdminPanel(props) {
     setSelectedTab(newValue);
   };
   return (
-    <div>
-      <h1 id="welcome">
-        Welcome to the Admin Panel, {props.store.user.username}!
-      </h1>
-      <p>Your ID is: {props.store.user.id}</p>
-      <Tabs value={selectedTab} onChange={handleTabChange}>
-        <Tab label="Requested" />
-        <Tab label="Approved" />
-      </Tabs>
+    <Container>
+      <div>
+        <h1 id="welcome">
+          Welcome to the Admin Panel, {props.store.user.username}!
+        </h1>
+      </div>
+      <Grid container>
+        <Grid item>
+          <Tabs value={selectedTab} onChange={handleTabChange}>
+            {/* Each of the tabs below should get a component - one that displays
+            requested orgs and one that displays approved orgs */}
+            <Tab label="Requested" />
+            <Tab label="Approved" />
+          </Tabs>
+        </Grid>
+      </Grid>
       {selectedTab === 0 && <h3>REQUESTED</h3>}
       {selectedTab === 1 && <h3>APPROVED</h3>}
-    </div>
+    </Container>
   );
 }
 
