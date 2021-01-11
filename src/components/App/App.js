@@ -47,7 +47,7 @@ class App extends Component {
             />
 
             {/* Browse Page (visible logged in or not) */}
-            <Route exact path="/browse" component={BrowsePage} />
+            <Route exact path="/browse-causes" component={BrowsePage} />
 
             {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
