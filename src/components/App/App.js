@@ -22,6 +22,7 @@ import LandingPage from '../../pages/LandingPage/LandingPage';
 import LoginPage from '../../pages/LoginPage/LoginPage';
 import RegisterOrganization from '../../pages/RegisterOrganization/RegisterOrganization';
 import RegisterVolunteer from '../../pages/RegisterVolunteer/RegisterVolunteer';
+import BrowsePage from '../../pages/BrowsePage/BrowsePage';
 
 import './App.css';
 
@@ -67,6 +68,9 @@ class App extends Component {
                 path="/about"
                 component={AboutPage}
               />
+
+              {/* Browse Page (visible logged in or not) */}
+              <Route exact path="/browse" component={BrowsePage} />
 
               {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
