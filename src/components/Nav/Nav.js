@@ -31,12 +31,12 @@ const Nav = (props) => {
           </Link>
         )}
         {props.store.user.id == null && (
-          <Link className="nav-link" to="/browse">
+          <Link className="nav-link" to="/browse-causes">
             Browse
           </Link>
         )}
         {props.store.user.access_level_id === 3 && (
-          <Link className="nav-link" to="/browse">
+          <Link className="nav-link" to="/browse-causes">
             Browse
           </Link>
         )}
