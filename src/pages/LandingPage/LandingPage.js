@@ -43,11 +43,15 @@ class LandingPage extends Component {
     return (
       <div className="container">
         <h2>{this.state.heading}</h2>
-        <Paper>
-          <Box p={3}>
-            <RegButtons />
-          </Box>
-        </Paper>
+        <Grid container justify="center" spacing={3}>
+          <Grid item xs={12} md={10}>
+            <Paper>
+              <Box p={3}>
+                <RegButtons />
+              </Box>
+            </Paper>
+          </Grid>
+        </Grid>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Aenean vel

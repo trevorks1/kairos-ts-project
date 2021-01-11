@@ -17,7 +17,7 @@ class RegButtons extends Component {
 
   render() {
     return (
-      <Grid container alignItems="center" spacing={3}>
+      <Grid container alignItems="center" justify="space-evenly" spacing={3}>
         <Grid item>
           <h2>Register now as an Organization or Volunteer.</h2>
         </Grid>
