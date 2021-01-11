@@ -22,7 +22,7 @@ function* getPrefActivities() {
     );
     yield put({
       type: 'SET_PREF_ACTIVITIES',
-      payload: preferredActivityList.data,
+      payload: prefActivityList.data,
     });
   } catch (err) {
     console.log('Could not get preferred activities list!', err);
