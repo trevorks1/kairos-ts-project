@@ -13,7 +13,24 @@ router.get(
   (req: Request, res: Response, next: express.NextFunction): void => {
     // GET route code here
     const queryText = `SELECT * FROM "postings"
-      JOIN "posting_ages" ON  `;
+      JOIN "posting_ages" ON "posting_ages".posting_id = "postings".id
+      JOIN "ages" ON "posting_ages".ages_id = "ages".id
+      JOIN "posting_activity" ON "posting_activity".posting_id = "postings".id
+      JOIN "activity_type" ON "posting_activity".activity_type_id = "activity_type".id
+      JOIN "organization" ON "organization".id = "postings".org_id
+      JOIN "org_causes" ON "org_causes".org_id = "organization".id
+      JOIN "causes" ON "org_causes".cause_id = "causes".id
+      WHERE "causes".id = $1`;
+
+    pool
+      .query(queryText, [req.params.id])
+      .then((dbResponse) => {
+        res.send(dbResponse.rows);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.sendStatus(500);
+      });
   }
 );
 
@@ -23,7 +40,7 @@ router.get(
 router.post(
   '/',
   rejectUnauthenticated,
-  (req: Request, res: Response, next: express.NextFunction): void => {
+  (req: any, res: Response, next: express.NextFunction): void => {
     try {
       // POST route code here
       const post: any = req.body;
@@ -89,7 +106,7 @@ router.post(
 router.put(
   '/edit/:id',
   rejectUnauthenticated,
-  (req: Request, res: Response, next: express.NextFunction): void => {
+  (req: any, res: Response, next: express.NextFunction): void => {
     const queryText = `UPDATE "postings" SET "date_to_attend"=$1, "start_time"=$2, "end_time"=$3, 
     "location"=$4, "description"=$5, "repeating"=$6, "frequency"=$7, "people_needed"=$8
     WHERE "id"=$9;`;
@@ -119,7 +136,7 @@ router.put(
 router.put(
   '/active/:id',
   rejectUnauthenticated,
-  (req: Request, res: Response, next: express.NextFunction): void => {
+  (req: any, res: Response, next: express.NextFunction): void => {
     const queryText = `UPDATE "postings" SET "active"=FALSE WHERE "id"=$1;`;
 
     pool
