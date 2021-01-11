@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
+// MATERIAL-UI
+import { Container } from '@material-ui/core';
+
 class BrowseActivitiesPage extends Component {
   componentDidMount() {
     console.log(this.props.match.params.id);
@@ -12,7 +15,12 @@ class BrowseActivitiesPage extends Component {
     });
   }
   render() {
-    return <h1>Browse these activities!</h1>;
+    return (
+      <Container>
+        <h1>Browse these activities!</h1>
+        {JSON.stringify(this.props.store.postings.postingsForSelectedCause)}
+      </Container>
+    );
   }
 }
 
