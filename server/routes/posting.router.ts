@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import express from 'express';
 import pool from '../modules/pool';
-//import { rejectUnauthenticated } from '../modules/authentication-middleware';
+import rejectUnauthenticated from '../modules/authentication-middleware';
 
 const router: express.Router = express.Router();
 
@@ -9,9 +9,11 @@ const router: express.Router = express.Router();
  * GET route template
  */
 router.get(
-  '/',
+  '/:id',
   (req: Request, res: Response, next: express.NextFunction): void => {
     // GET route code here
+    const queryText = `SELECT * FROM "postings"
+      JOIN "posting_ages" ON  `;
   }
 );
 
@@ -20,6 +22,7 @@ router.get(
  */
 router.post(
   '/',
+  rejectUnauthenticated,
   (req: Request, res: Response, next: express.NextFunction): void => {
     try {
       // POST route code here
@@ -85,6 +88,7 @@ router.post(
 
 router.put(
   '/edit/:id',
+  rejectUnauthenticated,
   (req: Request, res: Response, next: express.NextFunction): void => {
     const queryText = `UPDATE "postings" SET "date_to_attend"=$1, "start_time"=$2, "end_time"=$3, 
     "location"=$4, "description"=$5, "repeating"=$6, "frequency"=$7, "people_needed"=$8
@@ -114,6 +118,7 @@ router.put(
 
 router.put(
   '/active/:id',
+  rejectUnauthenticated,
   (req: Request, res: Response, next: express.NextFunction): void => {
     const queryText = `UPDATE "postings" SET "active"=FALSE WHERE "id"=$1;`;
 
