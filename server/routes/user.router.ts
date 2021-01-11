@@ -160,4 +160,50 @@ router.post('/logout', (req: Request, res: Response): void => {
   req.logout();
   res.sendStatus(200);
 });
+
+// Update phone
+router.put(
+  '/update/phone',
+  rejectUnauthenticated,
+  (req: any, res: Response, next: express.NextFunction): void => {
+    // put route code here
+
+    pool
+      .query(`UPDATE "user" SET phone_number = $1 WHERE "user".id=$2;`, [
+        req.body.phone_number,
+        req.user.id,
+      ])
+      .then((result) => {
+        res.sendStatus(200);
+      })
+      .catch((error) => {
+        console.log('Error changing phone number', error);
+        res.sendStatus(500);
+      });
+    return;
+  }
+);
+
+// Update phone
+router.put(
+  '/update/email',
+  rejectUnauthenticated,
+  (req: any, res: Response, next: express.NextFunction): void => {
+    // put route code here
+
+    pool
+      .query(`UPDATE "user" SET email_address = $1 WHERE "user".id=$2;`, [
+        req.body.email_address,
+        req.user.id,
+      ])
+      .then((result) => {
+        res.sendStatus(200);
+      })
+      .catch((error) => {
+        console.log('Error changing email address', error);
+        res.sendStatus(500);
+      });
+    return;
+  }
+);
 export default router;
