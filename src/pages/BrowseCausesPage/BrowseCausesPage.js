@@ -19,6 +19,13 @@ class BrowseCausesPage extends Component {
     });
   }
 
+  handleSeeAllClick = () => {
+    console.log('See All click!');
+
+    // TODO push to BrowseActivitiesPage
+    // should see ALL active activities!
+  };
+
   render() {
     return (
       <div>
@@ -29,7 +36,7 @@ class BrowseCausesPage extends Component {
           <Grid container spacing={2}>
             <Grid item xl={3}>
               <Card>
-                <CardActionArea onClick={this.handleCauseClick}>
+                <CardActionArea onClick={this.handleSeeAllClick}>
                   <CardContent>
                     <h4>See All</h4>
                   </CardContent>
