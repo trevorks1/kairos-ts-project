@@ -10,12 +10,12 @@ const router: express.Router = express.Router();
 router.get(
   '/all',
   (req: Request, res: Response, next: express.NextFunction): void => {
-    const queryText: string =
-      'SELECT "cause" from "causes" ORDER BY "cause" ASC;';
+    const queryText: string = 'SELECT * from "causes" ORDER BY "cause" ASC;';
 
     pool
       .query(queryText)
       .then((dbResponse) => {
+        console.log(dbResponse.rows);
         res.send(dbResponse.rows);
       })
       .catch((err) => {
