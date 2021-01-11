@@ -14,8 +14,24 @@ function* getCausesList() {
   }
 }
 
+function* getActivitiesSelectedCause(action) {
+  try {
+    const activities = yield axios.get(`/api/causes/select/${action.payload}`);
+    yield put({
+      type: 'SET_POSTINGS_SELECTED_CAUSE',
+      payload: activities.data,
+    });
+  } catch (err) {
+    console.log('could not get activities for the selected cause!', err);
+  }
+}
+
 function* causesSaga() {
   yield takeLatest('GET_CAUSES', getCausesList);
+  yield takeLatest(
+    'GET_POSTINGS_FOR_SELECTED_CAUSE',
+    getActivitiesSelectedCause
+  );
 }
 
 export default causesSaga;

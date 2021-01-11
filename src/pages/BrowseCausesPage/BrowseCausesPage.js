@@ -6,7 +6,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import { Grid, Container } from '@material-ui/core';
 import CauseListItem from '../../components/CauseListItem/CauseListItem';
 
-class BrowsePage extends Component {
+class BrowseCausesPage extends Component {
   componentDidMount() {
     this.props.dispatch({
       type: 'GET_CAUSES',
@@ -35,4 +35,4 @@ class BrowsePage extends Component {
   }
 }
 
-export default connect(mapStoreToProps)(BrowsePage);
+export default connect(mapStoreToProps)(BrowseCausesPage);
