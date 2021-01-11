@@ -17,29 +17,27 @@ class RegButtons extends Component {
 
   render() {
     return (
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
+      <Grid container alignItems="center" justify="space-evenly" spacing={3}>
+        <Grid item>
           <h2>Register now as an Organization or Volunteer.</h2>
         </Grid>
-        <Grid container item xs={12} spacing={3}>
-          <Grid item xs={6}>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={this.handleClickOrganization}
-            >
-              Organization
-            </Button>
-          </Grid>
-          <Grid item xs={6}>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={this.handleClickVolunteer}
-            >
-              Volunteer
-            </Button>
-          </Grid>
+        <Grid item>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={this.handleClickOrganization}
+          >
+            Organization
+          </Button>
+        </Grid>
+        <Grid item>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={this.handleClickVolunteer}
+          >
+            Volunteer
+          </Button>
         </Grid>
       </Grid>
     );

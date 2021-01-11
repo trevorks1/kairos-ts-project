@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 
 // MATERIAL UI
 import { Card, CardContent, CardActionArea } from '@material-ui/core';
@@ -10,6 +11,7 @@ class CauseListItem extends Component {
       this.props.cause.cause,
       this.props.cause.id
     );
+    this.props.history.push(`/browse/${this.props.cause.id}`);
   };
 
   render() {
@@ -25,4 +27,4 @@ class CauseListItem extends Component {
   }
 }
 
-export default CauseListItem;
+export default withRouter(CauseListItem);
