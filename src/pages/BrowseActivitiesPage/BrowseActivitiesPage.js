@@ -22,8 +22,6 @@ class BrowseActivitiesPage extends Component {
   };
 
   componentDidMount() {
-    console.log(this.props.match.params.id);
-
     this.props.dispatch({
       type: 'GET_POSTINGS_FOR_SELECTED_CAUSE',
       payload: this.props.match.params.id,
