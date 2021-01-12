@@ -32,12 +32,12 @@ function* getPrefActivities() {
 // gets retrieve all postings filtered by logged in user's preferred activities
 function* getPrefActivityPostings() {
   try {
-    const preferredActivityPostingsList = yield axios.get(
+    const prefActivityPostingsList = yield axios.get(
       '/api/activities/postings-for-volunteer'
     );
     yield put({
       type: 'SET_PREF_ACTIVITY_POSTINGS',
-      payload: preferredActivityPostingsList.data,
+      payload: prefActivityPostingsList.data,
     });
   } catch (err) {
     console.log('Could not get preferred activity postings list!', err);
