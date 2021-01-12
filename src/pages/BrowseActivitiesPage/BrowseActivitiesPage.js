@@ -89,6 +89,7 @@ class BrowseActivitiesPage extends Component {
               <Select
                 value={this.state.selectedCauseId}
                 onChange={this.handleCauseChange}
+                variant="outlined"
               >
                 <MenuItem value={0}>-please select-</MenuItem>
                 {this.props.store.causes.map((item) => {
@@ -103,6 +104,7 @@ class BrowseActivitiesPage extends Component {
               <Select
                 value={this.state.selectedActivityId}
                 onChange={this.handleActivityChange}
+                variant="outlined"
               >
                 <MenuItem value={0}>-please select-</MenuItem>
                 {this.props.store.activities.activityList.map((item) => {
@@ -119,6 +121,7 @@ class BrowseActivitiesPage extends Component {
               <Select
                 value={this.state.selectedAgeRangeId}
                 onChange={this.handleAgeChange}
+                variant="outlined"
               >
                 <MenuItem value={0}>-please select-</MenuItem>
                 {this.props.store.ages.map((item) => {
