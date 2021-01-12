@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-const postingsForSelectedCause = (state = [], action) => {
+const postingsForBrowsePage = (state = [], action) => {
   switch (action.type) {
     case 'SET_POSTINGS_SELECTED_CAUSE':
       return action.payload;
@@ -10,5 +10,5 @@ const postingsForSelectedCause = (state = [], action) => {
 };
 
 export default combineReducers({
-  postingsForSelectedCause,
+  postingsForBrowsePage,
 });

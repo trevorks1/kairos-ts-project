@@ -17,6 +17,9 @@ import {
   CardActions,
 } from '@material-ui/core';
 
+// CUSTOM COMPONENTS
+import PostingCard from '../../components/PostingCard/PostingCard';
+
 class BrowseActivitiesPage extends Component {
   state = {
     selectedCauseId: 0,
@@ -124,34 +127,14 @@ class BrowseActivitiesPage extends Component {
               </Select>
             </FormControl>
           </Grid>
+          {this.props.store.postings.postingsForBrowsePage.map((item) => {
+            return <PostingCard />;
+          })}
+
           <Grid item xl={12}>
             {/* use avatar to display the number in top left corner */}
             <Card>
               <CardHeader avatar={<Avatar>1</Avatar>} title="Activity Title" />
-              <CardContent>
-                <p>Activity Description</p>
-              </CardContent>
-              <CardActions>
-                <p>Date Posted: 01.01.2021</p>
-              </CardActions>
-            </Card>
-          </Grid>
-          <Grid item xl={12}>
-            {/* use avatar to display the number in top left corner */}
-            <Card>
-              <CardHeader avatar={<Avatar>2</Avatar>} title="Activity Title" />
-              <CardContent>
-                <p>Activity Description</p>
-              </CardContent>
-              <CardActions>
-                <p>Date Posted: 01.01.2021</p>
-              </CardActions>
-            </Card>
-          </Grid>
-          <Grid item xl={12}>
-            {/* use avatar to display the number in top left corner */}
-            <Card>
-              <CardHeader avatar={<Avatar>3</Avatar>} title="Activity Title" />
               <CardContent>
                 <p>Activity Description</p>
               </CardContent>
