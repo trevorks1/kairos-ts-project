@@ -13,12 +13,20 @@ import {
 } from '@material-ui/core';
 
 class BrowseActivitiesPage extends Component {
+  state = {
+    selectedCauseId: 0,
+  };
+
   componentDidMount() {
     console.log(this.props.match.params.id);
 
     this.props.dispatch({
       type: 'GET_POSTINGS_FOR_SELECTED_CAUSE',
       payload: this.props.match.params.id,
+    });
+
+    this.props.dispatch({
+      type: 'GET_CAUSES',
     });
   }
   render() {
@@ -29,7 +37,12 @@ class BrowseActivitiesPage extends Component {
           <Grid item xl={4}>
             <FormControl style={{ minWidth: 120 }}>
               <InputLabel>Cause Type</InputLabel>
-              <Select></Select>
+              <Select value={this.state.selectedCauseId}>
+                <MenuItem value={0}>-please select-</MenuItem>
+                {this.props.store.causes.map((item, index) => {
+                  return <MenuItem value={item.id}>{item.cause}</MenuItem>;
+                })}
+              </Select>
             </FormControl>
           </Grid>
           <Grid item xl={4}>
