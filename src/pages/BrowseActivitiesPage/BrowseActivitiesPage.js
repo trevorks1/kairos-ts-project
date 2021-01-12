@@ -10,6 +10,8 @@ import {
   InputLabel,
   Select,
   MenuItem,
+  Card,
+  CardContent,
 } from '@material-ui/core';
 
 class BrowseActivitiesPage extends Component {
@@ -96,6 +98,13 @@ class BrowseActivitiesPage extends Component {
               <InputLabel>Age Range</InputLabel>
               <Select></Select>
             </FormControl>
+          </Grid>
+          <Grid item xl={12}>
+            <Card>
+              <CardContent>
+                <h2>HELLO</h2>
+              </CardContent>
+            </Card>
           </Grid>
         </Grid>
       </Container>
