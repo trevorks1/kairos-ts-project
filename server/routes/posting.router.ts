@@ -20,7 +20,7 @@ router.get(
       JOIN "organization" ON "organization".id = "postings".org_id
       JOIN "org_causes" ON "org_causes".org_id = "organization".id
       JOIN "causes" ON "org_causes".cause_id = "causes".id
-      WHERE "causes".id = $1`;
+      WHERE "causes".id = $1;`;
 
     pool
       .query(queryText, [req.params.id])
