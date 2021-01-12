@@ -29,6 +29,17 @@ class BrowseActivitiesPage extends Component {
       type: 'GET_CAUSES',
     });
   }
+
+  handleCauseChange = (e) => {
+    this.setState(
+      {
+        selectedCauseId: e.target.value,
+      }
+      // () => {
+      //   console.log(this.state);
+      // }
+    );
+  };
   render() {
     return (
       <Container>
@@ -37,7 +48,10 @@ class BrowseActivitiesPage extends Component {
           <Grid item xl={4}>
             <FormControl style={{ minWidth: 120 }}>
               <InputLabel>Cause Type</InputLabel>
-              <Select value={this.state.selectedCauseId}>
+              <Select
+                value={this.state.selectedCauseId}
+                onChange={this.handleCauseChange}
+              >
                 <MenuItem value={0}>-please select-</MenuItem>
                 {this.props.store.causes.map((item, index) => {
                   return <MenuItem value={item.id}>{item.cause}</MenuItem>;
