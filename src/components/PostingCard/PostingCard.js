@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 
 // MATERIAL-UI
 import {
@@ -14,6 +15,7 @@ import {
 class PostingCard extends Component {
   handlePostingClick = () => {
     console.log(this.props.posting.id);
+    this.props.history.push(`/view-activity/${this.props.posting.id}`);
   };
 
   render() {
@@ -35,4 +37,4 @@ class PostingCard extends Component {
   }
 }
 
-export default PostingCard;
+export default withRouter(PostingCard);
