@@ -6,11 +6,6 @@ import { Card, CardContent, CardActionArea } from '@material-ui/core';
 
 class CauseListItem extends Component {
   handleCauseClick = () => {
-    console.log(
-      'you clicked a cause!',
-      this.props.cause.cause,
-      this.props.cause.id
-    );
     this.props.history.push(`/browse/${this.props.cause.id}`);
   };
 
