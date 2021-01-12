@@ -9,6 +9,7 @@ const router: express.Router = express.Router();
  * GET route template
  */
 router.get(
+
   '/:id',
   (req: Request, res: Response, next: express.NextFunction): void => {
     // GET route code here
@@ -39,6 +40,7 @@ router.get(
  */
 router.post(
   '/',
+
   rejectUnauthenticated,
   (req: any, res: Response, next: express.NextFunction): void => {
     try {
@@ -152,3 +154,4 @@ router.put(
 );
 
 export default router;
+

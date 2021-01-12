@@ -8,7 +8,7 @@
 --     "username" VARCHAR (80) UNIQUE NOT NULL,
 --     "password" VARCHAR (1000) NOT NULL
 -- );
-
+ 
 
 CREATE TABLE "user" (
   "id" SERIAL PRIMARY KEY,
@@ -20,7 +20,7 @@ CREATE TABLE "user" (
   "phone_number" VARCHAR (40),
   "company" BOOLEAN,
   "company_name" VARCHAR (40),
-  "non_profit" BOOLEAN,
+  "volunteer" BOOLEAN,
   "active" BOOLEAN,
   "access_level_id" INT
 );
@@ -160,3 +160,17 @@ ALTER TABLE "user" ADD FOREIGN KEY ("access_level_id") REFERENCES "access_level"
 ALTER TABLE "group_members" ADD FOREIGN KEY ("group_id") REFERENCES "group" ("id");
 
 ALTER TABLE "group_members" ADD FOREIGN KEY ("age_id") REFERENCES "ages" ("id");
+
+alter table  "organization"
+drop constraint organization_user_id_fkey,
+add constraint organization_user_id_fkey 
+	foreign key ("user_id")
+	references "user"(id)
+	ON DELETE CASCADE;
+
+alter table  "org_causes"
+drop constraint org_causes_org_id_fkey,
+add constraint org_causes_org_id_fkey 
+	foreign key ("org_id")
+	references "organization"(id)
+	ON DELETE CASCADE;
