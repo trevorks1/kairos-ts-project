@@ -3,7 +3,13 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 // MATERIAL-UI
-import { Grid, Container } from '@material-ui/core';
+import {
+  Grid,
+  Container,
+  Card,
+  CardActionArea,
+  CardContent,
+} from '@material-ui/core';
 import CauseListItem from '../../components/CauseListItem/CauseListItem';
 
 class BrowseCausesPage extends Component {
@@ -13,6 +19,13 @@ class BrowseCausesPage extends Component {
     });
   }
 
+  handleSeeAllClick = () => {
+    console.log('See All click!');
+
+    // TODO push to BrowseActivitiesPage
+    // should see ALL active activities!
+  };
+
   render() {
     return (
       <div>
@@ -21,6 +34,15 @@ class BrowseCausesPage extends Component {
         </div>
         <Container>
           <Grid container spacing={2}>
+            <Grid item xl={3}>
+              <Card>
+                <CardActionArea onClick={this.handleSeeAllClick}>
+                  <CardContent>
+                    <h4>See All</h4>
+                  </CardContent>
+                </CardActionArea>
+              </Card>
+            </Grid>
             {this.props.store.causes.map((item, index) => {
               return (
                 <Grid item key={index} xl={3}>

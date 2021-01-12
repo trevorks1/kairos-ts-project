@@ -7,8 +7,8 @@ import postingRouter from './routes/posting.router';
 import activitiesRouter from './routes/activity.router';
 import causesRouter from './routes/causes.router';
 import adminRouter from './routes/admin.router';
+import agesRouter from './routes/ages.router';
 import organizationRouter from './routes/organization.router';
-
 
 require('dotenv').config();
 
@@ -31,8 +31,8 @@ app.use('/api/postings', postingRouter);
 app.use('/api/activities', activitiesRouter);
 app.use('/api/causes', causesRouter);
 app.use('/api/admin', adminRouter);
+app.use('/api/ages', agesRouter);
 app.use('/api/organization', organizationRouter);
-
 
 // Serve static files
 app.use(express.static('build'));

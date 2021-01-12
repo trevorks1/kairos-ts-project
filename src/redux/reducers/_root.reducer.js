@@ -4,7 +4,7 @@ import user from './user.reducer';
 import causes from './causes.reducer';
 import activities from './activities.reducer';
 import postings from './postings.reducer';
-
+import ages from './ages.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -18,6 +18,7 @@ const rootReducer = combineReducers({
   causes,
   activities,
   postings,
+  ages,
 });
 
 export default rootReducer;

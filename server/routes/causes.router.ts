@@ -15,7 +15,6 @@ router.get(
     pool
       .query(queryText)
       .then((dbResponse) => {
-        console.log(dbResponse.rows);
         res.send(dbResponse.rows);
       })
       .catch((err) => {
