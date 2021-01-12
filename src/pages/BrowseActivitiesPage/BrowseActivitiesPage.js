@@ -18,6 +18,7 @@ class BrowseActivitiesPage extends Component {
   state = {
     selectedCauseId: 0,
     selectedActivityId: 0,
+    selectedAgeRangeId: 0,
   };
 
   componentDidMount() {
@@ -62,6 +63,17 @@ class BrowseActivitiesPage extends Component {
       }
     );
   };
+
+  handleAgeChange = (e) => {
+    this.setState(
+      {
+        selectedAgeRangeId: e.target.value,
+      },
+      () => {
+        console.log(this.state);
+      }
+    );
+  };
   render() {
     return (
       <Container>
@@ -100,7 +112,15 @@ class BrowseActivitiesPage extends Component {
           <Grid item xl={4}>
             <FormControl style={{ minWidth: 120 }}>
               <InputLabel>Age Range</InputLabel>
-              <Select></Select>
+              <Select
+                value={this.state.selectedAgeRangeId}
+                onChange={this.handleAgeChange}
+              >
+                <MenuItem value={0}>-please select-</MenuItem>
+                {this.props.store.ages.map((item, index) => {
+                  return <MenuItem value={item.id}>{item.range}</MenuItem>;
+                })}
+              </Select>
             </FormControl>
           </Grid>
           <Grid item xl={12}>
