@@ -6,6 +6,7 @@ import userRouter from './routes/user.router';
 import activitiesRouter from './routes/activity.router';
 import causesRouter from './routes/causes.router';
 import adminRouter from './routes/admin.router';
+import agesRouter from './routes/ages.router';
 
 require('dotenv').config();
 
@@ -27,6 +28,7 @@ app.use('/api/user', userRouter);
 app.use('/api/activities', activitiesRouter);
 app.use('/api/causes', causesRouter);
 app.use('/api/admin', adminRouter);
+app.use('/api/ages', agesRouter);
 
 // Serve static files
 app.use(express.static('build'));
