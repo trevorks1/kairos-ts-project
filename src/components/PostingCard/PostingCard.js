@@ -16,13 +16,12 @@ class PostingCard extends Component {
       <Grid item xl={12}>
         {/* use avatar to display the number in top left corner */}
         <Card>
-          <CardHeader avatar={<Avatar>1</Avatar>} title="Activity Title" />
-          <CardContent>
-            <p>Activity Description</p>
-          </CardContent>
-          <CardActions>
-            <p>Date Posted: 01.01.2021</p>
-          </CardActions>
+          <CardHeader
+            avatar={<Avatar>{this.props.postingId + 1}</Avatar>} // adding 1 to postingId because array index starts at 0!
+            title={this.props.posting.organization_name}
+          />
+          <CardContent>{this.props.posting.description}</CardContent>
+          <CardActions>{this.props.posting.date_posted}</CardActions>
         </Card>
       </Grid>
     );
