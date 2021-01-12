@@ -57,6 +57,7 @@ CREATE TABLE "org_causes" (
 
 CREATE TABLE "postings" (
   "id" SERIAL PRIMARY KEY,
+  "title" VARCHAR (120),
   "org_id" INT,
   "date_posted" date,
   "date_to_attend" date,
