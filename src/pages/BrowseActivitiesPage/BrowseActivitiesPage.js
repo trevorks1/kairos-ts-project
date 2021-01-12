@@ -15,6 +15,7 @@ import {
 class BrowseActivitiesPage extends Component {
   state = {
     selectedCauseId: 0,
+    selectedActivityId: 0,
   };
 
   componentDidMount() {
@@ -28,16 +29,31 @@ class BrowseActivitiesPage extends Component {
     this.props.dispatch({
       type: 'GET_CAUSES',
     });
+
+    this.props.dispatch({
+      type: 'GET_ACTIVITIES',
+    });
   }
 
   handleCauseChange = (e) => {
     this.setState(
       {
         selectedCauseId: e.target.value,
+      },
+      () => {
+        console.log(this.state);
       }
-      // () => {
-      //   console.log(this.state);
-      // }
+    );
+  };
+
+  handleActivityChange = (e) => {
+    this.setState(
+      {
+        selectedActivityId: e.target.value,
+      },
+      () => {
+        console.log(this.state);
+      }
     );
   };
   render() {
@@ -62,7 +78,17 @@ class BrowseActivitiesPage extends Component {
           <Grid item xl={4}>
             <FormControl style={{ minWidth: 120 }}>
               <InputLabel>Activity Type</InputLabel>
-              <Select></Select>
+              <Select
+                value={this.state.selectedActivityId}
+                onChange={this.handleActivityChange}
+              >
+                <MenuItem value={0}>-please select-</MenuItem>
+                {this.props.store.activities.activityList.map((item, index) => {
+                  return (
+                    <MenuItem value={item.id}>{item.activity_name}</MenuItem>
+                  );
+                })}
+              </Select>
             </FormControl>
           </Grid>
           <Grid item xl={4}>
