@@ -5,9 +5,42 @@ import pool from '../modules/pool';
 import userStrategy from '../strategies/user.strategy';
 import { encryptPassword } from '../modules/encryption';
 const router: express.Router = express.Router();
+
+/**
+ * GET ROUTES
+ */
 router.get('/', rejectUnauthenticated, (req: Request, res: Response): void => {
   res.send(req.user);
 });
+
+// GET Volunteer info /api/user/volunteer
+router.get(
+  '/volunteer',
+  rejectUnauthenticated,
+  (req: any, res: Response, next: express.NextFunction): void => {
+    const queryText = `SELECT "user".first_name, "user".last_name, "user".email_address, "user".phone_number, 
+      ARRAY(SELECT DISTINCT "ages".range FROM "ages", "user_ages" WHERE "user_ages".user_id = $1 AND "ages".id = "user_ages".ages_id) as age_ranges,
+      ARRAY(SELECT DISTINCT "activity_type".activity_name FROM "activity_type", "user_activity" WHERE "user_activity".activity_type_id = "activity_type".id AND "user_activity".user_id = $1)
+      FROM "user"
+      WHERE "user".id = $1;`;
+
+    pool
+      .query(queryText, [req.user.id])
+      .then((dbResponse) => {
+        console.log(dbResponse);
+        res.send(dbResponse.rows);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.sendStatus(500);
+      });
+  }
+);
+
+/**
+ * END GET ROUTES
+ */
+
 router.post(
   '/register/vol',
   (req: any, res: Response, next: express.NextFunction): void => {
