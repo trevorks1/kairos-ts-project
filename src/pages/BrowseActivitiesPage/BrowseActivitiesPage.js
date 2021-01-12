@@ -3,7 +3,14 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 // MATERIAL-UI
-import { Container } from '@material-ui/core';
+import {
+  Container,
+  Grid,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+} from '@material-ui/core';
 
 class BrowseActivitiesPage extends Component {
   componentDidMount() {
@@ -18,7 +25,26 @@ class BrowseActivitiesPage extends Component {
     return (
       <Container>
         <h1>Browse these activities!</h1>
-        {JSON.stringify(this.props.store.postings.postingsForSelectedCause)}
+        <Grid container spacing={2}>
+          <Grid item xl={4}>
+            <FormControl style={{ minWidth: 120 }}>
+              <InputLabel>Cause Type</InputLabel>
+              <Select></Select>
+            </FormControl>
+          </Grid>
+          <Grid item xl={4}>
+            <FormControl style={{ minWidth: 120 }}>
+              <InputLabel>Activity Type</InputLabel>
+              <Select></Select>
+            </FormControl>
+          </Grid>
+          <Grid item xl={4}>
+            <FormControl style={{ minWidth: 120 }}>
+              <InputLabel>Age Range</InputLabel>
+              <Select></Select>
+            </FormControl>
+          </Grid>
+        </Grid>
       </Container>
     );
   }
