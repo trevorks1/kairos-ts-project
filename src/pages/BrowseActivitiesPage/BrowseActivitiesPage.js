@@ -12,6 +12,9 @@ import {
   MenuItem,
   Card,
   CardContent,
+  CardHeader,
+  Avatar,
+  CardActions,
 } from '@material-ui/core';
 
 class BrowseActivitiesPage extends Component {
@@ -122,10 +125,39 @@ class BrowseActivitiesPage extends Component {
             </FormControl>
           </Grid>
           <Grid item xl={12}>
+            {/* use avatar to display the number in top left corner */}
             <Card>
+              <CardHeader avatar={<Avatar>1</Avatar>} title="Activity Title" />
               <CardContent>
-                <h2>HELLO</h2>
+                <p>Activity Description</p>
               </CardContent>
+              <CardActions>
+                <p>Date Posted: 01.01.2021</p>
+              </CardActions>
+            </Card>
+          </Grid>
+          <Grid item xl={12}>
+            {/* use avatar to display the number in top left corner */}
+            <Card>
+              <CardHeader avatar={<Avatar>2</Avatar>} title="Activity Title" />
+              <CardContent>
+                <p>Activity Description</p>
+              </CardContent>
+              <CardActions>
+                <p>Date Posted: 01.01.2021</p>
+              </CardActions>
+            </Card>
+          </Grid>
+          <Grid item xl={12}>
+            {/* use avatar to display the number in top left corner */}
+            <Card>
+              <CardHeader avatar={<Avatar>3</Avatar>} title="Activity Title" />
+              <CardContent>
+                <p>Activity Description</p>
+              </CardContent>
+              <CardActions>
+                <p>Date Posted: 01.01.2021</p>
+              </CardActions>
             </Card>
           </Grid>
         </Grid>
