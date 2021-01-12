@@ -35,6 +35,10 @@ class BrowseActivitiesPage extends Component {
     this.props.dispatch({
       type: 'GET_ACTIVITIES',
     });
+
+    this.props.dispatch({
+      type: 'GET_AGES',
+    });
   }
 
   handleCauseChange = (e) => {
