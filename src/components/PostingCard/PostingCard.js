@@ -20,7 +20,7 @@ class PostingCard extends Component {
 
   render() {
     return (
-      <Grid item xl={12}>
+      <Grid item lg={12}>
         {/* use avatar to display the number in top left corner */}
         <Card>
           <CardActionArea onClick={this.handlePostingClick}>

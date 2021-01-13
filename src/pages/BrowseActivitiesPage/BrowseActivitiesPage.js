@@ -83,7 +83,7 @@ class BrowseActivitiesPage extends Component {
       <Container>
         <h1>Browse these activities!</h1>
         <Grid container spacing={2}>
-          <Grid item xl={4}>
+          <Grid item lg={4}>
             <FormControl style={{ minWidth: 120 }}>
               <InputLabel>Cause Type</InputLabel>
               <Select
@@ -98,7 +98,7 @@ class BrowseActivitiesPage extends Component {
               </Select>
             </FormControl>
           </Grid>
-          <Grid item xl={4}>
+          <Grid item lg={4}>
             <FormControl style={{ minWidth: 120 }}>
               <InputLabel>Activity Type</InputLabel>
               <Select
@@ -115,7 +115,7 @@ class BrowseActivitiesPage extends Component {
               </Select>
             </FormControl>
           </Grid>
-          <Grid item xl={4}>
+          <Grid item lg={4}>
             <FormControl style={{ minWidth: 120 }}>
               <InputLabel>Age Range</InputLabel>
               <Select

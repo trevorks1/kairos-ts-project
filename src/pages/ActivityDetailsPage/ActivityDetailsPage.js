@@ -9,7 +9,7 @@ class ActivityDetailsPage extends Component {
       <Container>
         <Paper>
           <Grid container alignItems="center">
-            <Grid item xl={6}>
+            <Grid item lg={6}>
               <Box ml={3}>
                 <Grid item>
                   <h1>Activity Name</h1>
@@ -21,7 +21,7 @@ class ActivityDetailsPage extends Component {
                 </Grid>
               </Box>
             </Grid>
-            <Grid item xl={6}>
+            <Grid item lg={6}>
               <Grid container alignItems="center" justify="space-evenly">
                 <Grid item>
                   <Button variant="contained">BACK</Button>
