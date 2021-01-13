@@ -91,6 +91,43 @@ router.get(
   }
 );
 
+// GET Postings by Browse criteria /api/postings/browse
+router.get(
+  '/browse/:activity/:age/:cause',
+  (req: any, res: Response, next: express.NextFunction): void => {
+    let activity = `AND "activity_type".id > 0 `;
+    let age = `AND "ages".id > 0 `;
+    let cause = `AND "org_causes".id > 0 `;
+    // this is dirty but we're sending 0 if nothing is selected from the filters on the front
+    if (req.params.activity != 0) {
+      activity = `AND "activity_type".id = ${req.params.activity}`;
+    }
+    if (req.params.age != 0) {
+      age = `AND "ages".id = ${req.params.age}`;
+    }
+    if (req.params.cause != 0) {
+      cause = `AND "org_causes".cause_id = ${req.params.cause}`;
+    }
+    const queryText = `SELECT DISTINCT "postings".*, "organization".organization_name
+    FROM "postings", "causes", "activity_type", "ages", "posting_ages", "organization", "posting_activity", "org_causes"
+    WHERE "postings".active = true AND "posting_ages".posting_id = "postings".id AND "ages".id = "posting_ages".ages_id 
+    AND "posting_ages".posting_id = "postings".id AND"posting_activity".posting_id = "postings".id 
+    AND "activity_type".id = "posting_activity".activity_type_id AND "posting_activity".posting_id = "postings".id 
+    AND "org_causes".org_id = "postings".org_id AND "postings".org_id = "organization".id ${activity} ${age} ${cause};`;
+    console.log(queryText, 'Activity variable', activity);
+
+    pool
+      .query(queryText)
+      .then((dbResponse) => {
+        res.send(dbResponse.rows);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.sendStatus(500);
+      });
+  }
+);
+
 /**
  * POST route template
  */
