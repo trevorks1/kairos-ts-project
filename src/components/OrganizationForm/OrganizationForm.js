@@ -14,7 +14,7 @@ import {
   Checkbox,
 } from '@material-ui/core';
 
-class RegisterForm extends Component {
+class RegisterFormVolunteer extends Component {
   state = {
     username: '',
     password: '',
@@ -258,7 +258,7 @@ class RegisterForm extends Component {
             Upload Logo
             {/* TODO - AWS S3 needs to go here! */}
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={3}>
             <Button variant="contained">Cancel</Button>
           </Grid>
           <Grid item xs={6}>
@@ -272,4 +272,4 @@ class RegisterForm extends Component {
   }
 }
 
-export default connect(mapStoreToProps)(RegisterForm);
+export default connect(mapStoreToProps)(RegisterFormVolunteer);

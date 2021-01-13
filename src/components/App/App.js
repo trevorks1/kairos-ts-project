@@ -34,12 +34,12 @@ const customTheme = createMuiTheme({
     primary: {
       main: '#FF4D53',
     },
-    /* secondary: {
+    secondary: {
       // light: '',
-      // main: '#014F56',
+      main: '#DBDBDB',
       // dark: '',
       // contrastText: '',
-    }, */
+    },
     // error: deepOrange,
     // warning: lime,
     info: { main: '#FE7942' },
@@ -109,23 +109,21 @@ class App extends Component {
                 component={LoginPage}
                 authRedirect="/user"
               />
-              <ProtectedRoute
+              <Route
                 // with authRedirect:
                 // - if logged in, redirects to "/user"
                 // - else shows RegisterPage at "/registration"
                 exact
                 path="/registration"
                 component={RegisterOrganization}
-                authRedirect="/user"
               />
-              <ProtectedRoute
+              <Route
                 // with authRedirect:
                 // - if logged in, redirects to "/user"
                 // - else shows RegisterPage at "/registration"
                 exact
                 path="/registration-volunteer"
                 component={RegisterVolunteer}
-                authRedirect="/user"
               />
               <ProtectedRoute
                 // with authRedirect:
