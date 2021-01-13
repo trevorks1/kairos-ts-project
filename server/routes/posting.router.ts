@@ -9,6 +9,28 @@ const router: express.Router = express.Router();
  * GET routes
  */
 
+// GET posting by ID
+router.get(
+  '/details/:id',
+  (req: Request, res: Response, next: express.NextFunction): void => {
+    const queryText = `SELECT "postings".*, "organization".organization_name,
+    ARRAY(SELECT DISTINCT "ages".range FROM "ages", "posting_ages" WHERE "posting_ages".posting_id = "postings".id AND "ages".id = "posting_ages".ages_id AND "posting_ages".posting_id = "postings".id) as age_ranges, 
+    ARRAY(SELECT DISTINCT "activity_type".activity_name FROM "activity_type", "posting_activity" WHERE "posting_activity".posting_id = "postings".id AND "activity_type".id = "posting_activity".activity_type_id AND "posting_activity".posting_id = "postings".id ) as activities
+    FROM "organization" 
+    JOIN "postings" ON "organization".id = "postings".org_id
+    WHERE "postings".id = $1;`;
+    pool
+      .query(queryText, [req.params.id])
+      .then((dbResponse) => {
+        res.send(dbResponse.rows);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.sendStatus(500);
+      });
+  }
+);
+
 // GET All postings
 router.get(
   '/',
@@ -22,7 +44,6 @@ router.get(
     pool
       .query(queryText)
       .then((dbResponse) => {
-        console.log(dbResponse);
         res.send(dbResponse.rows);
       })
       .catch((err) => {
