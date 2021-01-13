@@ -1,9 +1,38 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import mapStoreToProps from '../../redux/mapStoreToProps';
 
 // MATERIAL-UI
 import { Container, Box, Paper, Grid, Button } from '@material-ui/core';
 
 class ActivityDetailsPage extends Component {
+  state = {
+    paramsId: 0,
+    postingIndex: 0,
+  };
+  componentDidMount() {
+    this.setState(
+      {
+        paramsId: this.props.match.params.id,
+      },
+      () => {
+        for (
+          let i = 0;
+          i < this.props.store.postings.postingsForBrowsePage.length;
+          i++
+        )
+          if (
+            this.props.store.postings.postingsForBrowsePage[i].id ==
+            this.state.paramsId
+          ) {
+            this.setState({
+              postingIndex: i,
+            });
+          }
+      }
+    );
+  }
+
   render() {
     return (
       <Container>
@@ -12,12 +41,22 @@ class ActivityDetailsPage extends Component {
             <Grid item lg={6}>
               <Box ml={3}>
                 <Grid item>
-                  <h1>Activity Name</h1>
+                  <h1>
+                    {this.props.store.postings &&
+                      this.props.store.postings.postingsForBrowsePage[
+                        this.state.postingIndex
+                      ].location}
+                  </h1>
                 </Grid>
               </Box>
               <Box ml={3}>
                 <Grid item>
-                  <h3>Organization Name</h3>
+                  <h3>
+                    {this.props.store.postings &&
+                      this.props.store.postings.postingsForBrowsePage[
+                        this.state.postingIndex
+                      ].organization_name}
+                  </h3>
                 </Grid>
               </Box>
             </Grid>
@@ -31,6 +70,14 @@ class ActivityDetailsPage extends Component {
                 </Grid>
               </Grid>
             </Grid>
+            <Grid item>
+              <h4>
+                {this.props.store.postings &&
+                  this.props.store.postings.postingsForBrowsePage[
+                    this.state.postingIndex
+                  ].description}
+              </h4>
+            </Grid>
           </Grid>
         </Paper>
       </Container>
@@ -38,4 +85,4 @@ class ActivityDetailsPage extends Component {
   }
 }
 
-export default ActivityDetailsPage;
+export default connect(mapStoreToProps)(ActivityDetailsPage);
