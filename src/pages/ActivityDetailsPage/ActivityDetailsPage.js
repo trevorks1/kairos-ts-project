@@ -6,6 +6,9 @@ import { withRouter } from 'react-router-dom';
 // MATERIAL-UI
 import { Container, Box, Paper, Grid, Button } from '@material-ui/core';
 
+// CUSTOM COMPONENTS
+import ActivityDetailsCard from '../../components/ActivityDetailsCard/ActivityDetailsCard';
+
 class ActivityDetailsPage extends Component {
   state = {
     paramsId: 0,
@@ -80,7 +83,7 @@ class ActivityDetailsPage extends Component {
             <Grid item></Grid>
           </Grid>
         </Paper>
-        <Grid container>
+        <Grid container alignItems="center" justify="space-evenly">
           <Grid item l={6}>
             <div>
               <img
@@ -96,6 +99,15 @@ class ActivityDetailsPage extends Component {
                   ].description}
               </h4>
             </div>
+          </Grid>
+          <Grid item l={6}>
+            <ActivityDetailsCard
+              posting={
+                this.props.store.postings.postingsForBrowsePage[
+                  this.state.postingIndex
+                ]
+              }
+            />
           </Grid>
         </Grid>
       </Container>
