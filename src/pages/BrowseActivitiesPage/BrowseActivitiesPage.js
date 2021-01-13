@@ -10,6 +10,7 @@ import {
   InputLabel,
   Select,
   MenuItem,
+  Button,
   Card,
   CardContent,
   CardHeader,
@@ -22,9 +23,9 @@ import PostingCard from '../../components/PostingCard/PostingCard';
 
 class BrowseActivitiesPage extends Component {
   state = {
-    selectedCauseId: 0,
-    selectedActivityId: 0,
-    selectedAgeRangeId: 0,
+    cause_id: 0,
+    activity_id: 0,
+    age_id: 0,
   };
 
   componentDidMount() {
@@ -47,43 +48,35 @@ class BrowseActivitiesPage extends Component {
   }
 
   handleCauseChange = (e) => {
-    this.setState(
-      {
-        selectedCauseId: e.target.value,
-      },
-      () => {
-        console.log(this.state);
-      }
-    );
+    this.setState({
+      cause_id: e.target.value,
+    });
   };
 
   handleActivityChange = (e) => {
-    this.setState(
-      {
-        selectedActivityId: e.target.value,
-      },
-      () => {
-        console.log(this.state);
-      }
-    );
+    this.setState({
+      activity_id: e.target.value,
+    });
   };
 
   handleAgeChange = (e) => {
-    this.setState(
-      {
-        selectedAgeRangeId: e.target.value,
-      },
-      () => {
-        console.log(this.state);
-      }
-    );
+    this.setState({
+      age_id: e.target.value,
+    });
+  };
+
+  clickHandleSubmit = () => {
+    this.props.dispatch({
+      type: 'SUBMIT_FILTERS',
+      payload: this.state,
+    });
   };
   render() {
     return (
       <Container>
         <h1>Browse these activities!</h1>
         <Grid container spacing={2}>
-          <Grid item lg={4}>
+          <Grid item lg={3}>
             <FormControl style={{ minWidth: 120 }}>
               <InputLabel>Cause Type</InputLabel>
               <Select
@@ -98,7 +91,7 @@ class BrowseActivitiesPage extends Component {
               </Select>
             </FormControl>
           </Grid>
-          <Grid item lg={4}>
+          <Grid item lg={3}>
             <FormControl style={{ minWidth: 120 }}>
               <InputLabel>Activity Type</InputLabel>
               <Select
@@ -115,7 +108,7 @@ class BrowseActivitiesPage extends Component {
               </Select>
             </FormControl>
           </Grid>
-          <Grid item lg={4}>
+          <Grid item lg={3}>
             <FormControl style={{ minWidth: 120 }}>
               <InputLabel>Age Range</InputLabel>
               <Select
@@ -129,6 +122,11 @@ class BrowseActivitiesPage extends Component {
                 })}
               </Select>
             </FormControl>
+          </Grid>
+          <Grid item lg={3}>
+            <Button variant="contained" onClick={this.clickHandleSubmit}>
+              SUBMIT
+            </Button>
           </Grid>
           {this.props.store.postings.postingsForBrowsePage.map(
             (item, index) => {
