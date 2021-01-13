@@ -1,9 +1,14 @@
 import { combineReducers } from 'redux';
 
-const fakeReducer = (state = '', action) => {
-  return state;
+const postingsForSelectedCause = (state = [], action) => {
+  switch (action.type) {
+    case 'SET_POSTINGS_SELECTED_CAUSE':
+      return action.payload;
+    default:
+      return state;
+  }
 };
 
 export default combineReducers({
-  fakeReducer,
+  postingsForSelectedCause,
 });

@@ -39,6 +39,7 @@ CREATE TABLE "organization" (
   "mission" VARCHAR (2000),
   "summary" VARCHAR (5000),
   "website" VARCHAR (60),
+  "logo" VARCHAR (1000),
   "organization_type" VARCHAR (40),
   "user_id" INT
 );
@@ -56,6 +57,7 @@ CREATE TABLE "org_causes" (
 
 CREATE TABLE "postings" (
   "id" SERIAL PRIMARY KEY,
+  "title" VARCHAR (120),
   "org_id" INT,
   "date_posted" date,
   "date_to_attend" date,
