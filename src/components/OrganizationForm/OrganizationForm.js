@@ -14,7 +14,7 @@ import {
   Checkbox,
 } from '@material-ui/core';
 
-class RegisterForm extends Component {
+class RegisterFormVolunteer extends Component {
   state = {
     username: '',
     password: '',
@@ -272,4 +272,4 @@ class RegisterForm extends Component {
   }
 }
 
-export default connect(mapStoreToProps)(RegisterForm);
+export default connect(mapStoreToProps)(RegisterFormVolunteer);
