@@ -53,7 +53,7 @@ class ActivityDetailsPage extends Component {
                     {this.props.store.postings &&
                       this.props.store.postings.postingsForBrowsePage[
                         this.state.postingIndex
-                      ].location}
+                      ].title}
                   </h1>
                 </Grid>
               </Box>
@@ -83,8 +83,8 @@ class ActivityDetailsPage extends Component {
             <Grid item></Grid>
           </Grid>
         </Paper>
-        <Grid container alignItems="center" justify="space-evenly">
-          <Grid item l={6}>
+        <Grid container>
+          <Grid item lg={6}>
             <div>
               <img
                 src={process.env.PUBLIC_URL + '/org-placeholder.png'}
@@ -100,7 +100,7 @@ class ActivityDetailsPage extends Component {
               </h4>
             </div>
           </Grid>
-          <Grid item l={6}>
+          <Grid item lg={6}>
             <ActivityDetailsCard
               posting={
                 this.props.store.postings.postingsForBrowsePage[
