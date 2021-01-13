@@ -15,7 +15,10 @@ cron.schedule('40 * * * * *', () => {
   pool
     .query(queryText, [maxDate, today])
     .then((dbResponse) => {
-      console.log(dbResponse.rows);
+      for (let i = 0; i < dbResponse.rows.length; i++) {
+        const eventItem = dbResponse.rows[i];
+        console.log(eventItem);
+      }
     })
     .catch((err) => {
       console.log(err);
