@@ -50,7 +50,7 @@ class ActivityDetailsCard extends Component {
                   <p>
                     <strong>GOOD FOR</strong>
                   </p>
-                  {/* need to map through age_ranges */}
+                  {/* need to map through age_ranges to display */}
                   {this.props.posting.age_ranges.map((item, index) => {
                     return <p key={index}>{item}</p>;
                   })}

@@ -11,11 +11,6 @@ import {
   Select,
   MenuItem,
   Button,
-  Card,
-  CardContent,
-  CardHeader,
-  Avatar,
-  CardActions,
 } from '@material-ui/core';
 
 // CUSTOM COMPONENTS
