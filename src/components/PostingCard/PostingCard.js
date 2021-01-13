@@ -12,6 +12,9 @@ import {
   Typography,
 } from '@material-ui/core';
 
+// import for date/time configuration
+import { DateTime } from 'luxon';
+
 class PostingCard extends Component {
   handlePostingClick = () => {
     console.log(this.props.posting.id);
@@ -19,6 +22,11 @@ class PostingCard extends Component {
   };
 
   render() {
+    const datePosted = DateTime.fromISO(this.props.posting.date_posted);
+    const humanReadablePostedDate = datePosted.toLocaleString(
+      DateTime.DATE_SHORT
+    );
+
     return (
       <Grid item lg={12}>
         {/* use avatar to display the number in top left corner */}
@@ -39,6 +47,7 @@ class PostingCard extends Component {
             </CardContent>
             <CardContent>
               <Typography variant="body2" component="p">
+                {humanReadablePostedDate}
                 {this.props.posting.date_posted}
               </Typography>
             </CardContent>
