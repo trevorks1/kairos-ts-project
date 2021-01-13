@@ -77,16 +77,27 @@ class ActivityDetailsPage extends Component {
                 </Grid>
               </Grid>
             </Grid>
-            <Grid item>
+            <Grid item></Grid>
+          </Grid>
+        </Paper>
+        <Grid container>
+          <Grid item l={6}>
+            <div>
+              <img
+                src={process.env.PUBLIC_URL + '/org-placeholder.png'}
+                alt="not found"
+              />
+            </div>
+            <div>
               <h4>
                 {this.props.store.postings &&
                   this.props.store.postings.postingsForBrowsePage[
                     this.state.postingIndex
                   ].description}
               </h4>
-            </Grid>
+            </div>
           </Grid>
-        </Paper>
+        </Grid>
       </Container>
     );
   }
