@@ -3,8 +3,20 @@ import React, { Component } from 'react';
 // MATERIAL-UI
 import { Grid, Card, CardContent } from '@material-ui/core';
 
+// import for date/time configuration
+import { DateTime } from 'luxon';
+
 class ActivityDetailsCard extends Component {
   render() {
+    const datePosted = DateTime.fromISO(this.props.posting.date_posted);
+    const humanReadablePostedDate = datePosted.toLocaleString(
+      DateTime.DATE_SHORT
+    );
+
+    const dateToAttend = DateTime.fromISO(this.props.posting.date_to_attend);
+    const humanReadableAttendDate = dateToAttend.toLocaleString(
+      DateTime.DATE_SHORT
+    );
     return (
       <Card>
         <CardContent>
@@ -15,7 +27,7 @@ class ActivityDetailsCard extends Component {
                   <p>
                     <strong>WHEN</strong>
                   </p>
-                  <p>{this.props.posting.date_to_attend}</p>
+                  <p>{humanReadableAttendDate}</p>
                 </Grid>
                 <Grid item lg={12}>
                   <p>
@@ -27,7 +39,7 @@ class ActivityDetailsCard extends Component {
                   <p>
                     <strong>DATE POSTED</strong>
                   </p>
-                  <p>{this.props.posting.date_posted}</p>
+                  <p>{humanReadablePostedDate}</p>
                 </Grid>
                 <Grid item lg={12}>
                   <p>
