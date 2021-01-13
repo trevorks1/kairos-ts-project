@@ -17,6 +17,11 @@ class ActivityDetailsCard extends Component {
     const humanReadableAttendDate = dateToAttend.toLocaleString(
       DateTime.DATE_SHORT
     );
+
+    let repeating = 'NO';
+    if (this.props.posting.repeating === true) {
+      repeating = 'YES';
+    }
     return (
       <Card>
         <CardContent>
@@ -46,7 +51,9 @@ class ActivityDetailsCard extends Component {
                     <strong>GOOD FOR</strong>
                   </p>
                   {/* need to map through age_ranges */}
-                  <p>{this.props.posting.location}</p>
+                  {this.props.posting.age_ranges.map((item, index) => {
+                    return <p key={index}>{item}</p>;
+                  })}
                 </Grid>
                 <Grid item lg={12}>
                   <p>
@@ -68,8 +75,7 @@ class ActivityDetailsCard extends Component {
                   <p>
                     <strong>REPEATING</strong>
                   </p>
-                  {/* need to set up conditional check for boolean and then display yes/no */}
-                  <p>{this.props.posting.repeating}</p>
+                  <p>{repeating}</p>
                 </Grid>
               </Grid>
             </Grid>
