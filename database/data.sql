@@ -157,9 +157,7 @@ VALUES (1, 2),
 (23, 10),
 (24, 10),
 (25, 15),
-(25, 5),
-(26, 5),
-(26, 13);
+(25, 5);
 
 INSERT INTO "postings" ("org_id", "date_posted", "date_to_attend", "start_time", "end_time", "location", "description", "repeating", "frequency", "people_needed", "active")
 VALUES (1, '2021-01-04', '2021-01-09', '12:30', '4:30', 'Shire', 'Help pack Frodos house', false, '', 6, true),
@@ -188,7 +186,6 @@ VALUES (1, '2021-01-04', '2021-01-09', '12:30', '4:30', 'Shire', 'Help pack Frod
 (23, '2021-01-04', '2021-02-04', '12:30', '4:30', 'Test 20', 'Pack stuff', false, '', 6, true),
 (24, '2021-01-04', '2021-02-05', '12:30', '4:30', 'Test 21', 'Pack stuff', false, '', 6, true),
 (25, '2021-01-04', '2021-02-06', '12:30', '4:30', 'Test 22', 'Pack stuff', false, '', 6, true),
-(26, '2021-01-04', '2021-02-07', '12:30', '4:30', 'Test 23', 'Pack stuff', false, '', 6, true),
 (7, '2021-01-04', '2021-02-08', '12:30', '4:30', 'Test 24', 'Pack stuff', false, '', 6, true),
 (8, '2021-01-04', '2021-02-09', '12:30', '4:30', 'Test 25', 'Pack stuff', false, '', 6, true),
 (9, '2021-01-04', '2021-02-10', '12:30', '4:30', 'Test 26', 'Pack stuff', false, '', 6, true),
@@ -235,8 +232,7 @@ VALUES (1, 1),
 (29, 11),
 (30, 12),
 (31, 13),
-(32, 14),
-(33, 1);
+(32, 14);
 
 INSERT INTO "posting_ages" ("posting_id", "ages_id")
 VALUES (1, 3),
@@ -281,5 +277,4 @@ VALUES (1, 3),
 (29, 5),
 (30, 1),
 (31, 2),
-(32, 3),
-(33, 4);
+(32, 3);
