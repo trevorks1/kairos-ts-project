@@ -9,6 +9,7 @@ import causesRouter from './routes/causes.router';
 import adminRouter from './routes/admin.router';
 import agesRouter from './routes/ages.router';
 import organizationRouter from './routes/organization.router';
+import './cronjob/event.notification';
 
 require('dotenv').config();
 
