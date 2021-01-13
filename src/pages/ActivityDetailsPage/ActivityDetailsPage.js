@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import { withRouter } from 'react-router-dom';
 
 // MATERIAL-UI
 import { Container, Box, Paper, Grid, Button } from '@material-ui/core';
@@ -33,6 +34,10 @@ class ActivityDetailsPage extends Component {
     );
   }
 
+  handleBackBtnClick = () => {
+    // pushes user back to the browse page using the stored id in backHistoryReducer as the filtering cause id
+    this.props.history.push(`/browse/${this.props.store.backHistoryReducer}`);
+  };
   render() {
     return (
       <Container>
@@ -63,7 +68,9 @@ class ActivityDetailsPage extends Component {
             <Grid item lg={6}>
               <Grid container alignItems="center" justify="space-evenly">
                 <Grid item>
-                  <Button variant="contained">BACK</Button>
+                  <Button variant="contained" onClick={this.handleBackBtnClick}>
+                    BACK
+                  </Button>
                 </Grid>
                 <Grid item>
                   <Button variant="contained">I WANT TO HELP</Button>
@@ -85,4 +92,4 @@ class ActivityDetailsPage extends Component {
   }
 }
 
-export default connect(mapStoreToProps)(ActivityDetailsPage);
+export default withRouter(connect(mapStoreToProps)(ActivityDetailsPage));
