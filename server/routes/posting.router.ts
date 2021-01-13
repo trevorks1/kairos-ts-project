@@ -6,8 +6,33 @@ import rejectUnauthenticated from '../modules/authentication-middleware';
 const router: express.Router = express.Router();
 
 /**
- * GET route template
+ * GET routes
  */
+
+// GET All postings
+router.get(
+  '/',
+  (req: Request, res: Response, next: express.NextFunction): void => {
+    const queryText = `SELECT "postings".*, "organization".organization_name,
+    ARRAY(SELECT DISTINCT "ages".range FROM "ages", "posting_ages" WHERE "posting_ages".posting_id = "postings".id AND "ages".id = "posting_ages".ages_id AND "posting_ages".posting_id = "postings".id) as age_ranges, 
+    ARRAY(SELECT DISTINCT "activity_type".activity_name FROM "activity_type", "posting_activity" WHERE "posting_activity".posting_id = "postings".id AND "activity_type".id = "posting_activity".activity_type_id AND "posting_activity".posting_id = "postings".id ) as activities
+    FROM "organization" 
+    JOIN "postings" ON "organization".id = "postings".org_id
+    WHERE "postings".active = true;`;
+    pool
+      .query(queryText)
+      .then((dbResponse) => {
+        console.log(dbResponse);
+        res.send(dbResponse.rows);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.sendStatus(500);
+      });
+  }
+);
+
+// GET Postings by Cause type
 router.get(
   '/:id',
   (req: Request, res: Response, next: express.NextFunction): void => {
@@ -56,13 +81,14 @@ router.post(
     try {
       // POST route code here
       const post: any = req.body;
-      const queryText: string = `INSERT INTO "postings" ("org_id", "date_posted", "date_to_attend", 
+      const queryText: string = `INSERT INTO "postings" ("org_id", "title, "date_posted", "date_to_attend", 
       "start_time", "end_time", "location", "description", "repeating", "frequency", "people_needed", 
       "active")
       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, 't')
       RETURNING "id";`;
       const queryArray = [
         post.org_id,
+        post.title,
         post.date_posted,
         post.date_to_attend,
         post.start_time,
@@ -120,8 +146,8 @@ router.put(
   rejectUnauthenticated,
   (req: any, res: Response, next: express.NextFunction): void => {
     const queryText = `UPDATE "postings" SET "date_to_attend"=$1, "start_time"=$2, "end_time"=$3, 
-    "location"=$4, "description"=$5, "repeating"=$6, "frequency"=$7, "people_needed"=$8
-    WHERE "id"=$9;`;
+    "location"=$4, "description"=$5, "repeating"=$6, "frequency"=$7, "people_needed"=$8, "title"=$9
+    WHERE "id"=$10;`;
 
     pool
       .query(queryText, [
@@ -133,6 +159,7 @@ router.put(
         req.body.repeating,
         req.body.frequency,
         req.body.people_needed,
+        req.body.title,
         req.params.id,
       ])
       .then((dbResponse) => {
