@@ -30,8 +30,15 @@ class RegisterFormVolunteer extends Component {
     organization_summary: '',
     type_of_cause: '',
     url: '',
-    test_checkboxes: [{}, {}, {}, {}],
+    causes: [],
   };
+
+  componentDidMount() {
+    this.props.dispatch({
+      type: 'GET_CAUSES',
+    });
+    console.log('!!!!!STORE DATA!!!!!', this.props.store.causes);
+  }
 
   registerUser = (event) => {
     event.preventDefault();
@@ -194,9 +201,10 @@ class RegisterFormVolunteer extends Component {
                   <em>None</em>
                   {/* TODO - need to get types from server */}
                 </MenuItem>
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
+                <MenuItem value="Non-Profit">Non-Profit</MenuItem>
+                <MenuItem value="School">TweSchoolnty</MenuItem>
+                <MenuItem value="Community Group">Community Group</MenuItem>
+                <MenuItem value="Other">Other</MenuItem>
               </Select>
             </FormControl>
           </Grid>
@@ -235,19 +243,20 @@ class RegisterFormVolunteer extends Component {
           </Grid>
           <Grid item xs={12}>
             <Grid container spacing={1}>
-              {this.state.test_checkboxes.map((item, index) => {
+              {this.props.store.causes.map((item, index) => {
                 return (
                   <Grid item xs={4}>
                     <FormControlLabel
                       control={
                         <Checkbox
-                          checked={this.state.type_of_cause}
-                          onChange={this.handleInputChangeFor('type_of_cause')}
-                          name="checkedB"
+                          key={index.toString()}
+                          value={item.id}
+                          onChange={this.handleCheckbox}
+                          name="checked"
                           color="primary"
                         />
                       }
-                      label="Primary"
+                      label={item.cause}
                     />
                   </Grid>
                 );
