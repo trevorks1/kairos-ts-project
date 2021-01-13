@@ -81,13 +81,14 @@ router.post(
     try {
       // POST route code here
       const post: any = req.body;
-      const queryText: string = `INSERT INTO "postings" ("org_id", "date_posted", "date_to_attend", 
+      const queryText: string = `INSERT INTO "postings" ("org_id", "title, "date_posted", "date_to_attend", 
       "start_time", "end_time", "location", "description", "repeating", "frequency", "people_needed", 
       "active")
       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, 't')
       RETURNING "id";`;
       const queryArray = [
         post.org_id,
+        post.title,
         post.date_posted,
         post.date_to_attend,
         post.start_time,
@@ -145,8 +146,8 @@ router.put(
   rejectUnauthenticated,
   (req: any, res: Response, next: express.NextFunction): void => {
     const queryText = `UPDATE "postings" SET "date_to_attend"=$1, "start_time"=$2, "end_time"=$3, 
-    "location"=$4, "description"=$5, "repeating"=$6, "frequency"=$7, "people_needed"=$8
-    WHERE "id"=$9;`;
+    "location"=$4, "description"=$5, "repeating"=$6, "frequency"=$7, "people_needed"=$8, "title"=$9
+    WHERE "id"=$10;`;
 
     pool
       .query(queryText, [
@@ -158,6 +159,7 @@ router.put(
         req.body.repeating,
         req.body.frequency,
         req.body.people_needed,
+        req.body.title,
         req.params.id,
       ])
       .then((dbResponse) => {
