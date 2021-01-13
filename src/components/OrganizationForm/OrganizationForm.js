@@ -258,7 +258,7 @@ class RegisterFormVolunteer extends Component {
             Upload Logo
             {/* TODO - AWS S3 needs to go here! */}
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={3}>
             <Button variant="contained">Cancel</Button>
           </Grid>
           <Grid item xs={6}>

@@ -34,12 +34,12 @@ const customTheme = createMuiTheme({
     primary: {
       main: '#FF4D53',
     },
-    /* secondary: {
+    secondary: {
       // light: '',
-      // main: '#014F56',
+      main: '#DBDBDB',
       // dark: '',
       // contrastText: '',
-    }, */
+    },
     // error: deepOrange,
     // warning: lime,
     info: { main: '#FE7942' },
