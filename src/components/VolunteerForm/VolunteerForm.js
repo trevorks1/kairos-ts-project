@@ -28,6 +28,7 @@ class RegisterForm extends Component {
     company_or_no: 'true',
     age_groups: [{}, {}, {}],
     company_name: '',
+    activities: [{}, {}, {}, {}, {}, {}, {}],
   };
 
   registerUser = (event) => {
@@ -45,6 +46,7 @@ class RegisterForm extends Component {
         company_or_no: this.state.company_or_no,
         ape_groups: this.state.age_groups,
         company_name: this.state.company_name,
+        activities: this.state.activities,
       },
     });
   }; // end registerUser
@@ -183,6 +185,28 @@ class RegisterForm extends Component {
                         <Checkbox
                           checked={false}
                           onChange={this.handleInputChangeFor('age_groups')}
+                          name="checkedB"
+                          color="primary"
+                        />
+                      }
+                      label="Primary"
+                    />
+                  </Grid>
+                );
+              })}
+            </Grid>
+          </Grid>
+          <Grid item xs={12}>
+            <InputLabel>Activities interested in:</InputLabel>
+            <Grid container spacing={1}>
+              {this.state.activities.map((item, index) => {
+                return (
+                  <Grid item xs={3}>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={false}
+                          onChange={this.handleInputChangeFor('activities')}
                           name="checkedB"
                           color="primary"
                         />
