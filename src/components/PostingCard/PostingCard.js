@@ -32,8 +32,16 @@ class PostingCard extends Component {
                 </Typography>
               }
             />
-            <CardContent>{this.props.posting.description}</CardContent>
-            <CardContent>{this.props.posting.date_posted}</CardContent>
+            <CardContent>
+              <Typography variant="body1" component="p">
+                {this.props.posting.description}
+              </Typography>
+            </CardContent>
+            <CardContent>
+              <Typography variant="body2" component="p">
+                {this.props.posting.date_posted}
+              </Typography>
+            </CardContent>
           </CardActionArea>
         </Card>
       </Grid>
