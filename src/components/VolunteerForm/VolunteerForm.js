@@ -12,6 +12,9 @@ import {
   Select,
   FormControlLabel,
   Checkbox,
+  FormLabel,
+  RadioGroup,
+  Radio,
 } from '@material-ui/core';
 
 class RegisterForm extends Component {
@@ -22,7 +25,9 @@ class RegisterForm extends Component {
     password: '',
     phone_number: '',
     email: '',
-    age_groups: [{}, {}, {}, {}],
+    company_or_no: 'true',
+    age_groups: [{}, {}, {}],
+    company_name: '',
   };
 
   registerUser = (event) => {
@@ -37,17 +42,16 @@ class RegisterForm extends Component {
         password: this.state.password,
         phone_number: this.state.phone_number,
         email: this.state.email,
+        company_or_no: this.state.company_or_no,
         ape_groups: this.state.age_groups,
+        company_name: this.state.company_name,
       },
     });
   }; // end registerUser
 
   handleInputChangeFor = (propertyName) => (event) => {
     this.setState({
-      form: {
-        ...this.state.form,
-        [propertyName]: event.target.value,
-      },
+      [propertyName]: event.target.value,
     });
   };
 
@@ -134,17 +138,50 @@ class RegisterForm extends Component {
             />
           </Grid>
           <Grid item xs={6}>
-            <InputLabel>Age Groups</InputLabel>
+            <FormControl component="fieldset">
+              <FormLabel component="legend">Is this for a company?</FormLabel>
+              <RadioGroup
+                row
+                aria-label="company_or_no"
+                name="company_or_no"
+                value={this.state.company_or_no}
+                onChange={this.handleInputChangeFor('company_or_no')}
+              >
+                <FormControlLabel
+                  value="true"
+                  control={<Radio color="primary" />}
+                  label="Yes"
+                />
+                <FormControlLabel
+                  value="false"
+                  control={<Radio color="primary" />}
+                  label="No"
+                />
+              </RadioGroup>
+            </FormControl>
+            {this.state.company_or_no == 'true' && (
+              <TextField
+                fullWidth
+                variant="outlined"
+                label="Company Name"
+                type="company_name"
+                name="company_name"
+                value={this.state.company_name}
+                required
+                onChange={this.handleInputChangeFor('company_name')}
+              />
+            )}
           </Grid>
           <Grid item xs={6}>
-            <Grid container spacing={1}>
+            <InputLabel>Age Groups</InputLabel>
+            <Grid container spacing={1} direction="column">
               {this.state.age_groups.map((item, index) => {
                 return (
                   <Grid item xs={3}>
                     <FormControlLabel
                       control={
                         <Checkbox
-                          checked={this.state.age_groups}
+                          checked={false}
                           onChange={this.handleInputChangeFor('age_groups')}
                           name="checkedB"
                           color="primary"
