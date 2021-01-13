@@ -1,11 +1,14 @@
 import { Request, Response } from 'express';
 import express from 'express';
 import pool from '../modules/pool';
+
 import rejectUnauthenticated from '../modules/authentication-middleware';
+
 
 const router: express.Router = express.Router();
 
 /**
+
  * GET list of organizations to be validated
  */
 router.get(
@@ -109,6 +112,7 @@ router.delete(
       return;
     }
     res.sendStatus(403);
+
   }
 );
 
@@ -148,3 +152,4 @@ router.post(
 );
 
 export default router;
+

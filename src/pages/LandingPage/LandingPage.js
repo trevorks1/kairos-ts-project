@@ -1,15 +1,36 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import { Grid, Card, Paper, Box } from '@material-ui/core';
+import { makeStyles, withStyles, createStyles } from '@material-ui/core/styles';
 
 import './LandingPage.css';
 
 // CUSTOM COMPONENTS
-import RegisterForm from '../../components/RegisterForm/RegisterForm';
+import RegButtons from '../../components/RegButtons/RegButtons';
+
+// Material-UI styles
+const muiStyles = (theme) =>
+  createStyles({
+    root: {
+      minWidth: 275,
+    },
+    bullet: {
+      display: 'inline-block',
+      margin: '0 2px',
+      transform: 'scale(0.8)',
+    },
+    title: {
+      fontsize: 14,
+    },
+    pos: {
+      marginBottom: 12,
+    },
+  });
 
 class LandingPage extends Component {
   state = {
-    heading: 'Class Component',
+    heading: 'Welcome to Kairos!',
   };
 
   onLogin = (event) => {
@@ -17,58 +38,40 @@ class LandingPage extends Component {
   };
 
   render() {
+    const { classes } = this.props;
+
     return (
       <div className="container">
         <h2>{this.state.heading}</h2>
-
-        <div className="grid">
-          <div className="grid-col grid-col_8">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-              id felis metus. Vestibulum et pulvinar tortor. Morbi pharetra
-              lacus ut ex molestie blandit. Etiam et turpis sit amet risus
-              mollis interdum. Suspendisse et justo vitae metus bibendum
-              fringilla sed sed justo. Aliquam sollicitudin dapibus lectus,
-              vitae consequat odio elementum eget. Praesent efficitur eros vitae
-              nunc interdum, eu interdum justo facilisis. Sed pulvinar nulla ac
-              dignissim efficitur. Quisque eget eros metus. Vestibulum bibendum
-              fringilla nibh a luctus. Duis a sapien metus.
-            </p>
-
-            <p>
-              Praesent consectetur orci dui, id elementum eros facilisis id. Sed
-              id dolor in augue porttitor faucibus eget sit amet ante. Nunc
-              consectetur placerat pharetra. Aenean gravida ex ut erat commodo,
-              ut finibus metus facilisis. Nullam eget lectus non urna rhoncus
-              accumsan quis id massa. Curabitur sit amet dolor nisl. Proin
-              euismod, augue at condimentum rhoncus, massa lorem semper lacus,
-              sed lobortis augue mi vel felis. Duis ultrices sapien at est
-              convallis congue.
-            </p>
-
-            <p>
-              Fusce porta diam ac tortor elementum, ut imperdiet metus volutpat.
-              Suspendisse posuere dapibus maximus. Aliquam vitae felis libero.
-              In vehicula sapien at semper ultrices. Vivamus sed feugiat libero.
-              Sed sagittis neque id diam euismod, ut egestas felis ultricies.
-              Nullam non fermentum mauris. Sed in enim ac turpis faucibus
-              pretium in sit amet nisi.
-            </p>
-          </div>
-          <div className="grid-col grid-col_4">
-            <RegisterForm />
-
-            <center>
-              <h4>Already a Member?</h4>
-              <button className="btn btn_sizeSm" onClick={this.onLogin}>
-                Login
-              </button>
-            </center>
-          </div>
-        </div>
+        <Grid container justify="center" spacing={3}>
+          <Grid item xs={12} md={10}>
+            <Paper>
+              <Box p={3}>
+                <RegButtons />
+              </Box>
+            </Paper>
+          </Grid>
+        </Grid>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Aenean vel
+          elit scelerisque mauris pellentesque pulvinar pellentesque habitant
+          morbi. Pharetra magna ac placerat vestibulum. Praesent tristique magna
+          sit amet purus gravida quis blandit. Aenean euismod elementum nisi
+          quis eleifend quam adipiscing. Mauris augue neque gravida in fermentum
+          et sollicitudin. Pharetra sit amet aliquam id diam maecenas. Sed
+          viverra tellus in hac. Fermentum posuere urna nec tincidunt praesent
+          semper. Dictumst vestibulum rhoncus est pellentesque elit. Dolor magna
+          eget est lorem ipsum. Ipsum suspendisse ultrices gravida dictum fusce
+          ut placerat orci. Ut tellus elementum sagittis vitae et. Eget felis
+          eget nunc lobortis. Lorem ipsum dolor sit amet consectetur adipiscing
+          elit. Ut ornare lectus sit amet. Tellus pellentesque eu tincidunt
+          tortor aliquam nulla facilisi cras. Morbi quis commodo odio aenean sed
+          adipiscing diam donec adipiscing.
+        </p>
       </div>
     );
   }
 }
 
-export default connect(mapStoreToProps)(LandingPage);
+export default connect(mapStoreToProps)(withStyles(muiStyles)(LandingPage));
