@@ -14,6 +14,8 @@ import {
   Checkbox,
 } from '@material-ui/core';
 
+// /register/org
+
 class RegisterFormVolunteer extends Component {
   state = {
     username: '',
@@ -37,14 +39,13 @@ class RegisterFormVolunteer extends Component {
     this.props.dispatch({
       type: 'GET_CAUSES',
     });
-    console.log('!!!!!STORE DATA!!!!!', this.props.store.causes);
   }
 
   registerUser = (event) => {
     event.preventDefault();
 
     this.props.dispatch({
-      type: 'REGISTER',
+      type: 'ORG_REGISTER',
       payload: {
         username: this.state.username,
         password: this.state.password,
@@ -58,6 +59,7 @@ class RegisterFormVolunteer extends Component {
         organization_type: this.state.organization_type,
         mission_statement: this.state.mission_statement,
         organization_summary: this.state.organization_summary,
+        causes: this.state.causes,
       },
     });
   }; // end registerUser
@@ -66,6 +68,31 @@ class RegisterFormVolunteer extends Component {
     this.setState({
       [propertyName]: event.target.value,
     });
+  };
+
+  // const updateUsesTools = (item) => {
+  //   if (usesTools.includes(item)) {
+  //     setUsesTools(usesTools.filter(tool => tool.value != item));
+  //   } else {
+  //     setUsesTools([...usesTools, item]);// or push
+  //   }
+  // };
+
+  handleCheckbox = (event) => {
+    if (this.state.causes.includes(event.target.value)) {
+      const checkboxes = this.state.causes.filter(
+        (box) => box.value != event.target.value
+      );
+      console.log('!!!!!!!!', checkboxes);
+      // this.setState({
+      //   causes: checkboxes,
+      // });
+    } else {
+      this.setState({
+        causes: [...this.state.causes, event.target.value],
+      });
+    }
+    console.log(this.state.causes);
   };
 
   render() {
@@ -201,10 +228,18 @@ class RegisterFormVolunteer extends Component {
                   <em>None</em>
                   {/* TODO - need to get types from server */}
                 </MenuItem>
-                <MenuItem value="Non-Profit">Non-Profit</MenuItem>
-                <MenuItem value="School">TweSchoolnty</MenuItem>
-                <MenuItem value="Community Group">Community Group</MenuItem>
-                <MenuItem value="Other">Other</MenuItem>
+                <MenuItem key="1" value="Non-Profit">
+                  Non-Profit
+                </MenuItem>
+                <MenuItem key="2" value="School">
+                  TweSchoolnty
+                </MenuItem>
+                <MenuItem key="3" value="Community Group">
+                  Community Group
+                </MenuItem>
+                <MenuItem key="4" value="Other">
+                  Other
+                </MenuItem>
               </Select>
             </FormControl>
           </Grid>
@@ -245,11 +280,10 @@ class RegisterFormVolunteer extends Component {
             <Grid container spacing={1}>
               {this.props.store.causes.map((item, index) => {
                 return (
-                  <Grid item xs={4}>
+                  <Grid key={index.toString()} item xs={4}>
                     <FormControlLabel
                       control={
                         <Checkbox
-                          key={index.toString()}
                           value={item.id}
                           onChange={this.handleCheckbox}
                           name="checked"
