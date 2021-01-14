@@ -11,7 +11,7 @@ function* getFilteredPostings(action) {
     );
     yield put({
       type: 'SET_FILTERED_POSTINGS',
-      payload: filterPostingsSaga.data,
+      payload: filteredPostings.data,
     });
   } catch (err) {
     console.log('could not get filtered postings', err);
