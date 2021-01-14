@@ -8,7 +8,8 @@ function* registerUser(action) {
     yield put({ type: 'CLEAR_REGISTRATION_ERROR' });
 
     // passes the username and password from the payload to the server
-    yield axios.post('/api/user/register', action.payload);
+
+    yield axios.post('/api/user/register/vol', action.payload);
 
     // automatically log a user in after registration
     yield put({ type: 'LOGIN', payload: action.payload });
@@ -22,8 +23,18 @@ function* registerUser(action) {
   }
 }
 
+function* registerOrg(action) {
+  try {
+    yield axios.post('/api/user/register/org', action.payload);
+  } catch (error) {
+    console.log('Error with user registration:', error);
+    yield put({ type: 'ORG_REGISTRATION_FAILED' });
+  }
+}
+
 function* registrationSaga() {
   yield takeLatest('REGISTER', registerUser);
+  yield takeLatest('ORG_REGISTER', registerOrg);
 }
 
 export default registrationSaga;
