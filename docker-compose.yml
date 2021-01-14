@@ -61,13 +61,10 @@ services:
       SERVER_SESSION_SECRET: ${SERVER_SESSION_SECRET}
       CHOKIDAR_USEPOLLING: 'true'
       NODE_ENV: ${NODE_ENV}
-<<<<<<< HEAD
       MAILER_EMAIL: ${MAILER_EMAIL}
       MAILER_EMAIL_PASS: ${MAILER_EMAIL_PASS}
-=======
       AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
       AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
->>>>>>> develop
     volumes:
       - './server:/app-server/server'
       - './server/dist:/app-server/dist'

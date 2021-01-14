@@ -9,11 +9,8 @@ import causesRouter from './routes/causes.router';
 import adminRouter from './routes/admin.router';
 import agesRouter from './routes/ages.router';
 import organizationRouter from './routes/organization.router';
-<<<<<<< HEAD
 import eventNotifications from './cronjob/event.notification';
-=======
 import imageUrlRouter from './routes/imageUrl.router';
->>>>>>> develop
 
 require('dotenv').config();
 
