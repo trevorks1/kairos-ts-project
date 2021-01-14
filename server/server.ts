@@ -11,6 +11,7 @@ import agesRouter from './routes/ages.router';
 import organizationRouter from './routes/organization.router';
 import eventNotifications from './cronjob/event.notification';
 import imageUrlRouter from './routes/imageUrl.router';
+import volunteerRouter from './routes/volunteer.router';
 
 require('dotenv').config();
 
@@ -47,6 +48,7 @@ app.use(
     ACL: 'public-read',
   })
 );
+app.use('/api/volunteer', volunteerRouter);
 
 // Serve static files
 app.use(express.static('build'));
