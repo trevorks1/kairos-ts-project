@@ -8,7 +8,7 @@ import { Container, Grid, Paper, Typography, Button } from '@material-ui/core';
 class VolunteerProfile extends Component {
   componentDidMount() {
     this.props.dispatch({
-      type: 'GET_USER_PREF_ACTIVITIES',
+      type: 'GET_PREF_ACTIVITIES',
     });
   }
   render() {
@@ -59,6 +59,15 @@ class VolunteerProfile extends Component {
                   MY PREFERRED ACTIVITY TYPES
                 </Typography>
                 {/* map through preferred activities */}
+                {this.props.store.activities.prefActivityList.map(
+                  (item, index) => {
+                    return (
+                      <Typography variant="body1" component="p" key={index}>
+                        {item.activity_name}
+                      </Typography>
+                    );
+                  }
+                )}
               </Grid>
             </Grid>
           </Grid>
