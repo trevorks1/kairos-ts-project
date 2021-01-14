@@ -61,6 +61,8 @@ services:
       SERVER_SESSION_SECRET: ${SERVER_SESSION_SECRET}
       CHOKIDAR_USEPOLLING: 'true'
       NODE_ENV: ${NODE_ENV}
+      MAILER_EMAIL: ${MAILER_EMAIL}
+      MAILER_EMAIL_PASS: ${MAILER_EMAIL_PASS}
     volumes:
       - './server:/app-server/server'
       - './server/dist:/app-server/dist'
