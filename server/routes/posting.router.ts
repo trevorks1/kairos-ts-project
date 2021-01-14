@@ -199,6 +199,69 @@ router.post(
   }
 );
 
+// POST volunteer volunteering for posting /api/postings/avol
+router.post(
+  '/avol',
+  rejectUnauthenticated,
+  (req: any, res: Response, next: express.NextFunction): void => {
+    const queryText = `INSERT INTO "group" (number_of_people)
+    VALUES (1) RETURNING id;`;
+    pool
+      .query(queryText)
+      .then((result) => {
+        const groupId = Number(result.rows[0].id);
+
+        const postQuery = `INSERT INTO "posting_volunteers" (user_id, posting_id, group_id, waiver_agreement) 
+        VALUES ($1, $2, $3, true);`;
+        pool.query(postQuery, [req.user['id'], req.body.posting_id, groupId]);
+      })
+      .then(() => {
+        res.sendStatus(201);
+      })
+      .catch(() => res.sendStatus(500));
+  }
+);
+
+// POST group of volunteers volunteering for posting /api/postings/avol
+router.post(
+  '/gvol',
+  rejectUnauthenticated,
+  (req: any, res: Response, next: express.NextFunction): void => {
+    let groupId: Number;
+    let number_of_people = 0 + req.body.group_members.length;
+    const queryText = `INSERT INTO "group" (number_of_people)
+    VALUES ($1) RETURNING id;`;
+    pool
+      .query(queryText, [number_of_people])
+      .then((result) => {
+        groupId = Number(result.rows[0].id);
+        const postQuery = `INSERT INTO "posting_volunteers" (user_id, posting_id, group_id, waiver_agreement) 
+        VALUES ($1, $2, $3, true);`;
+        pool.query(postQuery, [req.user['id'], req.body.posting_id, groupId]);
+      })
+
+      .then((result) => {
+        for (let i = 0; i < req.body.group_members.length; i++) {
+          const postQuery = `INSERT INTO "group_members" ("group_id", "member_name", "email", "age_id", "waiver_signed")
+          VALUES ($1, $2, $3, $4, false)`;
+          pool.query(postQuery, [
+            groupId,
+            req.body.group_members[i].member_name,
+            req.body.group_members[i].email,
+            req.body.group_members[i].age_id,
+          ]);
+        }
+      })
+      .then(() => {
+        res.sendStatus(201);
+      })
+      .catch((err) => {
+        console.log('#### POST GROUP VOLUNTEERS ROUTE ERROR: ', err);
+        res.sendStatus(500);
+      });
+  }
+);
+
 router.put(
   '/edit/:id',
   rejectUnauthenticated,
