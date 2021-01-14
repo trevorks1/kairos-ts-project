@@ -6,6 +6,11 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import { Container, Grid, Paper, Typography, Button } from '@material-ui/core';
 
 class VolunteerProfile extends Component {
+  componentDidMount() {
+    this.props.dispatch({
+      type: 'GET_USER_PREF_ACTIVITIES',
+    });
+  }
   render() {
     return (
       <Container>
@@ -50,7 +55,10 @@ class VolunteerProfile extends Component {
                 </Grid>
               </Grid>
               <Grid item lg={7}>
-                Preferred Activities bla bla bla
+                <Typography variant="h5" component="h5">
+                  MY PREFERRED ACTIVITY TYPES
+                </Typography>
+                {/* map through preferred activities */}
               </Grid>
             </Grid>
           </Grid>
