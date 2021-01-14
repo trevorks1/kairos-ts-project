@@ -14,6 +14,8 @@ require('dotenv').config();
 
 const app: any = express();
 
+const UploadS3Router = require('react-dropzone-s3-uploader/s3router');
+
 // Body parser middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -33,6 +35,15 @@ app.use('/api/causes', causesRouter);
 app.use('/api/admin', adminRouter);
 app.use('/api/ages', agesRouter);
 app.use('/api/organization', organizationRouter);
+app.use(
+  '/s3',
+  UploadS3Router({
+    bucket: 'kairos-images-bucket',
+    region: 'us-east-2',
+    headers: { 'Access-Control-Allow-Origin': '*' },
+    ACL: 'public-read',
+  })
+);
 
 // Serve static files
 app.use(express.static('build'));
