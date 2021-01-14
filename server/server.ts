@@ -9,11 +9,17 @@ import causesRouter from './routes/causes.router';
 import adminRouter from './routes/admin.router';
 import agesRouter from './routes/ages.router';
 import organizationRouter from './routes/organization.router';
+<<<<<<< HEAD
 import eventNotifications from './cronjob/event.notification';
+=======
+import imageUrlRouter from './routes/imageUrl.router';
+>>>>>>> develop
 
 require('dotenv').config();
 
 const app: any = express();
+
+const UploadS3Router = require('react-dropzone-s3-uploader/s3router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -34,6 +40,16 @@ app.use('/api/causes', causesRouter);
 app.use('/api/admin', adminRouter);
 app.use('/api/ages', agesRouter);
 app.use('/api/organization', organizationRouter);
+app.use('/api/imageurl', imageUrlRouter);
+app.use(
+  '/s3',
+  UploadS3Router({
+    bucket: 'kairos-images-bucket',
+    region: 'us-east-2',
+    headers: { 'Access-Control-Allow-Origin': '*' },
+    ACL: 'public-read',
+  })
+);
 
 // Serve static files
 app.use(express.static('build'));

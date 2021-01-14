@@ -119,12 +119,9 @@ router.post(
       const last_name: string | null = <string>req.body.last_name;
       const email_address: string | null = <string>req.body.email_address;
       const phone_number: string | null = <string>req.body.phone_number;
-      const company: boolean | null = <boolean>req.body.company;
-      const company_name: string | null = <string>req.body.company_name;
-      const volunteer: boolean | null = <boolean>req.body.volunteer;
       const queryText: string = `INSERT INTO "user" (username, password, first_name, last_name, email_address, phone_number, 
     company, company_name, volunteer, active, access_level_id) 
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, false, 2) 
+    VALUES ($1, $2, $3, $4, $5, $6, true, $7, false, false, 2) 
     RETURNING id;`;
       pool
         .query(queryText, [
@@ -134,9 +131,7 @@ router.post(
           last_name,
           email_address,
           phone_number,
-          company,
-          company_name,
-          volunteer,
+          req.body.organization_name,
         ])
         .then((result) => {
           const newUserId = result.rows[0].id;
@@ -177,7 +172,7 @@ router.post(
             });
         });
     } catch (err) {
-      console.log(`Error saving user to database: ${err}`);
+      console.log(`Error saving organization to database: ${err}`);
       res.sendStatus(500);
     }
   }

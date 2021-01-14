@@ -91,6 +91,43 @@ router.get(
   }
 );
 
+// GET Postings by Browse criteria /api/postings/browse
+router.get(
+  '/browse/:activity/:age/:cause',
+  (req: any, res: Response, next: express.NextFunction): void => {
+    let activity = `AND "activity_type".id > 0 `;
+    let age = `AND "ages".id > 0 `;
+    let cause = `AND "org_causes".id > 0 `;
+    // this is dirty but we're sending 0 if nothing is selected from the filters on the front
+    if (req.params.activity != 0) {
+      activity = `AND "activity_type".id = ${req.params.activity}`;
+    }
+    if (req.params.age != 0) {
+      age = `AND "ages".id = ${req.params.age}`;
+    }
+    if (req.params.cause != 0) {
+      cause = `AND "org_causes".cause_id = ${req.params.cause}`;
+    }
+    const queryText = `SELECT DISTINCT "postings".*, "organization".organization_name
+    FROM "postings", "causes", "activity_type", "ages", "posting_ages", "organization", "posting_activity", "org_causes"
+    WHERE "postings".active = true AND "posting_ages".posting_id = "postings".id AND "ages".id = "posting_ages".ages_id 
+    AND "posting_ages".posting_id = "postings".id AND"posting_activity".posting_id = "postings".id 
+    AND "activity_type".id = "posting_activity".activity_type_id AND "posting_activity".posting_id = "postings".id 
+    AND "org_causes".org_id = "postings".org_id AND "postings".org_id = "organization".id ${activity} ${age} ${cause};`;
+    console.log(queryText, 'Activity variable', activity);
+
+    pool
+      .query(queryText)
+      .then((dbResponse) => {
+        res.send(dbResponse.rows);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.sendStatus(500);
+      });
+  }
+);
+
 /**
  * POST route template
  */
@@ -159,6 +196,69 @@ router.post(
       console.log(err);
       res.sendStatus(500);
     }
+  }
+);
+
+// POST volunteer volunteering for posting /api/postings/avol
+router.post(
+  '/avol',
+  rejectUnauthenticated,
+  (req: any, res: Response, next: express.NextFunction): void => {
+    const queryText = `INSERT INTO "group" (number_of_people)
+    VALUES (1) RETURNING id;`;
+    pool
+      .query(queryText)
+      .then((result) => {
+        const groupId = Number(result.rows[0].id);
+
+        const postQuery = `INSERT INTO "posting_volunteers" (user_id, posting_id, group_id, waiver_agreement) 
+        VALUES ($1, $2, $3, true);`;
+        pool.query(postQuery, [req.user['id'], req.body.posting_id, groupId]);
+      })
+      .then(() => {
+        res.sendStatus(201);
+      })
+      .catch(() => res.sendStatus(500));
+  }
+);
+
+// POST group of volunteers volunteering for posting /api/postings/avol
+router.post(
+  '/gvol',
+  rejectUnauthenticated,
+  (req: any, res: Response, next: express.NextFunction): void => {
+    let groupId: Number;
+    let number_of_people = 0 + req.body.group_members.length;
+    const queryText = `INSERT INTO "group" (number_of_people)
+    VALUES ($1) RETURNING id;`;
+    pool
+      .query(queryText, [number_of_people])
+      .then((result) => {
+        groupId = Number(result.rows[0].id);
+        const postQuery = `INSERT INTO "posting_volunteers" (user_id, posting_id, group_id, waiver_agreement) 
+        VALUES ($1, $2, $3, true);`;
+        pool.query(postQuery, [req.user['id'], req.body.posting_id, groupId]);
+      })
+
+      .then((result) => {
+        for (let i = 0; i < req.body.group_members.length; i++) {
+          const postQuery = `INSERT INTO "group_members" ("group_id", "member_name", "email", "age_id", "waiver_signed")
+          VALUES ($1, $2, $3, $4, false)`;
+          pool.query(postQuery, [
+            groupId,
+            req.body.group_members[i].member_name,
+            req.body.group_members[i].email,
+            req.body.group_members[i].age_id,
+          ]);
+        }
+      })
+      .then(() => {
+        res.sendStatus(201);
+      })
+      .catch((err) => {
+        console.log('#### POST GROUP VOLUNTEERS ROUTE ERROR: ', err);
+        res.sendStatus(500);
+      });
   }
 );
 

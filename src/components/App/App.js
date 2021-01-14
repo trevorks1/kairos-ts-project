@@ -24,6 +24,7 @@ import RegisterOrganization from '../../pages/RegisterOrganization/RegisterOrgan
 import RegisterVolunteer from '../../pages/RegisterVolunteer/RegisterVolunteer';
 import BrowseCausesPage from '../../pages/BrowseCausesPage/BrowseCausesPage';
 import BrowseActivitiesPage from '../../pages/BrowseActivitiesPage/BrowseActivitiesPage';
+import ActivityDetailsPage from '../../pages/ActivityDetailsPage/ActivityDetailsPage';
 
 import './App.css';
 
@@ -77,6 +78,12 @@ class App extends Component {
                 exact
                 path="/browse/:id"
                 component={BrowseActivitiesPage}
+              />
+
+              <Route
+                exact
+                path="/view-activity/:id"
+                component={ActivityDetailsPage}
               />
 
               {/* For protected routes, the view could show one of several things on the same route.

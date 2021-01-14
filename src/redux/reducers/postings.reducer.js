@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
 
-const postingsForSelectedCause = (state = [], action) => {
+const postingsForBrowsePage = (state = [], action) => {
   switch (action.type) {
     case 'SET_POSTINGS_SELECTED_CAUSE':
+      return action.payload;
+    case 'SET_FILTERED_POSTINGS':
       return action.payload;
     default:
       return state;
@@ -10,5 +12,5 @@ const postingsForSelectedCause = (state = [], action) => {
 };
 
 export default combineReducers({
-  postingsForSelectedCause,
+  postingsForBrowsePage,
 });

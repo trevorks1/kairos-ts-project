@@ -14,9 +14,10 @@ function* getCausesList() {
   }
 }
 
+// should this be moved to a posting.saga  ???
 function* getActivitiesSelectedCause(action) {
   try {
-    const activities = yield axios.get(`/api/causes/select/${action.payload}`);
+    const activities = yield axios.get(`/api/postings/${action.payload}`);
     yield put({
       type: 'SET_POSTINGS_SELECTED_CAUSE',
       payload: activities.data,

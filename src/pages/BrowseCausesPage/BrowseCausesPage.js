@@ -34,7 +34,7 @@ class BrowseCausesPage extends Component {
         </div>
         <Container>
           <Grid container spacing={2}>
-            <Grid item xl={3}>
+            <Grid item lg={3}>
               <Card>
                 <CardActionArea onClick={this.handleSeeAllClick}>
                   <CardContent>
@@ -45,7 +45,7 @@ class BrowseCausesPage extends Component {
             </Grid>
             {this.props.store.causes.map((item, index) => {
               return (
-                <Grid item key={index} xl={3}>
+                <Grid item key={index} lg={3}>
                   <CauseListItem cause={item} />
                 </Grid>
               );

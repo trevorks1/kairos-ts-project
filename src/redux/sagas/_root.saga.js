@@ -5,6 +5,10 @@ import userSaga from './user.saga';
 import causesSaga from './causes.saga';
 import activitiesSaga from './activities.saga';
 import agesSaga from './ages.saga';
+import backBtnHistorySaga from './back.history.saga';
+import filterPostingsSaga from './filter.postings.saga';
+import imageUploadSaga from './imageUpload.saga';
+
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -21,5 +25,8 @@ export default function* rootSaga() {
     causesSaga(),
     activitiesSaga(),
     agesSaga(),
+    backBtnHistorySaga(),
+    filterPostingsSaga(),
+    imageUploadSaga(),
   ]);
 }
