@@ -5,6 +5,7 @@ import causes from './causes.reducer';
 import activities from './activities.reducer';
 import postings from './postings.reducer';
 import ages from './ages.reducer';
+import backHistoryReducer from './back.history.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   activities,
   postings,
   ages,
+  backHistoryReducer,
 });
 
 export default rootReducer;
