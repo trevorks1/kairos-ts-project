@@ -9,6 +9,16 @@ const postingsForBrowsePage = (state = [], action) => {
   }
 };
 
+const filteredPostingsForBrowsePage = (state = [], action) => {
+  switch (action.type) {
+    case 'SET_FILTERED_POSTINGS':
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
 export default combineReducers({
   postingsForBrowsePage,
+  filteredPostingsForBrowsePage,
 });
