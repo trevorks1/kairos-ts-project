@@ -9,6 +9,30 @@ const router: express.Router = express.Router();
  * GET routes
  */
 
+// GET Number of people volunteering for a posting by posting ID /api/postings/volunteers/:id
+router.get(
+  '/volunteers/:id',
+  rejectUnauthenticated,
+  (req: Request, res: Response, next: express.NextFunction): void => {
+    const queryText = `SELECT ARRAY(SELECT "group".number_of_people FROM "group", "posting_volunteers" 
+    WHERE "posting_volunteers".posting_id = $1 AND "posting_volunteers".group_id = "group".id) as volunteered;`;
+    pool
+      .query(queryText, [req.params.id])
+      .then((dbResponse) => {
+        console.log(dbResponse.rows[0].volunteered);
+        let total = 0;
+        for (let i = 0; i < dbResponse.rows[0].volunteered.length; i++) {
+          total += Number(dbResponse.rows[0].volunteered[i]);
+        }
+        res.send([total]);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.sendStatus(500);
+      });
+  }
+);
+
 // GET posting by ID
 router.get(
   '/details/:id',
