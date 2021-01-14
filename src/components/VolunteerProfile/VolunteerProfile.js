@@ -16,6 +16,7 @@ import {
 class VolunteerProfile extends Component {
   state = {
     editActivitiesBtnSelected: false,
+    editActivitiesSelected: [],
   };
 
   componentDidMount() {
@@ -118,15 +119,34 @@ class VolunteerProfile extends Component {
                   </div>
                 )}
 
-                {/* {this.props.store.activities.activityList.map(
-                  (item, index) => {
-                    return (
-                      <Typography variant="body1" component="p" key={index}>
-                        {item.activity_name}
-                      </Typography>
-                    );
-                  }
-                )} */}
+                {/* below is code for the edit activity pref. checkboxes */}
+                <Grid container spacing={2} item xs={12}>
+                  {this.props.store.activities.activityList.map(
+                    (item, index) => {
+                      return (
+                        <Grid item xs={3} key={index}>
+                          <FormControlLabel
+                            control={
+                              <Checkbox
+                                checked={
+                                  this.state.editActivitiesSelected.indexOf(
+                                    item.id
+                                  ) !== -1
+                                }
+                                value={item.id}
+                                onChange={(event) =>
+                                  this.handleChangeFor(event, 'selected')
+                                }
+                                color="primary"
+                              />
+                            }
+                            label={item.activity_name}
+                          />
+                        </Grid>
+                      );
+                    }
+                  )}
+                </Grid>
               </Grid>
             </Grid>
           </Grid>
