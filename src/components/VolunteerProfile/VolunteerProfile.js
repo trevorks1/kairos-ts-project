@@ -29,9 +29,14 @@ class VolunteerProfile extends Component {
   }
 
   handleEditActivities = () => {
-    console.log('edit btn');
     this.setState({
       editActivitiesBtnSelected: true,
+    });
+  };
+
+  handleSubmitActivities = () => {
+    this.setState({
+      editActivitiesBtnSelected: false,
     });
   };
   render() {
@@ -83,22 +88,36 @@ class VolunteerProfile extends Component {
                 </Typography>
                 {this.state.editActivitiesBtnSelected === false ? (
                   // map through preferred activities
-                  this.props.store.activities.prefActivityList.map(
-                    (item, index) => {
-                      return (
-                        <Typography variant="body1" component="p" key={index}>
-                          {item.activity_name}
-                        </Typography>
-                      );
-                    }
-                  )
+                  <div>
+                    {this.props.store.activities.prefActivityList.map(
+                      (item, index) => {
+                        return (
+                          <Typography variant="body1" component="p" key={index}>
+                            {item.activity_name}
+                          </Typography>
+                        );
+                      }
+                    )}
+
+                    <Button
+                      variant="contained"
+                      onClick={this.handleEditActivities}
+                    >
+                      EDIT
+                    </Button>
+                  </div>
                 ) : (
-                  <p>edit checkboxes go here</p>
+                  <div>
+                    <p>edit checkboxes go here</p>
+                    <Button
+                      variant="contained"
+                      onClick={this.handleSubmitActivities}
+                    >
+                      SUBMIT
+                    </Button>
+                  </div>
                 )}
 
-                <Button variant="contained" onClick={this.handleEditActivities}>
-                  EDIT
-                </Button>
                 {/* {this.props.store.activities.activityList.map(
                   (item, index) => {
                     return (
