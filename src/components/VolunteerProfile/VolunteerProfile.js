@@ -3,14 +3,37 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 // MATERIAL-UI
-import { Container, Grid, Paper, Typography, Button } from '@material-ui/core';
+import {
+  Container,
+  Grid,
+  Paper,
+  Typography,
+  Button,
+  FormControlLabel,
+  Checkbox,
+} from '@material-ui/core';
 
 class VolunteerProfile extends Component {
+  state = {
+    editActivitiesBtnSelected: false,
+  };
+
   componentDidMount() {
     this.props.dispatch({
       type: 'GET_PREF_ACTIVITIES',
     });
+    // gets all activities to map through and display as checkboxes for edit
+    this.props.dispatch({
+      type: 'GET_ACTIVITIES',
+    });
   }
+
+  handleEditActivities = () => {
+    console.log('edit btn');
+    this.setState({
+      editActivitiesBtnSelected: true,
+    });
+  };
   render() {
     return (
       <Container>
@@ -58,8 +81,25 @@ class VolunteerProfile extends Component {
                 <Typography variant="h5" component="h5">
                   MY PREFERRED ACTIVITY TYPES
                 </Typography>
-                {/* map through preferred activities */}
-                {this.props.store.activities.prefActivityList.map(
+                {this.state.editActivitiesBtnSelected === false ? (
+                  // map through preferred activities
+                  this.props.store.activities.prefActivityList.map(
+                    (item, index) => {
+                      return (
+                        <Typography variant="body1" component="p" key={index}>
+                          {item.activity_name}
+                        </Typography>
+                      );
+                    }
+                  )
+                ) : (
+                  <p>edit checkboxes go here</p>
+                )}
+
+                <Button variant="contained" onClick={this.handleEditActivities}>
+                  EDIT
+                </Button>
+                {/* {this.props.store.activities.activityList.map(
                   (item, index) => {
                     return (
                       <Typography variant="body1" component="p" key={index}>
@@ -67,7 +107,7 @@ class VolunteerProfile extends Component {
                       </Typography>
                     );
                   }
-                )}
+                )} */}
               </Grid>
             </Grid>
           </Grid>
