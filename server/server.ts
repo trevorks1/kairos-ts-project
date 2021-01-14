@@ -9,6 +9,7 @@ import causesRouter from './routes/causes.router';
 import adminRouter from './routes/admin.router';
 import agesRouter from './routes/ages.router';
 import organizationRouter from './routes/organization.router';
+import imageUrlRouter from './routes/imageUrl.router';
 
 require('dotenv').config();
 
@@ -35,6 +36,7 @@ app.use('/api/causes', causesRouter);
 app.use('/api/admin', adminRouter);
 app.use('/api/ages', agesRouter);
 app.use('/api/organization', organizationRouter);
+app.use('/api/imageurl', imageUrlRouter);
 app.use(
   '/s3',
   UploadS3Router({

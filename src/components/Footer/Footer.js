@@ -1,5 +1,5 @@
 import React from 'react';
-import AWS from '../AWS/AWS';
+import ImageUploader from '../ImageUploader/ImageUploader';
 import './Footer.css';
 // This is one of our simplest components
 // It doesn't have local state, so it can be a function component.
@@ -8,7 +8,7 @@ import './Footer.css';
 
 const Footer = () => (
   <footer>
-    <AWS />
+    <ImageUploader />
     &copy; Prime Digital Academy
   </footer>
 );
