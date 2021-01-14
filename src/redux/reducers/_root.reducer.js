@@ -6,6 +6,8 @@ import activities from './activities.reducer';
 import postings from './postings.reducer';
 import ages from './ages.reducer';
 import backHistoryReducer from './back.history.reducer';
+import adminReducer from './admin.reducer';
+import adminApprovedReducer from './adminApproved.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -21,6 +23,8 @@ const rootReducer = combineReducers({
   postings,
   ages,
   backHistoryReducer,
+  adminReducer,
+  adminApprovedReducer,
 });
 
 export default rootReducer;
