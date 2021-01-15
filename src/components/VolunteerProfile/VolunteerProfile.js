@@ -5,6 +5,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 // MATERIAL-UI
 import {
   Container,
+  Box,
   Grid,
   Paper,
   Typography,
@@ -59,6 +60,12 @@ class VolunteerProfile extends Component {
         deleteArray: actDeleteArray,
         postArray: this.state.editActivitiesSelected,
       },
+    });
+  };
+
+  handleCancelClick = () => {
+    this.setState({
+      editActivitiesBtnSelected: false,
     });
   };
 
@@ -144,13 +151,14 @@ class VolunteerProfile extends Component {
                         );
                       }
                     )}
-
-                    <Button
-                      variant="contained"
-                      onClick={this.handleEditActivities}
-                    >
-                      EDIT
-                    </Button>
+                    <Box mt={2}>
+                      <Button
+                        variant="contained"
+                        onClick={this.handleEditActivities}
+                      >
+                        EDIT
+                      </Button>
+                    </Box>
                   </div>
                 ) : (
                   <div>
@@ -180,12 +188,26 @@ class VolunteerProfile extends Component {
                         }
                       )}
                     </Grid>
-                    <Button
-                      variant="contained"
-                      onClick={this.handleSubmitActivities}
-                    >
-                      SUBMIT
-                    </Button>
+                    <Box mt={2}>
+                      <Grid container>
+                        <Grid item xs={6}>
+                          <Button
+                            variant="contained"
+                            onClick={this.handleCancelClick}
+                          >
+                            CANCEL
+                          </Button>
+                        </Grid>
+                        <Grid item xs={6}>
+                          <Button
+                            variant="contained"
+                            onClick={this.handleSubmitActivities}
+                          >
+                            SUBMIT
+                          </Button>
+                        </Grid>
+                      </Grid>
+                    </Box>
                   </div>
                 )}
               </Grid>
