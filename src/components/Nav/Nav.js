@@ -35,42 +35,48 @@ const Nav = (props) => {
         auth redirect they end up getting directed to /user 
         we might have address this*/}
         {props.store.user.access_level_id === 2 && (
-          <Button size="medium" color="primary" to="/home">
+          <Link
+            // size="medium"
+            // color="primary"
+            to="/home"
+          >
             About
-          </Button>
+          </Link>
         )}
         {props.store.user.id == null && (
-          <Button
-            size="medium"
-            color="primary"
-            variant="contained"
+          <Link
+            // size="medium"
+            // color="primary"
+            // variant="contained"
             to="/browse-causes"
+            className="nav-link"
           >
             Browse
-          </Button>
+          </Link>
         )}
         {props.store.user.access_level_id === 3 && (
-          <Button
-            size="medium"
-            color="primary"
-            variant="contained"
+          <Link
+            // size="medium"
+            // color="primary"
+            // variant="contained"
             to="/browse-causes"
+            className="nav-link"
           >
             Browse
-          </Button>
+          </Link>
         )}
-        <Button
-          color="primary"
-          size="medium"
+        <Link
+          // color="primary"
+          // size="medium"
           className="nav-link"
-          variant="contained"
+          // variant="contained"
           to={loginLinkData.path}
         >
           {/* Show this link if they are logged in or not,
           but call this link 'Profile' if they are logged in,
           and call this link 'Login / Register' if they are not */}
           {loginLinkData.text}
-        </Button>
+        </Link>
         {/* Show the link to the info page and the logout button if the user is logged in */}
         {props.store.user.id && (
           <>
