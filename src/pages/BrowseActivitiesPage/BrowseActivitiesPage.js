@@ -24,7 +24,10 @@ class BrowseActivitiesPage extends Component {
   };
 
   componentDidMount() {
-    if (parseInt(this.props.match.params.id) > 0) {
+    if (
+      parseInt(this.props.match.params.id) > 0 &&
+      this.props.match.params.id != 8080
+    ) {
       this.setState(
         {
           cause_id: parseInt(this.props.match.params.id),
@@ -36,6 +39,8 @@ class BrowseActivitiesPage extends Component {
           });
         }
       );
+    } else if (this.props.match.params.id == 8080) {
+      return;
     } else {
       console.log(this.state);
       this.props.dispatch({
