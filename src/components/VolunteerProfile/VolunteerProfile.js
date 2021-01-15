@@ -15,6 +15,15 @@ import {
   TextField,
 } from '@material-ui/core';
 
+// material-ui for dummy card
+import {
+  Avatar,
+  Card,
+  CardHeader,
+  CardContent,
+  CardActionArea,
+} from '@material-ui/core';
+
 class VolunteerProfile extends Component {
   state = {
     editActivitiesBtnSelected: false,
@@ -301,6 +310,35 @@ class VolunteerProfile extends Component {
             </Grid>
             <Grid item xs={2}>
               <Button variant="contained">EVENTS FOR ME</Button>
+            </Grid>
+
+            {/* dummy code for presentation!! to be replaced by GET route of postings user has signed up for */}
+            <Grid item lg={12}>
+              {/* use avatar to display the number in top left corner */}
+              <Box mt={2}>
+                <Card>
+                  <CardActionArea onClick={this.handlePostingClick}>
+                    <CardHeader
+                      avatar={<Avatar>1</Avatar>} // adding 1 to postingId because array index starts at 0!
+                      title={
+                        <Typography variant="h3" component="h3">
+                          Posting Title
+                        </Typography>
+                      }
+                    />
+                    <CardContent>
+                      <Typography variant="body1" component="p">
+                        Posting Description
+                      </Typography>
+                    </CardContent>
+                    <CardContent>
+                      <Typography variant="body2" component="p">
+                        2/14/21
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                </Card>
+              </Box>
             </Grid>
           </Grid>
         </Grid>
