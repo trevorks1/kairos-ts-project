@@ -19,34 +19,42 @@ import {
 
 class RegisterForm extends Component {
   state = {
-    firstname: '',
-    lastname: '',
+    first_name: '',
+    last_name: '',
     username: '',
     password: '',
     phone_number: '',
     email: '',
     company_or_no: 'true',
-    age_groups: [{}, {}, {}],
+    ages_id: [],
     company_name: '',
-    activities: [{}, {}, {}, {}, {}, {}, {}],
+    activity_type_id: [],
   };
+
+  componentDidMount() {
+    this.props.dispatch({
+      type: 'GET_AGES',
+    });
+    this.props.dispatch({
+      type: 'GET_ACTIVITIES',
+    });
+  }
 
   registerUser = (event) => {
     event.preventDefault();
-
     this.props.dispatch({
       type: 'REGISTER_VOLUNTEER',
       payload: {
-        firstname: this.state.firstname,
-        lastname: this.state.lastname,
+        first_name: this.state.first_name,
+        last_name: this.state.last_name,
         username: this.state.username,
         password: this.state.password,
         phone_number: this.state.phone_number,
         email: this.state.email,
         company_or_no: this.state.company_or_no,
-        ape_groups: this.state.age_groups,
+        ages_id: this.state.ages_id,
         company_name: this.state.company_name,
-        activities: this.state.activities,
+        activity_type_id: this.state.activity_type_id,
       },
     });
   }; // end registerUser
@@ -55,6 +63,51 @@ class RegisterForm extends Component {
     this.setState({
       [propertyName]: event.target.value,
     });
+  };
+
+  handleAgeCheckbox = (event) => {
+    let newAgeRange = parseInt(event.target.value);
+    const isSelected = event.target.checked;
+    if (isSelected === true) {
+      this.setState({
+        ...this.state,
+        ages_id: [...this.state.ages_id, newAgeRange],
+      });
+    } else if (isSelected === false) {
+      const ageArray = this.state.ages_id;
+      const updatedAgeRange = ageArray.filter((item) => {
+        return item !== newAgeRange;
+      });
+      this.setState({
+        ...this.state,
+        ages_id: updatedAgeRange,
+      });
+    }
+  };
+
+  handleActivitiesCheckbox = (event) => {
+    let newActivity = parseInt(event.target.value);
+    const isSelected = event.target.checked;
+    if (isSelected === true) {
+      this.setState(
+        {
+          ...this.state,
+          activity_type_id: [...this.state.activity_type_id, newActivity],
+        },
+        () => {
+          console.log(this.state.activity_type_id);
+        }
+      );
+    } else if (isSelected === false) {
+      const actArray = this.state.activity_type_id;
+      const updatedActivities = actArray.filter((item) => {
+        return item !== newActivity;
+      });
+      this.setState({
+        ...this.state,
+        activity_type_id: updatedActivities,
+      });
+    }
   };
 
   render() {
@@ -73,10 +126,10 @@ class RegisterForm extends Component {
               variant="outlined"
               label="First Name:"
               type="text"
-              name="firstname"
-              value={this.state.firstname}
+              name="first_name"
+              value={this.state.first_name}
               required
-              onChange={this.handleInputChangeFor('firstname')}
+              onChange={this.handleInputChangeFor('first_name')}
             />
           </Grid>
           <Grid item xs={12} md={6}>
@@ -85,10 +138,10 @@ class RegisterForm extends Component {
               variant="outlined"
               label="Last Name:"
               type="text"
-              name="lastname"
-              value={this.state.lastname}
+              name="last_name"
+              value={this.state.last_name}
               required
-              onChange={this.handleInputChangeFor('lastname')}
+              onChange={this.handleInputChangeFor('last_name')}
             />
           </Grid>
           <Grid item xs={12} md={6}>
@@ -176,20 +229,20 @@ class RegisterForm extends Component {
           </Grid>
           <Grid item xs={6}>
             <InputLabel>Age Groups</InputLabel>
-            <Grid container spacing={1} direction="column">
-              {this.state.age_groups.map((item, index) => {
+            <Grid container spacing={1}>
+              {this.props.store.ages.map((item, index) => {
                 return (
-                  <Grid item xs={3}>
+                  <Grid item xs={6}>
                     <FormControlLabel
                       control={
                         <Checkbox
-                          checked={false}
-                          onChange={this.handleInputChangeFor('age_groups')}
-                          name="checkedB"
+                          checked={this.state.ages_id.indexOf(item.id) !== -1}
+                          value={item.id}
                           color="primary"
+                          onChange={this.handleAgeCheckbox}
                         />
                       }
-                      label="Primary"
+                      label={item.range}
                     />
                   </Grid>
                 );
@@ -199,19 +252,21 @@ class RegisterForm extends Component {
           <Grid item xs={12}>
             <InputLabel>Activities interested in:</InputLabel>
             <Grid container spacing={1}>
-              {this.state.activities.map((item, index) => {
+              {this.props.store.activities.activityList.map((item, index) => {
                 return (
                   <Grid item xs={3}>
                     <FormControlLabel
                       control={
                         <Checkbox
-                          checked={false}
-                          onChange={this.handleInputChangeFor('activities')}
-                          name="checkedB"
+                          checked={
+                            this.state.activity_type_id.indexOf(item.id) !== -1
+                          }
+                          value={item.id}
                           color="primary"
+                          onChange={this.handleActivitiesCheckbox}
                         />
                       }
-                      label="Primary"
+                      label={item.activity_name}
                     />
                   </Grid>
                 );

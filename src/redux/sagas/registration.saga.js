@@ -33,7 +33,7 @@ function* registerOrg(action) {
 }
 
 function* registrationSaga() {
-  yield takeLatest('REGISTER', registerUser);
+  yield takeLatest('REGISTER_VOLUNTEER', registerUser);
   yield takeLatest('ORG_REGISTER', registerOrg);
 }
 
