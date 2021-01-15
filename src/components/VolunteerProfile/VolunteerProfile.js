@@ -20,6 +20,8 @@ class VolunteerProfile extends Component {
     editActivitiesBtnSelected: false,
     editContactBtnSelected: false,
     editActivitiesSelected: [],
+    user_email: '',
+    user_phone: '',
   };
 
   componentDidMount() {
@@ -43,6 +45,14 @@ class VolunteerProfile extends Component {
     this.setState({
       editContactBtnSelected: true,
     });
+  };
+
+  handleSubmitContact = () => {
+    this.setState({
+      editContactBtnSelected: false,
+    });
+    console.log(this.state.user_email);
+    console.log(this.state.user_phone);
   };
 
   handleSubmitActivities = () => {
@@ -106,6 +116,12 @@ class VolunteerProfile extends Component {
       });
     }
   };
+
+  handleTextFieldChange = (propertyName) => (event) => {
+    this.setState({
+      [propertyName]: event.target.value,
+    });
+  };
   render() {
     return (
       <Container>
@@ -162,10 +178,18 @@ class VolunteerProfile extends Component {
                 ) : (
                   <Grid container>
                     <Grid item xs={6}>
-                      <TextField value={this.props.store.user.email_address} />
+                      <TextField
+                        label={this.props.store.user.email_address}
+                        value={this.state.user_email}
+                        onChange={this.handleTextFieldChange('user_email')}
+                      />
                     </Grid>
                     <Grid item xs={6}>
-                      <TextField value={this.props.store.user.phone_number} />
+                      <TextField
+                        label={this.props.store.user.phone_number}
+                        value={this.state.user_phone}
+                        onChange={this.handleTextFieldChange('user_phone')}
+                      />
                     </Grid>
                     <Box mt={2}>
                       <Grid container spacing={2}>
@@ -180,7 +204,7 @@ class VolunteerProfile extends Component {
                         <Grid item xs={6}>
                           <Button
                             variant="contained"
-                            onClick={this.handleSubmitActivities}
+                            onClick={this.handleSubmitContact}
                           >
                             SUBMIT
                           </Button>
