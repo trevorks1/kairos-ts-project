@@ -66,7 +66,7 @@ class ActivityDetailsCard extends Component {
                   <p>
                     <strong>CURRENTLY SIGNED UP</strong>
                   </p>
-                  <p>69</p>
+                  <p>2</p>
                 </Grid>
               </Grid>
             </Grid>
