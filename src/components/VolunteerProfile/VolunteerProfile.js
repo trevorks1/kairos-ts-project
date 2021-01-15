@@ -12,6 +12,7 @@ import {
   Button,
   FormControlLabel,
   Checkbox,
+  TextField,
 } from '@material-ui/core';
 
 class VolunteerProfile extends Component {
@@ -161,10 +162,10 @@ class VolunteerProfile extends Component {
                 ) : (
                   <Grid container>
                     <Grid item xs={6}>
-                      <h3>email</h3>
+                      <TextField value={this.props.store.user.email_address} />
                     </Grid>
                     <Grid item xs={6}>
-                      <h3>phone</h3>
+                      <TextField value={this.props.store.user.phone_number} />
                     </Grid>
                     <Box mt={2}>
                       <Grid container spacing={2}>
