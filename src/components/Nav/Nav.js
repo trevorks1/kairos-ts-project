@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import { Button, Grid, ButtonGroup } from '@material-ui/core';
 
 const Nav = (props) => {
   let loginLinkData = {
@@ -21,45 +22,69 @@ const Nav = (props) => {
       <Link to="/home">
         <h2 className="nav-title">Kairos</h2>
       </Link>
-      <div className="nav-right">
-        {/* the About link for organization seems pointless because with 
+      <Grid container spacing={12}>
+        <Grid item>
+          <div className="nav-right">
+            {/* the About link for organization seems pointless because with 
         auth redirect they end up getting directed to /user 
         we might have address this*/}
-        {props.store.user.access_level_id === 2 && (
-          <Link className="nav-link" to="/home">
-            About
-          </Link>
-        )}
-        {props.store.user.id == null && (
-          <Link className="nav-link" to="/browse-causes">
-            Browse
-          </Link>
-        )}
-        {props.store.user.access_level_id === 3 && (
-          <Link className="nav-link" to="/browse-causes">
-            Browse
-          </Link>
-        )}
-        <Link className="nav-link" to={loginLinkData.path}>
-          {/* Show this link if they are logged in or not,
+            {props.store.user.access_level_id === 2 && (
+              <Button size="small" color="primary" to="/home">
+                About
+              </Button>
+            )}
+            {props.store.user.id == null && (
+              <Grid item xs={3}>
+                <Button
+                  size="small"
+                  color="secondary"
+                  variant="contained"
+                  to="/browse-causes"
+                >
+                  Browse
+                </Button>
+              </Grid>
+            )}
+            {props.store.user.access_level_id === 3 && (
+              <Button
+                size="small"
+                color="secondary"
+                variant="contained"
+                to="/browse-causes"
+              >
+                Browse
+              </Button>
+            )}
+            <ButtonGroup
+              justify="right"
+              size="small"
+              className="nav-link"
+              variant="contained"
+              to={loginLinkData.path}
+            >
+              <Button>Login</Button>
+              <Button>Register</Button>
+              {/* Show this link if they are logged in or not,
           but call this link 'Profile' if they are logged in,
           and call this link 'Login / Register' if they are not */}
-          {loginLinkData.text}
-        </Link>
-        {/* Show the link to the info page and the logout button if the user is logged in */}
-        {props.store.user.id && (
-          <>
-            {/* <Link className="nav-link" to="/info">
+              {loginLinkData.text}
+            </ButtonGroup>
+            {/* Show the link to the info page and the logout button if the user is logged in */}
+            {props.store.user.id && (
+              <>
+                {/* <Link className="nav-link" to="/info">
               Info Page
             </Link> */}
-            <LogOutButton className="nav-link" />
-          </>
-        )}
-        {/* Always show this link since the about page is not protected */}
-        {/* <Link className="nav-link" to="/about">
+                <LogOutButton className="nav-link" />
+              </>
+            )}
+            {/* Always show this link since the about page is not protected */}
+            {/* <Link className="nav-link" to="/about">
           About
         </Link> */}
-      </div>
+          </div>
+        </Grid>
+      </Grid>
     </div>
   );
 };
