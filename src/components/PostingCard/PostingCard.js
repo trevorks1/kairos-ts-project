@@ -48,7 +48,8 @@ class PostingCard extends Component {
             <CardContent>
               <Typography variant="body2" component="p">
                 {humanReadablePostedDate}
-                {this.props.posting.date_posted}
+                {/* TODO need to fix the date!!! */}
+                {/* {this.props.posting.date_posted} */}
               </Typography>
             </CardContent>
           </CardActionArea>

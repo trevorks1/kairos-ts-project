@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import { withRouter } from 'react-router-dom';
 
 // MATERIAL-UI
 import {
@@ -88,6 +89,20 @@ class VolunteerProfile extends Component {
         postArray: this.state.editActivitiesSelected,
       },
     });
+  };
+
+  eventsForMeClick = () => {
+    // default id is 0 incase user has no saved preferred activities
+    let idToSend = 0;
+    if (this.props.store.activities.prefActivityList.length > 0) {
+      idToSend = this.props.store.activities.prefActivityList[0]
+        .activity_type_id;
+    }
+    this.props.dispatch({
+      type: 'GET_USER_POSTINGS',
+      payload: idToSend,
+    });
+    this.props.history.push('/browse/0');
   };
 
   handleCancelClickActivity = () => {
@@ -309,7 +324,9 @@ class VolunteerProfile extends Component {
               </Typography>
             </Grid>
             <Grid item xs={2}>
-              <Button variant="contained">EVENTS FOR ME</Button>
+              <Button variant="contained" onClick={this.eventsForMeClick}>
+                EVENTS FOR ME
+              </Button>
             </Grid>
 
             {/* dummy code for presentation!! to be replaced by GET route of postings user has signed up for */}
@@ -347,4 +364,4 @@ class VolunteerProfile extends Component {
   }
 }
 
-export default connect(mapStoreToProps)(VolunteerProfile);
+export default withRouter(connect(mapStoreToProps)(VolunteerProfile));
