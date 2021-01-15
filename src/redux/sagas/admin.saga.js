@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 
-//gets list of activities
+//gets list of admin
 function* getRequestedOrg() {
   try {
     const requestedList = yield axios.get('/api/admin/requested');

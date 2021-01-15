@@ -1,16 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import { Card, Button } from '@material-ui/core';
+import OrganizationProfileItem from '../OrganizationProfileItem/OrganizationProfileItem';
 
 class OrganizationProfile extends Component {
+  componentDidMount() {
+    this.props.dispatch({ type: 'GET_ORG_PROFILE' });
+  }
+
   render() {
+    console.log(this.props.store.orgProfileReducer);
     return (
       <div>
-        <h1 id="welcome">
-          Welcome to your Organization Profile Page,{' '}
-          {this.props.store.user.username}!
-        </h1>
-        <p>Your ID is: {this.props.store.user.id}</p>
+        {this.props.store.orgProfileReducer.map((item, index) => (
+          <OrganizationProfileItem item={item} key={index} />
+        ))}
       </div>
     );
   }
