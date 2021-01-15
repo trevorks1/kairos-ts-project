@@ -19,15 +19,16 @@ const Nav = (props) => {
 
   return (
     <div className="nav">
-      <img
-        className="nav-logo"
-        src="kairoslogo.png"
-        alt="kairos"
-        width="150"
-        height="150"
-      ></img>
       <Link to="/home">
-        <h2 className="nav-title">Kairos</h2>
+        <h2 className="nav-title">
+          <img
+            className="nav-logo"
+            src="kairoslogo.png"
+            alt="kairos"
+            width="200"
+            height="200"
+          ></img>
+        </h2>
       </Link>
       <div className="nav-right">
         {/* the About link for organization seems pointless because with 
@@ -41,7 +42,7 @@ const Nav = (props) => {
         {props.store.user.id == null && (
           <Button
             size="medium"
-            color="secondary"
+            color="primary"
             variant="contained"
             to="/browse-causes"
           >
@@ -51,7 +52,7 @@ const Nav = (props) => {
         {props.store.user.access_level_id === 3 && (
           <Button
             size="medium"
-            color="secondary"
+            color="primary"
             variant="contained"
             to="/browse-causes"
           >
@@ -59,6 +60,7 @@ const Nav = (props) => {
           </Button>
         )}
         <Button
+          color="primary"
           size="medium"
           className="nav-link"
           variant="contained"
