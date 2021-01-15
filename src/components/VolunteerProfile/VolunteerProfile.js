@@ -292,6 +292,17 @@ class VolunteerProfile extends Component {
               </Grid>
             </Grid>
           </Grid>
+
+          <Grid container>
+            <Grid item xs={10}>
+              <Typography variant="h3" component="h3">
+                My Upcoming Events
+              </Typography>
+            </Grid>
+            <Grid item xs={2}>
+              <Button variant="contained">EVENTS FOR ME</Button>
+            </Grid>
+          </Grid>
         </Grid>
       </Container>
     );
