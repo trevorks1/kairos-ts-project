@@ -23,6 +23,7 @@ class VolunteerProfile extends Component {
     this.props.dispatch({
       type: 'GET_PREF_ACTIVITIES',
     });
+
     // gets all activities to map through and display as checkboxes for edit
     this.props.dispatch({
       type: 'GET_ACTIVITIES',
@@ -39,6 +40,50 @@ class VolunteerProfile extends Component {
     this.setState({
       editActivitiesBtnSelected: false,
     });
+    // data to be posted - this.state.editActivitiesSelected
+    // data to be deleted - actDeleteArray
+    const actDeleteArray = [];
+    for (
+      let i = 0;
+      i < this.props.store.activities.prefActivityList.length;
+      i++
+    ) {
+      actDeleteArray.push(
+        this.props.store.activities.prefActivityList[i].activity_type_id
+      );
+    }
+
+    this.props.dispatch({
+      type: 'UPDATE_PREF_ACTIVITIES',
+      payload: {
+        deleteArray: actDeleteArray,
+        postArray: this.state.editActivitiesSelected,
+      },
+    });
+  };
+
+  handleCheckBoxes = (event) => {
+    let newActivity = parseInt(event.target.value);
+    const isSelected = event.target.checked;
+
+    if (isSelected === true) {
+      this.setState({
+        ...this.state,
+        editActivitiesSelected: [
+          ...this.state.editActivitiesSelected,
+          newActivity,
+        ],
+      });
+    } else if (isSelected === false) {
+      const actArray = this.state.editActivitiesSelected;
+      const updatedActivities = actArray.filter((item) => {
+        return item !== newActivity;
+      });
+      this.setState({
+        ...this.state,
+        editActivitiesSelected: updatedActivities,
+      });
+    }
   };
   render() {
     return (
@@ -109,7 +154,32 @@ class VolunteerProfile extends Component {
                   </div>
                 ) : (
                   <div>
-                    <p>edit checkboxes go here</p>
+                    {/* below is code for the edit activity pref. checkboxes */}
+                    <Grid container spacing={2} item xs={12}>
+                      {this.props.store.activities.activityList.map(
+                        (item, index) => {
+                          return (
+                            <Grid item xs={3} key={index}>
+                              <FormControlLabel
+                                control={
+                                  <Checkbox
+                                    checked={
+                                      this.state.editActivitiesSelected.indexOf(
+                                        item.id
+                                      ) !== -1
+                                    }
+                                    value={item.id}
+                                    onChange={this.handleCheckBoxes}
+                                    color="primary"
+                                  />
+                                }
+                                label={item.activity_name}
+                              />
+                            </Grid>
+                          );
+                        }
+                      )}
+                    </Grid>
                     <Button
                       variant="contained"
                       onClick={this.handleSubmitActivities}
@@ -118,35 +188,6 @@ class VolunteerProfile extends Component {
                     </Button>
                   </div>
                 )}
-
-                {/* below is code for the edit activity pref. checkboxes */}
-                <Grid container spacing={2} item xs={12}>
-                  {this.props.store.activities.activityList.map(
-                    (item, index) => {
-                      return (
-                        <Grid item xs={3} key={index}>
-                          <FormControlLabel
-                            control={
-                              <Checkbox
-                                checked={
-                                  this.state.editActivitiesSelected.indexOf(
-                                    item.id
-                                  ) !== -1
-                                }
-                                value={item.id}
-                                onChange={(event) =>
-                                  this.handleChangeFor(event, 'selected')
-                                }
-                                color="primary"
-                              />
-                            }
-                            label={item.activity_name}
-                          />
-                        </Grid>
-                      );
-                    }
-                  )}
-                </Grid>
               </Grid>
             </Grid>
           </Grid>

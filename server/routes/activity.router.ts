@@ -1,4 +1,3 @@
-
 import { query, Request, Response } from 'express';
 import express from 'express';
 import rejectUnauthenticated from '../modules/authentication-middleware';
