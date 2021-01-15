@@ -79,21 +79,6 @@ class RegisterFormVolunteer extends Component {
   // };
 
   handleCheckbox = (event) => {
-    // if (this.state.causes.includes(event.target.value)) {
-    //     const checkboxes = this.state.causes.filter(
-    //       (box) => box.value != event.target.value
-    //     );
-    //     console.log('!!!!!!!!', checkboxes);
-    //     // this.setState({
-    //     //   causes: checkboxes,
-    //     // });
-    //   } else {
-    //     this.setState({
-    //       causes: [...this.state.causes, event.target.value],
-    //     });
-    //   }
-    //   console.log(this.state.causes);
-    // };
     let newCauses = parseInt(event.target.value);
     const isSelected = event.target.checked;
     if (isSelected === true) {
