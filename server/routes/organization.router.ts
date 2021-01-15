@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import express from 'express';
 import pool from '../modules/pool';
+import rejectUnauthenticated from '../modules/authentication-middleware';
 
 const router: express.Router = express.Router();
 
@@ -28,6 +29,38 @@ router.get(
   }
 );
 
+// GET api/organization/profile for org profile page
+router.get(
+  '/profile',
+  rejectUnauthenticated,
+  (req: any, res: Response, next: express.NextFunction): void => {
+    let orgId: Number;
+    const queryText: string = `SELECT DISTINCT "organization".id from "organization" WHERE "organization".user_id = $1;`;
+    // GET Org ID by user ID
+    pool.query(queryText, [req.user['id']]).then((result) => {
+      orgId = Number(result.rows[0].id);
+      const orgQuery = `SELECT "organization".* FROM "organization" WHERE "organization".id = $1;`;
+      // GET Organization info by returned Org ID
+      pool
+        .query(orgQuery, [orgId])
+        .then((resultOrg) => {
+          let organization = resultOrg.rows[0];
+          const postingsQuery = `SELECT DISTINCT * FROM "postings" WHERE "postings".org_id = $1 AND "postings".active = true;`;
+          // GET Active postings by org id
+          pool.query(postingsQuery, [orgId]).then((resultPostings) => {
+            const postings = resultPostings.rows;
+            const dbResponse = { org: organization, post: postings };
+            res.send(dbResponse);
+          });
+        })
+        .catch((err) => {
+          console.log('Could not retrieve the organization profile!', err);
+          res.sendStatus(500);
+        });
+    });
+  }
+);
+
 /**
  * POST route template
  */
@@ -38,6 +71,4 @@ router.post(
   }
 );
 
-
 export default router;
-

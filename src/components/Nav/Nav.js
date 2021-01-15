@@ -36,6 +36,7 @@ const Nav = (props) => {
             {/* the About link for organization seems pointless because with 
         auth redirect they end up getting directed to /user 
         we might have address this*/}
+
             {props.store.user.access_level_id === 2 && (
               <Grid item>
                 <Button
@@ -88,6 +89,7 @@ const Nav = (props) => {
             {props.store.user.id && (
               <>
                 {/* <Link className="nav-link" to="/info">
+
               Info Page
             </Link> */}
                 <Grid item>

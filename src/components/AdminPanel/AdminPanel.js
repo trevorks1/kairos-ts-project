@@ -6,6 +6,9 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 
 // Material-UI imports
 import { Tabs, Tab, Container, Grid } from '@material-ui/core';
+import ImageUploader from '../ImageUploader/ImageUploader';
+import RequestedTable from '../RequestedTable/RequestedTable';
+import ApprovedTable from '../ApprovedTable/ApprovedTable';
 
 function AdminPanel(props) {
   // BELOW IS HOW TO USE DISPATCH!!
@@ -14,15 +17,16 @@ function AdminPanel(props) {
   // useEffect(() => {
   //   // dispatch to get all tips to render on page load
   //   dispatch({
-  //     type: 'GET_TIPS',
+  //     type: 'GET_REQUESTED_ADMIN',
   //   });
-  // }, [dispatch]);
+  // });
 
   //config for tabs
   const [selectedTab, setSelectedTab] = React.useState(0);
   const handleTabChange = (event, newValue) => {
     setSelectedTab(newValue);
   };
+
   return (
     <Container>
       <div>
@@ -40,8 +44,8 @@ function AdminPanel(props) {
           </Tabs>
         </Grid>
       </Grid>
-      {selectedTab === 0 && <h3>REQUESTED</h3>}
-      {selectedTab === 1 && <h3>APPROVED</h3>}
+      {selectedTab === 0 && <RequestedTable />}
+      {selectedTab === 1 && <ApprovedTable />}
     </Container>
   );
 }
