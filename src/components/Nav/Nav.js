@@ -75,6 +75,7 @@ const Nav = (props) => {
                 color="secondary"
                 size="medium"
                 className="nav-link"
+                onClick={clickToNav('/user')}
                 to={loginLinkData.path}
               >
                 {/* Show this link if they are logged in or not,
