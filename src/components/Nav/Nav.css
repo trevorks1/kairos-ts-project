@@ -1,32 +1,15 @@
-.nav-title {
-  font-size: 50px;
-  font-weight: 700;
-  display: inline-block;
-  color: #f2f2f2;
-  padding-left: 10px;
-  text-shadow: #1a0c0c;
-}
-
 .nav {
   margin: 0 0 30px;
-  background-color: #ac3438;
+  padding: 10px;
+  background-color: #c43237;
   overflow: hidden;
 }
 
 .nav-logo {
-  padding: 24px 10px;
-  float: left;
+  width: 80px;
 }
 
 .nav-link {
-  float: left;
-  color: #f2f2f2;
-  background-color: #ac3438;
-  text-align: center;
-  padding: 24px 10px;
-  text-decoration: none;
-  font-size: 15px;
-
   /* these last two make the logout button in
   the nav bar look like another link */
   border: none;
@@ -39,7 +22,5 @@
 }
 
 .nav-right {
-  float: right;
-  padding: 24px 10px;
-  margin: auto;
+  text-align: right;
 }
