@@ -24,10 +24,25 @@ class BrowseActivitiesPage extends Component {
   };
 
   componentDidMount() {
-    this.props.dispatch({
-      type: 'GET_POSTINGS_FOR_SELECTED_CAUSE',
-      payload: this.props.match.params.id,
-    });
+    if (parseInt(this.props.match.params.id) > 0) {
+      this.setState(
+        {
+          cause_id: parseInt(this.props.match.params.id),
+        },
+        () => {
+          this.props.dispatch({
+            type: 'SUBMIT_FILTERS',
+            payload: this.state,
+          });
+        }
+      );
+    } else {
+      console.log(this.state);
+      this.props.dispatch({
+        type: 'SUBMIT_FILTERS',
+        payload: this.state,
+      });
+    }
 
     this.props.dispatch({
       type: 'GET_CAUSES',

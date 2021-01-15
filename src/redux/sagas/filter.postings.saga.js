@@ -5,7 +5,7 @@ function* getFilteredPostings(action) {
   try {
     const activity_id = action.payload.activity_id;
     const age_id = action.payload.age_id;
-    const cause_id = action.payload.age_id;
+    const cause_id = action.payload.cause_id;
     const filteredPostings = yield axios.get(
       `/api/postings/browse/${activity_id}/${age_id}/${cause_id}`
     );
