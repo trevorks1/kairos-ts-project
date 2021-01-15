@@ -19,10 +19,16 @@ const Nav = (props) => {
 
   return (
     <div className="nav">
+      <img
+        className="nav-logo"
+        src="kairoslogo.png"
+        alt="kairos"
+        width="150"
+        height="150"
+      ></img>
       <Link to="/home">
         <h2 className="nav-title">Kairos</h2>
       </Link>
-
       <div className="nav-right">
         {/* the About link for organization seems pointless because with 
         auth redirect they end up getting directed to /user 

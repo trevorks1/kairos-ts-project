@@ -13,6 +13,11 @@
   overflow: hidden;
 }
 
+.nav-logo {
+  padding: 24px 10px;
+  float: left;
+}
+
 .nav-link {
   float: left;
   color: #f2f2f2;
