@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import { withRouter } from 'react-router-dom';
 
 // MATERIAL-UI
 import {
@@ -20,10 +21,12 @@ class BrowseCausesPage extends Component {
   }
 
   handleSeeAllClick = () => {
-    console.log('See All click!');
-
-    // TODO push to BrowseActivitiesPage
-    // should see ALL active activities!
+    // setting value to 0 so back btn will show all postings again
+    this.props.dispatch({
+      type: 'SET_BACK_HISTORY_SAGA',
+      payload: 0,
+    });
+    this.props.history.push('/browse/0');
   };
 
   render() {
@@ -57,4 +60,4 @@ class BrowseCausesPage extends Component {
   }
 }
 
-export default connect(mapStoreToProps)(BrowseCausesPage);
+export default withRouter(connect(mapStoreToProps)(BrowseCausesPage));
