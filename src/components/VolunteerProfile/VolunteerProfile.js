@@ -102,7 +102,7 @@ class VolunteerProfile extends Component {
       type: 'GET_USER_POSTINGS',
       payload: idToSend,
     });
-    this.props.history.push('/browse/0');
+    this.props.history.push('/browse/8080');
   };
 
   handleCancelClickActivity = () => {
