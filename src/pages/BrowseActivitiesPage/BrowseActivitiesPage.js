@@ -40,6 +40,8 @@ class BrowseActivitiesPage extends Component {
         }
       );
     } else if (this.props.match.params.id == 8080) {
+      // if params.id = 8080 then it's volunteer user coming from their
+      // profile page so we don't want to resubmit filters!
       return;
     } else {
       console.log(this.state);
