@@ -24,6 +24,17 @@ class BrowseActivitiesPage extends Component {
   };
 
   componentDidMount() {
+    this.props.dispatch({
+      type: 'GET_CAUSES',
+    });
+
+    this.props.dispatch({
+      type: 'GET_ACTIVITIES',
+    });
+
+    this.props.dispatch({
+      type: 'GET_AGES',
+    });
     if (
       parseInt(this.props.match.params.id) > 0 &&
       this.props.match.params.id != 8080
@@ -44,24 +55,11 @@ class BrowseActivitiesPage extends Component {
       // profile page so we don't want to resubmit filters!
       return;
     } else {
-      console.log(this.state);
       this.props.dispatch({
         type: 'SUBMIT_FILTERS',
         payload: this.state,
       });
     }
-
-    this.props.dispatch({
-      type: 'GET_CAUSES',
-    });
-
-    this.props.dispatch({
-      type: 'GET_ACTIVITIES',
-    });
-
-    this.props.dispatch({
-      type: 'GET_AGES',
-    });
   }
 
   // combining handleChange functions!
