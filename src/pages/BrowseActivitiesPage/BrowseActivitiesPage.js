@@ -62,21 +62,10 @@ class BrowseActivitiesPage extends Component {
     });
   }
 
-  handleCauseChange = (e) => {
+  // combining handleChange functions!
+  handleChangeFor = (propertyName) => (e) => {
     this.setState({
-      cause_id: e.target.value,
-    });
-  };
-
-  handleActivityChange = (e) => {
-    this.setState({
-      activity_id: e.target.value,
-    });
-  };
-
-  handleAgeChange = (e) => {
-    this.setState({
-      age_id: e.target.value,
+      [propertyName]: e.target.value,
     });
   };
 
@@ -96,7 +85,7 @@ class BrowseActivitiesPage extends Component {
               <InputLabel>Cause Type</InputLabel>
               <Select
                 value={this.state.selectedCauseId}
-                onChange={this.handleCauseChange}
+                onChange={this.handleChangeFor('cause_id')}
                 variant="outlined"
               >
                 <MenuItem value={0}>-please select-</MenuItem>
@@ -111,7 +100,7 @@ class BrowseActivitiesPage extends Component {
               <InputLabel>Activity Type</InputLabel>
               <Select
                 value={this.state.selectedActivityId}
-                onChange={this.handleActivityChange}
+                onChange={this.handleChangeFor('activity_id')}
                 variant="outlined"
               >
                 <MenuItem value={0}>-please select-</MenuItem>
@@ -128,7 +117,7 @@ class BrowseActivitiesPage extends Component {
               <InputLabel>Age Range</InputLabel>
               <Select
                 value={this.state.selectedAgeRangeId}
-                onChange={this.handleAgeChange}
+                onChange={this.handleChangeFor('age_id')}
                 variant="outlined"
               >
                 <MenuItem value={0}>-please select-</MenuItem>
