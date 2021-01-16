@@ -37,9 +37,9 @@ function* getUserPostings(action) {
   }
 }
 
-function* filterPostingsSaga() {
+function* PostingsSaga() {
   yield takeLatest('SUBMIT_FILTERS', getFilteredPostings);
   yield takeLatest('GET_USER_POSTINGS', getUserPostings);
 }
 
-export default filterPostingsSaga;
+export default PostingsSaga;
