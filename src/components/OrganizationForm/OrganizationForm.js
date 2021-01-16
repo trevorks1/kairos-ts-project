@@ -13,6 +13,7 @@ import {
   FormControlLabel,
   Checkbox,
 } from '@material-ui/core';
+import ImageUploader from '../ImageUploader/ImageUploader';
 
 // /register/org
 
@@ -60,6 +61,7 @@ class RegisterFormVolunteer extends Component {
         mission_statement: this.state.mission_statement,
         organization_summary: this.state.organization_summary,
         causes: this.state.causes,
+        logo: this.props.store.imageReducer,
       },
     });
   }; // end registerUser
@@ -303,6 +305,7 @@ class RegisterFormVolunteer extends Component {
           <Grid item xs={12}>
             Upload Logo
             {/* TODO - AWS S3 needs to go here! */}
+            <ImageUploader />
           </Grid>
           <Grid item xs={3}>
             <Button variant="contained">Cancel</Button>
