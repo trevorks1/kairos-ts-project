@@ -37,8 +37,9 @@ class ActivityDetailsPage extends Component {
   }
 
   handleBackBtnClick = () => {
-    // pushes user back to the browse page using the stored id in backHistoryReducer as the filtering cause id
-    this.props.history.push(`/browse/${this.props.store.backHistoryReducer}`);
+    // pushes user back to previous page - list of postings
+    // OR pushes volunteer back to their profile page if they are viewing an 'upcoming posting' they have signed up for
+    this.props.history.goBack();
   };
   render() {
     return (
