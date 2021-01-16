@@ -24,8 +24,19 @@ function* fetchUser() {
   }
 }
 
+function* updateContactInfo(action) {
+  try {
+    yield axios.put('/api/user/update/phone', action.payload);
+    yield axios.put('/api/user/update/email', action.payload);
+    yield put({ type: 'FETCH_USER' });
+  } catch (err) {
+    console.log('could not update user contact info', err);
+  }
+}
+
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
+  yield takeLatest('UPDATE_CONTACT_INFO', updateContactInfo);
 }
 
 export default userSaga;

@@ -61,8 +61,14 @@ class VolunteerProfile extends Component {
     this.setState({
       editContactBtnSelected: false,
     });
-    console.log(this.state.user_email);
-    console.log(this.state.user_phone);
+    const dataToSend = {
+      email_address: this.state.user_email,
+      phone_number: this.state.user_phone,
+    };
+    this.props.dispatch({
+      type: 'UPDATE_CONTACT_INFO',
+      payload: dataToSend,
+    });
   };
 
   handleSubmitActivities = () => {
