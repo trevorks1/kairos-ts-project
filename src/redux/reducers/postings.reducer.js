@@ -11,6 +11,16 @@ const postingsForBrowsePage = (state = [], action) => {
   }
 };
 
+const postingsForVolunteerUser = (state = [], action) => {
+  switch (action.type) {
+    case 'SET_POSTINGS_FOR_VOLUNTEER':
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
 export default combineReducers({
   postingsForBrowsePage,
+  postingsForVolunteerUser,
 });
