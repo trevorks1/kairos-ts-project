@@ -13,6 +13,7 @@ import {
   FormControlLabel,
   Checkbox,
 } from '@material-ui/core';
+import ImageUploader from '../ImageUploader/ImageUploader';
 
 // /register/org
 
@@ -31,7 +32,7 @@ class RegisterFormVolunteer extends Component {
     mission_statement: '',
     organization_summary: '',
     type_of_cause: '',
-    url: '',
+    url: this.props.store.imageReducer,
     causes: [],
   };
 
@@ -49,17 +50,18 @@ class RegisterFormVolunteer extends Component {
       payload: {
         username: this.state.username,
         password: this.state.password,
-        name_of_organization: this.state.name_of_organization,
-        contact_first_name: this.state.contact_first_name,
-        contact_last_name: this.state.contact_last_name,
+        organization_name: this.state.name_of_organization,
+        first_name: this.state.contact_first_name,
+        last_name: this.state.contact_last_name,
         phone_number: this.state.phone_number,
-        email: this.state.email,
+        email_address: this.state.email,
         contact_title: this.state.contact_title,
         website: this.state.website,
         organization_type: this.state.organization_type,
-        mission_statement: this.state.mission_statement,
-        organization_summary: this.state.organization_summary,
+        mission: this.state.mission_statement,
+        summary: this.state.organization_summary,
         causes: this.state.causes,
+        logo: this.state.url,
       },
     });
   }; // end registerUser
@@ -99,6 +101,7 @@ class RegisterFormVolunteer extends Component {
   };
 
   render() {
+    console.log(this.props.store.imageReducer);
     return (
       <form className="formPanel formPanel_wide" onSubmit={this.registerUser}>
         <h2>Organization Registration</h2>
@@ -303,6 +306,7 @@ class RegisterFormVolunteer extends Component {
           <Grid item xs={12}>
             Upload Logo
             {/* TODO - AWS S3 needs to go here! */}
+            <ImageUploader />
           </Grid>
           <Grid item xs={3}>
             <Button variant="contained">Cancel</Button>

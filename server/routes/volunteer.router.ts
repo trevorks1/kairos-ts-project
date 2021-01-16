@@ -9,7 +9,8 @@ const router: express.Router = express.Router();
  * GET route template
  */
 router.get('/', (req: any, res: Response, next: express.NextFunction): void => {
-  const queryText = `SELECT * FROM "postings", "posting_volunteers" WHERE "postings".id = "posting_volunteers".posting_id AND "posting_volunteers".user_id = $1;`;
+  const queryText = `SELECT * FROM "posting_volunteers", "postings" 
+  WHERE "postings".id = "posting_volunteers".posting_id AND "posting_volunteers".user_id = $1;`;
   pool
     .query(queryText, [req.user['id']])
     .then((dbResponse) => {
