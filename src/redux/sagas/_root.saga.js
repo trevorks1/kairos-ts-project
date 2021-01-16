@@ -9,6 +9,7 @@ import backBtnHistorySaga from './back.history.saga';
 import filterPostingsSaga from './filter.postings.saga';
 import imageUploadSaga from './imageUpload.saga';
 import adminSaga from './admin.saga';
+import orgProfileSaga from './orgProfile.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -29,5 +30,6 @@ export default function* rootSaga() {
     filterPostingsSaga(),
     imageUploadSaga(),
     adminSaga(),
+    orgProfileSaga(),
   ]);
 }

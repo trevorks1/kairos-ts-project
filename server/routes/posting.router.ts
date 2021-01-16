@@ -138,7 +138,6 @@ router.get(
     AND "posting_ages".posting_id = "postings".id AND"posting_activity".posting_id = "postings".id 
     AND "activity_type".id = "posting_activity".activity_type_id AND "posting_activity".posting_id = "postings".id 
     AND "org_causes".org_id = "postings".org_id AND "postings".org_id = "organization".id ${activity} ${age} ${cause};`;
-    console.log(queryText, 'Activity variable', activity);
 
     pool
       .query(queryText)

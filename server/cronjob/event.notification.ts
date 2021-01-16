@@ -17,7 +17,8 @@ function eventNotifications() {
 
   // CronJob
 
-  cron.schedule('0 */24 * * *', () => {
+
+  cron.schedule('* * 23 * * *', () => {
     console.log('running every forty seconds');
     const queryText = `SELECT * FROM "postings" WHERE "date_to_attend" < $1 AND "date_to_attend" > $2;`;
 
