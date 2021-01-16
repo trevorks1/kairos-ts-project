@@ -35,7 +35,7 @@ class RegisterFormVolunteer extends Component {
     mission: '',
     summary: '',
     type_of_cause: '',
-    url: this.props.store.imageReducer,
+    url: this.props.url,
     causes: [],
   };
 
@@ -68,7 +68,7 @@ class RegisterFormVolunteer extends Component {
         mission: this.state.mission,
         summary: this.state.summary,
         causes: this.state.causes,
-        logo: this.state.url,
+        logo: this.props.store.imageReducer,
       },
     });
   }; // end registerUser
@@ -105,6 +105,7 @@ class RegisterFormVolunteer extends Component {
         causes: updatedCauses,
       });
     }
+    console.log(this.props.store.imageReducer);
   };
 
   render() {
@@ -276,6 +277,13 @@ class RegisterFormVolunteer extends Component {
               </Select>
             </FormControl>
           </Grid>
+
+          <Grid item xs={1}></Grid>
+          <Grid item xs={2}>
+            <p style={{ textAlign: 'center' }}>
+              <ImageUploader />
+            </p>
+          </Grid>
           <Grid item xs={12}>
             <TextField
               multiline
@@ -329,11 +337,6 @@ class RegisterFormVolunteer extends Component {
                 );
               })}
             </Grid>
-          </Grid>
-          <Grid item xs={12}>
-            Upload Logo
-            {/* TODO - AWS S3 needs to go here! */}
-            <ImageUploader />
           </Grid>
           <Grid item xs={12}>
             {message}
