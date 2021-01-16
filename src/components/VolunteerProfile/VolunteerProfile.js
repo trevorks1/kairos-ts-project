@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import { withRouter } from 'react-router-dom';
 
+// CUSTOM COMPONENTS
+import PostingCard from '../../components/PostingCard/PostingCard';
+
 // MATERIAL-UI
 import {
   Container,
@@ -43,6 +46,11 @@ class VolunteerProfile extends Component {
     this.props.dispatch({
       type: 'GET_ACTIVITIES',
     });
+
+    // gets all postings user has signed up for
+    this.props.dispatch({
+      type: 'GET_POSTINGS_FOR_VOLUNTEER',
+    });
   }
 
   handleEditActivities = () => {
@@ -61,8 +69,14 @@ class VolunteerProfile extends Component {
     this.setState({
       editContactBtnSelected: false,
     });
-    console.log(this.state.user_email);
-    console.log(this.state.user_phone);
+    const dataToSend = {
+      email_address: this.state.user_email,
+      phone_number: this.state.user_phone,
+    };
+    this.props.dispatch({
+      type: 'UPDATE_CONTACT_INFO',
+      payload: dataToSend,
+    });
   };
 
   handleSubmitActivities = () => {
@@ -329,33 +343,12 @@ class VolunteerProfile extends Component {
               </Button>
             </Grid>
 
-            {/* dummy code for presentation!! to be replaced by GET route of postings user has signed up for */}
-            <Grid item lg={12}>
-              {/* use avatar to display the number in top left corner */}
-              <Box mt={2}>
-                <Card>
-                  <CardActionArea onClick={this.handlePostingClick}>
-                    <CardHeader
-                      avatar={<Avatar>1</Avatar>} // adding 1 to postingId because array index starts at 0!
-                      title={
-                        <Typography variant="h3" component="h3">
-                          Posting Title
-                        </Typography>
-                      }
-                    />
-                    <CardContent>
-                      <Typography variant="body1" component="p">
-                        Posting Description
-                      </Typography>
-                    </CardContent>
-                    <CardContent>
-                      <Typography variant="body2" component="p">
-                        2/14/21
-                      </Typography>
-                    </CardContent>
-                  </CardActionArea>
-                </Card>
-              </Box>
+            <Grid item xs={12}>
+              {this.props.store.postings.postingsForVolunteerUser.map(
+                (item, index) => {
+                  return <PostingCard posting={item} postingId={index} />;
+                }
+              )}
             </Grid>
           </Grid>
         </Grid>

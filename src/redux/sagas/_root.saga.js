@@ -6,7 +6,7 @@ import causesSaga from './causes.saga';
 import activitiesSaga from './activities.saga';
 import agesSaga from './ages.saga';
 import backBtnHistorySaga from './back.history.saga';
-import filterPostingsSaga from './filter.postings.saga';
+import postingsSaga from './postings.saga';
 import imageUploadSaga from './imageUpload.saga';
 import adminSaga from './admin.saga';
 import orgProfileSaga from './orgProfile.saga';
@@ -27,7 +27,7 @@ export default function* rootSaga() {
     activitiesSaga(),
     agesSaga(),
     backBtnHistorySaga(),
-    filterPostingsSaga(),
+    postingsSaga(),
     imageUploadSaga(),
     adminSaga(),
     orgProfileSaga(),

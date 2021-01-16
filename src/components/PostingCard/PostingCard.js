@@ -17,7 +17,7 @@ import { DateTime } from 'luxon';
 
 class PostingCard extends Component {
   handlePostingClick = () => {
-    console.log(this.props.posting.id);
+    console.log(this.props.posting);
     this.props.history.push(`/view-activity/${this.props.posting.id}`);
   };
 
@@ -32,6 +32,8 @@ class PostingCard extends Component {
         {/* use avatar to display the number in top left corner */}
         <Card>
           <CardActionArea onClick={this.handlePostingClick}>
+            {/* TODO - add light grey border under CardHeader! */}
+            {/* TODO - replace number with heart icon. background color of avatar matches Kairos logo */}
             <CardHeader
               avatar={<Avatar>{this.props.postingId + 1}</Avatar>} // adding 1 to postingId because array index starts at 0!
               title={

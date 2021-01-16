@@ -24,8 +24,32 @@ function* fetchUser() {
   }
 }
 
+function* updateContactInfo(action) {
+  try {
+    yield axios.put('/api/user/update/phone', action.payload);
+    yield axios.put('/api/user/update/email', action.payload);
+    yield put({ type: 'FETCH_USER' });
+  } catch (err) {
+    console.log('could not update user contact info', err);
+  }
+}
+
+function* getPostings() {
+  try {
+    const postingsForVolunteerUser = yield axios.get('/api/volunteer');
+    yield put({
+      type: 'SET_POSTINGS_FOR_VOLUNTEER',
+      payload: postingsForVolunteerUser.data,
+    });
+  } catch (err) {
+    console.lof('could not get postings for user', err);
+  }
+}
+
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
+  yield takeLatest('UPDATE_CONTACT_INFO', updateContactInfo);
+  yield takeLatest('GET_POSTINGS_FOR_VOLUNTEER', getPostings);
 }
 
 export default userSaga;
