@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import { Link } from 'react-router-dom';
+
 import {
   TextField,
   Box,
@@ -21,16 +23,17 @@ class RegisterFormVolunteer extends Component {
   state = {
     username: '',
     password: '',
-    name_of_organization: '',
-    contact_first_name: '',
-    contact_last_name: '',
+    organization_name: '',
+    first_name: '',
+    last_name: '',
     phone_number: '',
-    email: '',
+    address: '',
+    email_address: '',
     contact_title: '',
     website: '',
     organization_type: '',
-    mission_statement: '',
-    organization_summary: '',
+    mission: '',
+    summary: '',
     type_of_cause: '',
     url: this.props.store.imageReducer,
     causes: [],
@@ -39,6 +42,9 @@ class RegisterFormVolunteer extends Component {
   componentDidMount() {
     this.props.dispatch({
       type: 'GET_CAUSES',
+    });
+    this.props.dispatch({
+      type: 'GET_ORG_PROFILE',
     });
   }
 
@@ -50,16 +56,17 @@ class RegisterFormVolunteer extends Component {
       payload: {
         username: this.state.username,
         password: this.state.password,
-        organization_name: this.state.name_of_organization,
-        first_name: this.state.contact_first_name,
-        last_name: this.state.contact_last_name,
+        organization_name: this.state.organization_name,
+        first_name: this.state.first_name,
+        last_name: this.state.last_name,
         phone_number: this.state.phone_number,
-        email_address: this.state.email,
+        address: this.state.address,
+        email_address: this.state.email_address,
         contact_title: this.state.contact_title,
         website: this.state.website,
         organization_type: this.state.organization_type,
-        mission: this.state.mission_statement,
-        summary: this.state.organization_summary,
+        mission: this.state.mission,
+        summary: this.state.summary,
         causes: this.state.causes,
         logo: this.state.url,
       },
@@ -101,7 +108,15 @@ class RegisterFormVolunteer extends Component {
   };
 
   render() {
-    console.log(this.props.store.imageReducer);
+    let message;
+    if (this.props.store.orgSuccess == 1) {
+      message = (
+        <h3 className="alert" role="alert">
+          You've successfully registered. Check your email for approval.
+        </h3>
+      );
+    }
+
     return (
       <form className="formPanel formPanel_wide" onSubmit={this.registerUser}>
         <h2>Organization Registration</h2>
@@ -140,11 +155,23 @@ class RegisterFormVolunteer extends Component {
               fullWidth
               variant="outlined"
               label="Name of Organization:"
-              type="name_of_organization"
-              name="name_of_organization"
-              value={this.state.name_of_organization}
+              type="organization_name"
+              name="organization_name"
+              value={this.state.organization_name}
               required
-              onChange={this.handleInputChangeFor('name_of_organization')}
+              onChange={this.handleInputChangeFor('organization_name')}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              fullWidth
+              variant="outlined"
+              label="Contact Title:"
+              type="contact_title"
+              name="contact_title"
+              value={this.state.contact_title}
+              required
+              onChange={this.handleInputChangeFor('contact_title')}
             />
           </Grid>
           <Grid item xs={6}>
@@ -152,11 +179,11 @@ class RegisterFormVolunteer extends Component {
               fullWidth
               variant="outlined"
               label="Contact First Name:"
-              type="contact_first_name"
-              name="contact_first_name"
-              value={this.state.contact_first_name}
+              type="first_name"
+              name="first_name"
+              value={this.state.first_name}
               required
-              onChange={this.handleInputChangeFor('contact_first_name')}
+              onChange={this.handleInputChangeFor('first_name')}
             />
           </Grid>
           <Grid item xs={6}>
@@ -164,11 +191,11 @@ class RegisterFormVolunteer extends Component {
               fullWidth
               variant="outlined"
               label="Contact Last Name:"
-              type="contact_last_name"
-              name="contact_last_name"
-              value={this.state.contact_last_name}
+              type="last_name"
+              name="last_name"
+              value={this.state.last_name}
               required
-              onChange={this.handleInputChangeFor('contact_last_name')}
+              onChange={this.handleInputChangeFor('last_name')}
             />
           </Grid>
           <Grid item xs={6}>
@@ -187,24 +214,24 @@ class RegisterFormVolunteer extends Component {
             <TextField
               fullWidth
               variant="outlined"
-              label="Email:"
-              type="email"
-              name="email"
-              value={this.state.email}
+              label="Address:"
+              type="address"
+              name="address"
+              value={this.state.address}
               required
-              onChange={this.handleInputChangeFor('email')}
+              onChange={this.handleInputChangeFor('address')}
             />
           </Grid>
           <Grid item xs={6}>
             <TextField
               fullWidth
               variant="outlined"
-              label="Contact Title:"
-              type="contact_title"
-              name="contact_title"
-              value={this.state.contact_title}
+              label="Email:"
+              type="email_address"
+              name="email_address"
+              value={this.state.email_address}
               required
-              onChange={this.handleInputChangeFor('contact_title')}
+              onChange={this.handleInputChangeFor('email_address')}
             />
           </Grid>
           <Grid item xs={6}>
@@ -238,7 +265,7 @@ class RegisterFormVolunteer extends Component {
                   Non-Profit
                 </MenuItem>
                 <MenuItem key="2" value="School">
-                  TweSchoolnty
+                  School
                 </MenuItem>
                 <MenuItem key="3" value="Community Group">
                   Community Group
@@ -256,11 +283,11 @@ class RegisterFormVolunteer extends Component {
               fullWidth
               variant="outlined"
               label="Mission Statement:"
-              type="mission_statement"
-              name="mission_statement"
-              value={this.state.mission_statement}
+              type="mission"
+              name="mission"
+              value={this.state.mission}
               required
-              onChange={this.handleInputChangeFor('mission_statement')}
+              onChange={this.handleInputChangeFor('mission')}
             />
           </Grid>
           <Grid item xs={12}>
@@ -270,11 +297,11 @@ class RegisterFormVolunteer extends Component {
               fullWidth
               variant="outlined"
               label="Organization Summary:"
-              type="organization_summary"
-              name="organization_summary"
-              value={this.state.organization_summary}
+              type="summary"
+              name="summary"
+              value={this.state.summary}
               required
-              onChange={this.handleInputChangeFor('organization_summary')}
+              onChange={this.handleInputChangeFor('summary')}
             />
           </Grid>
           <Grid item xs={12}>
@@ -308,10 +335,16 @@ class RegisterFormVolunteer extends Component {
             {/* TODO - AWS S3 needs to go here! */}
             <ImageUploader />
           </Grid>
-          <Grid item xs={3}>
-            <Button variant="contained">Cancel</Button>
+          <Grid item xs={12}>
+            {message}
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={3}></Grid>
+          <Grid item xs={4}>
+            <Link to="/home" style={{ textDecoration: 'none' }}>
+              <Button variant="contained">Cancel</Button>
+            </Link>
+          </Grid>
+          <Grid item xs={4}>
             <Button variant="contained" color="primary" type="submit">
               Register
             </Button>

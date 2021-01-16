@@ -26,9 +26,10 @@ function* registerUser(action) {
 function* registerOrg(action) {
   try {
     yield axios.post('/api/user/register/org', action.payload);
+    yield put({ type: 'ORG_REGISTERED', payload: 1 });
   } catch (error) {
     console.log('Error with user registration:', error);
-    yield put({ type: 'ORG_REGISTRATION_FAILED' });
+    yield put({ type: 'REGISTRATION_FAILED' });
   }
 }
 

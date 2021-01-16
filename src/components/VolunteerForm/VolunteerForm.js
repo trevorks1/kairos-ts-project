@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import { Link, withRouter } from 'react-router-dom';
 import {
   TextField,
   Box,
@@ -24,8 +25,8 @@ class RegisterForm extends Component {
     username: '',
     password: '',
     phone_number: '',
-    email: '',
-    company_or_no: 'true',
+    email_address: '',
+    company: 'false',
     ages_id: [],
     company_name: '',
     activity_type_id: [],
@@ -50,8 +51,8 @@ class RegisterForm extends Component {
         username: this.state.username,
         password: this.state.password,
         phone_number: this.state.phone_number,
-        email: this.state.email,
-        company_or_no: this.state.company_or_no,
+        email_address: this.state.email_address,
+        company: this.state.company,
         ages_id: this.state.ages_id,
         company_name: this.state.company_name,
         activity_type_id: this.state.activity_type_id,
@@ -187,9 +188,9 @@ class RegisterForm extends Component {
               label="Email Address:"
               type="email"
               name="email"
-              value={this.state.email}
+              value={this.state.email_address}
               required
-              onChange={this.handleInputChangeFor('email')}
+              onChange={this.handleInputChangeFor('email_address')}
             />
           </Grid>
           <Grid item xs={6}>
@@ -197,10 +198,10 @@ class RegisterForm extends Component {
               <FormLabel component="legend">Is this for a company?</FormLabel>
               <RadioGroup
                 row
-                aria-label="company_or_no"
-                name="company_or_no"
-                value={this.state.company_or_no}
-                onChange={this.handleInputChangeFor('company_or_no')}
+                aria-label="company"
+                name="company"
+                value={this.state.company}
+                onChange={this.handleInputChangeFor('company')}
               >
                 <FormControlLabel
                   value="true"
@@ -214,7 +215,7 @@ class RegisterForm extends Component {
                 />
               </RadioGroup>
             </FormControl>
-            {this.state.company_or_no == 'true' && (
+            {this.state.company == 'true' && (
               <TextField
                 fullWidth
                 variant="outlined"
@@ -273,10 +274,13 @@ class RegisterForm extends Component {
               })}
             </Grid>
           </Grid>
-          <Grid item xs={3}>
-            <Button variant="contained">Cancel</Button>
+          <Grid item xs={3}></Grid>
+          <Grid item xs={4}>
+            <Link to="/home" style={{ textDecoration: 'none' }}>
+              <Button variant="contained">Cancel</Button>
+            </Link>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={4}>
             <Button variant="contained" color="primary" type="submit">
               Register
             </Button>
@@ -287,4 +291,4 @@ class RegisterForm extends Component {
   }
 }
 
-export default connect(mapStoreToProps)(RegisterForm);
+export default withRouter(connect(mapStoreToProps)(RegisterForm));

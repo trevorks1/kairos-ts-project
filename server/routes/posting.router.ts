@@ -37,7 +37,7 @@ router.get(
 router.get(
   '/details/:id',
   (req: Request, res: Response, next: express.NextFunction): void => {
-    const queryText = `SELECT "postings".*, "organization".organization_name,
+    const queryText = `SELECT "postings".*, "organization".organization_name, "organization".logo,
     ARRAY(SELECT DISTINCT "ages".range FROM "ages", "posting_ages" WHERE "posting_ages".posting_id = "postings".id AND "ages".id = "posting_ages".ages_id AND "posting_ages".posting_id = "postings".id) as age_ranges, 
     ARRAY(SELECT DISTINCT "activity_type".activity_name FROM "activity_type", "posting_activity" WHERE "posting_activity".posting_id = "postings".id AND "activity_type".id = "posting_activity".activity_type_id AND "posting_activity".posting_id = "postings".id ) as activities
     FROM "organization" 

@@ -8,6 +8,7 @@ import ages from './ages.reducer';
 import backHistoryReducer from './back.history.reducer';
 import adminReducer from './admin.reducer';
 import adminApprovedReducer from './adminApproved.reducer';
+import orgSuccess from './registration.reducer';
 import orgProfileReducer from './orgProfile.reducer';
 import imageReducer from './image.reducer';
 
@@ -27,6 +28,7 @@ const rootReducer = combineReducers({
   backHistoryReducer,
   adminReducer,
   adminApprovedReducer,
+  orgSuccess,
   orgProfileReducer,
   imageReducer,
 });

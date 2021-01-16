@@ -53,10 +53,9 @@ router.post(
       const phone_number: string | null = <string>req.body.phone_number;
       const company: boolean | null = <boolean>req.body.company;
       const company_name: string | null = <string>req.body.company_name;
-      const volunteer: boolean | null = <boolean>req.body.volunteer;
       const queryText: string = `INSERT INTO "user" (username, password, first_name, last_name, email_address, phone_number, 
     company, company_name, volunteer, active, access_level_id) 
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, true, 3) 
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, true, true, 3) 
     RETURNING id;`;
       pool
         .query(queryText, [
@@ -68,7 +67,6 @@ router.post(
           phone_number,
           company,
           company_name,
-          volunteer,
         ])
         .then((result) => {
           const newUserId = result.rows[0].id;
@@ -170,6 +168,10 @@ router.post(
                 res.sendStatus(201);
               });
             });
+        })
+        .catch((error) => {
+          console.log('Error Registering Username', error);
+          res.sendStatus(500);
         });
     } catch (err) {
       console.log(`Error saving organization to database: ${err}`);

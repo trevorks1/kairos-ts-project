@@ -131,6 +131,7 @@ class App extends Component {
                 exact
                 path="/registration-volunteer"
                 component={RegisterVolunteer}
+                authRedirect="/user"
               />
               <ProtectedRoute
                 // with authRedirect:
