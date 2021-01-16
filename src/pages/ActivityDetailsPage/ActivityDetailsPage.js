@@ -11,10 +11,22 @@ import {
   Grid,
   Button,
   Typography,
+  Card,
+  CardContent,
+  CardMedia,
 } from '@material-ui/core';
+
+import { withStyles, createStyles } from '@material-ui/core/styles';
 
 // CUSTOM COMPONENTS
 import ActivityDetailsCard from '../../components/ActivityDetailsCard/ActivityDetailsCard';
+
+const muiStyle = (theme) =>
+  createStyles({
+    media: {
+      height: '500px',
+    },
+  });
 
 class ActivityDetailsPage extends Component {
   componentDidMount() {
@@ -68,23 +80,24 @@ class ActivityDetailsPage extends Component {
           </Grid>
         </Paper>
         <Box mt={6}>
-          <Grid container>
+          <Grid container spacing={2}>
             <Grid item lg={6}>
-              <div>
-                <img
-                  src={process.env.PUBLIC_URL + '/org-placeholder.png'}
-                  alt="not found"
+              <Card>
+                <CardMedia
+                  image={process.env.PUBLIC_URL + '/org-placeholder.png'}
+                  title="org picture"
+                  className={this.props.classes.media}
                 />
-              </div>
-              <Box mt={3}>
-                <Typography variant="h4" component="h4">
-                  Description:
-                </Typography>
-                <Typography variant="body1" component="p">
-                  {this.props.store.postings.postingDetails[0] &&
-                    this.props.store.postings.postingDetails[0].description}
-                </Typography>
-              </Box>
+                <CardContent>
+                  <Typography variant="h4" component="h4">
+                    Description:
+                  </Typography>
+                  <Typography variant="body1" component="p">
+                    {this.props.store.postings.postingDetails[0] &&
+                      this.props.store.postings.postingDetails[0].description}
+                  </Typography>
+                </CardContent>
+              </Card>
             </Grid>
             <Grid item lg={6}>
               {this.props.store.postings.postingDetails[0] && (
@@ -100,4 +113,6 @@ class ActivityDetailsPage extends Component {
   }
 }
 
-export default withRouter(connect(mapStoreToProps)(ActivityDetailsPage));
+export default withStyles(muiStyle)(
+  withRouter(connect(mapStoreToProps)(ActivityDetailsPage))
+);
