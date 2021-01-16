@@ -7,10 +7,6 @@ import { Card, CardContent, CardActionArea } from '@material-ui/core';
 
 class CauseListItem extends Component {
   handleCauseClick = () => {
-    this.props.dispatch({
-      type: 'SET_BACK_HISTORY_SAGA',
-      payload: this.props.cause.id,
-    });
     this.props.history.push(`/browse/${this.props.cause.id}`);
   };
 
