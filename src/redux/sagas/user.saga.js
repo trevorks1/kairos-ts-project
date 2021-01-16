@@ -34,9 +34,22 @@ function* updateContactInfo(action) {
   }
 }
 
+function* getPostings() {
+  try {
+    const postingsForVolunteerUser = yield axios.get('/api/volunteer');
+    yield put({
+      type: 'SET_POSTINGS_FOR_VOLUNTEER',
+      payload: postingsForVolunteerUser.data,
+    });
+  } catch (err) {
+    console.lof('could not get postings for user', err);
+  }
+}
+
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
   yield takeLatest('UPDATE_CONTACT_INFO', updateContactInfo);
+  yield takeLatest('GET_POSTINGS_FOR_VOLUNTEER', getPostings);
 }
 
 export default userSaga;

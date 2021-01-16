@@ -43,6 +43,11 @@ class VolunteerProfile extends Component {
     this.props.dispatch({
       type: 'GET_ACTIVITIES',
     });
+
+    // gets all postings user has signed up for
+    this.props.dispatch({
+      type: 'GET_POSTINGS_FOR_VOLUNTEER',
+    });
   }
 
   handleEditActivities = () => {
