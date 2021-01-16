@@ -37,9 +37,22 @@ function* getUserPostings(action) {
   }
 }
 
+function* getPosting(action) {
+  try {
+    const posting = yield axios.get(`/api/postings/details/${action.payload}`);
+    yield put({
+      type: 'SET_POSTING_DETAILS',
+      payload: posting.data,
+    });
+  } catch (err) {
+    console.log('could not get details for this posting!', err);
+  }
+}
+
 function* PostingsSaga() {
   yield takeLatest('SUBMIT_FILTERS', getFilteredPostings);
   yield takeLatest('GET_USER_POSTINGS', getUserPostings);
+  yield takeLatest('GET_POSTING', getPosting);
 }
 
 export default PostingsSaga;

@@ -17,7 +17,7 @@ import { DateTime } from 'luxon';
 
 class PostingCard extends Component {
   handlePostingClick = () => {
-    // console.log(this.props.posting.posting_id);
+    console.log(this.props.posting);
     this.props.history.push(`/view-activity/${this.props.posting.id}`);
   };
 

@@ -17,31 +17,11 @@ import {
 import ActivityDetailsCard from '../../components/ActivityDetailsCard/ActivityDetailsCard';
 
 class ActivityDetailsPage extends Component {
-  state = {
-    paramsId: 0,
-    postingIndex: 0,
-  };
   componentDidMount() {
-    this.setState(
-      {
-        paramsId: this.props.match.params.id,
-      },
-      () => {
-        for (
-          let i = 0;
-          i < this.props.store.postings.postingsForBrowsePage.length;
-          i++
-        )
-          if (
-            this.props.store.postings.postingsForBrowsePage[i].id ==
-            this.state.paramsId
-          ) {
-            this.setState({
-              postingIndex: i,
-            });
-          }
-      }
-    );
+    this.props.dispatch({
+      type: 'GET_POSTING',
+      payload: this.props.match.params.id,
+    });
   }
 
   handleBackBtnClick = () => {
@@ -57,20 +37,17 @@ class ActivityDetailsPage extends Component {
               <Box ml={3}>
                 <Grid item>
                   <h1>
-                    {this.props.store.postings &&
-                      this.props.store.postings.postingsForBrowsePage[
-                        this.state.postingIndex
-                      ].title}
+                    {this.props.store.postings.postingDetails[0] &&
+                      this.props.store.postings.postingDetails[0].title}
                   </h1>
                 </Grid>
               </Box>
               <Box ml={3}>
                 <Grid item>
                   <h3>
-                    {this.props.store.postings &&
-                      this.props.store.postings.postingsForBrowsePage[
-                        this.state.postingIndex
-                      ].organization_name}
+                    {this.props.store.postings.postingDetails[0] &&
+                      this.props.store.postings.postingDetails[0]
+                        .organization_name}
                   </h3>
                 </Grid>
               </Box>
@@ -104,21 +81,17 @@ class ActivityDetailsPage extends Component {
                   Description:
                 </Typography>
                 <Typography variant="body1" component="p">
-                  {this.props.store.postings &&
-                    this.props.store.postings.postingsForBrowsePage[
-                      this.state.postingIndex
-                    ].description}
+                  {this.props.store.postings.postingDetails[0] &&
+                    this.props.store.postings.postingDetails[0].description}
                 </Typography>
               </Box>
             </Grid>
             <Grid item lg={6}>
-              <ActivityDetailsCard
-                posting={
-                  this.props.store.postings.postingsForBrowsePage[
-                    this.state.postingIndex
-                  ]
-                }
-              />
+              {this.props.store.postings.postingDetails[0] && (
+                <ActivityDetailsCard
+                  posting={this.props.store.postings.postingDetails[0]}
+                />
+              )}
             </Grid>
           </Grid>
         </Box>

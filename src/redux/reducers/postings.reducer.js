@@ -20,7 +20,17 @@ const postingsForVolunteerUser = (state = [], action) => {
   }
 };
 
+const postingDetails = (state = [], action) => {
+  switch (action.type) {
+    case 'SET_POSTING_DETAILS':
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
 export default combineReducers({
   postingsForBrowsePage,
   postingsForVolunteerUser,
+  postingDetails,
 });
