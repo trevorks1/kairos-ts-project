@@ -79,14 +79,15 @@ class BrowseActivitiesPage extends Component {
     return (
       <Container>
         <h1>Browse these activities!</h1>
-        <Grid container spacing={2}>
+        <Grid container spacing={2} alignItems="center">
           <Grid item lg={3}>
-            <FormControl style={{ minWidth: 120 }}>
+            <FormControl fullWidth>
               <InputLabel>Cause Type</InputLabel>
               <Select
                 value={this.state.selectedCauseId}
                 onChange={this.handleChangeFor('cause_id')}
                 variant="outlined"
+                fullWidth
               >
                 <MenuItem value={0}>-please select-</MenuItem>
                 {this.props.store.causes.map((item) => {
@@ -96,12 +97,13 @@ class BrowseActivitiesPage extends Component {
             </FormControl>
           </Grid>
           <Grid item lg={3}>
-            <FormControl style={{ minWidth: 120 }}>
+            <FormControl fullWidth>
               <InputLabel>Activity Type</InputLabel>
               <Select
                 value={this.state.selectedActivityId}
                 onChange={this.handleChangeFor('activity_id')}
                 variant="outlined"
+                fullWidth
               >
                 <MenuItem value={0}>-please select-</MenuItem>
                 {this.props.store.activities.activityList.map((item) => {
@@ -113,12 +115,13 @@ class BrowseActivitiesPage extends Component {
             </FormControl>
           </Grid>
           <Grid item lg={3}>
-            <FormControl style={{ minWidth: 120 }}>
+            <FormControl fullWidth>
               <InputLabel>Age Range</InputLabel>
               <Select
                 value={this.state.selectedAgeRangeId}
                 onChange={this.handleChangeFor('age_id')}
                 variant="outlined"
+                fullWidth
               >
                 <MenuItem value={0}>-please select-</MenuItem>
                 {this.props.store.ages.map((item) => {
@@ -128,7 +131,11 @@ class BrowseActivitiesPage extends Component {
             </FormControl>
           </Grid>
           <Grid item lg={3}>
-            <Button variant="contained" onClick={this.clickHandleSubmit}>
+            <Button
+              variant="contained"
+              onClick={this.clickHandleSubmit}
+              size="large"
+            >
               SUBMIT
             </Button>
           </Grid>
