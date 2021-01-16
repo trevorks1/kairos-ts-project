@@ -51,9 +51,10 @@ class ActivityDetailsCard extends Component {
                     <strong>GOOD FOR</strong>
                   </p>
                   {/* need to map through age_ranges to display */}
-                  {this.props.posting.age_ranges.map((item, index) => {
-                    return <p key={index}>{item}</p>;
-                  })}
+                  {this.props.posting.age_ranges &&
+                    this.props.posting.age_ranges.map((item, index) => {
+                      return <p key={index}>{item}</p>;
+                    })}
                 </Grid>
                 <Grid item lg={12}>
                   <p>
@@ -65,7 +66,7 @@ class ActivityDetailsCard extends Component {
                   <p>
                     <strong>CURRENTLY SIGNED UP</strong>
                   </p>
-                  <p>69</p>
+                  <p>2</p>
                 </Grid>
               </Grid>
             </Grid>

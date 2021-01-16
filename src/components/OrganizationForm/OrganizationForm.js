@@ -79,20 +79,23 @@ class RegisterFormVolunteer extends Component {
   // };
 
   handleCheckbox = (event) => {
-    if (this.state.causes.includes(event.target.value)) {
-      const checkboxes = this.state.causes.filter(
-        (box) => box.value != event.target.value
-      );
-      console.log('!!!!!!!!', checkboxes);
-      // this.setState({
-      //   causes: checkboxes,
-      // });
-    } else {
+    let newCauses = parseInt(event.target.value);
+    const isSelected = event.target.checked;
+    if (isSelected === true) {
       this.setState({
-        causes: [...this.state.causes, event.target.value],
+        ...this.state,
+        causes: [...this.state.causes, newCauses],
+      });
+    } else if (isSelected === false) {
+      const causesArray = this.state.causes;
+      const updatedCauses = causesArray.filter((item) => {
+        return item !== newCauses;
+      });
+      this.setState({
+        ...this.state,
+        causes: updatedCauses,
       });
     }
-    console.log(this.state.causes);
   };
 
   render() {
@@ -284,9 +287,9 @@ class RegisterFormVolunteer extends Component {
                     <FormControlLabel
                       control={
                         <Checkbox
+                          checked={this.state.causes.indexOf(item.id) !== -1}
                           value={item.id}
                           onChange={this.handleCheckbox}
-                          name="checked"
                           color="primary"
                         />
                       }

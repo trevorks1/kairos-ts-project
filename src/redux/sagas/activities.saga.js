@@ -64,12 +64,35 @@ function* savePrefActivity(action) {
   }
 }
 
+// deletes first, then posts preferred activity for a logged in volunteer user
+// updates reducer and re-loads page with new info
+function* updatePrefActivity(action) {
+  try {
+    yield axios.delete('/api/activities/delete', {
+      data: {
+        activity_type_id: action.payload.deleteArray,
+      },
+    });
+
+    yield axios.post(`/api/activities/save`, {
+      activity_type_id: action.payload.postArray,
+    });
+    // calling getPrefActivities to update Reducer and force page to re-render
+    yield put({
+      type: 'GET_PREF_ACTIVITIES',
+    });
+  } catch (err) {
+    console.log('something went wrong updating the preferred activities!', err);
+  }
+}
+
 function* activitiesSaga() {
   yield takeLatest('GET_ACTIVITIES', getAllActivities);
   yield takeLatest('GET_PREF_ACTIVITIES', getPrefActivities);
   yield takeLatest('GET_PREF_ACTIVITY_POSTINGS', getPrefActivityPostings);
   yield takeLatest('DELETE_PREF_ACTIVITY', deletePrefActivities);
   yield takeLatest('POST_ACTIVITIES', savePrefActivity);
+  yield takeLatest('UPDATE_PREF_ACTIVITIES', updatePrefActivity);
 }
 
 export default activitiesSaga;

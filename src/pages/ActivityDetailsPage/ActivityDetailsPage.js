@@ -4,7 +4,14 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import { withRouter } from 'react-router-dom';
 
 // MATERIAL-UI
-import { Container, Box, Paper, Grid, Button } from '@material-ui/core';
+import {
+  Container,
+  Box,
+  Paper,
+  Grid,
+  Button,
+  Typography,
+} from '@material-ui/core';
 
 // CUSTOM COMPONENTS
 import ActivityDetailsCard from '../../components/ActivityDetailsCard/ActivityDetailsCard';
@@ -83,33 +90,38 @@ class ActivityDetailsPage extends Component {
             <Grid item></Grid>
           </Grid>
         </Paper>
-        <Grid container>
-          <Grid item lg={6}>
-            <div>
-              <img
-                src={process.env.PUBLIC_URL + '/org-placeholder.png'}
-                alt="not found"
-              />
-            </div>
-            <div>
-              <h4>
-                {this.props.store.postings &&
+        <Box mt={6}>
+          <Grid container>
+            <Grid item lg={6}>
+              <div>
+                <img
+                  src={process.env.PUBLIC_URL + '/org-placeholder.png'}
+                  alt="not found"
+                />
+              </div>
+              <Box mt={3}>
+                <Typography variant="h4" component="h4">
+                  Description:
+                </Typography>
+                <Typography variant="body1" component="p">
+                  {this.props.store.postings &&
+                    this.props.store.postings.postingsForBrowsePage[
+                      this.state.postingIndex
+                    ].description}
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid item lg={6}>
+              <ActivityDetailsCard
+                posting={
                   this.props.store.postings.postingsForBrowsePage[
                     this.state.postingIndex
-                  ].description}
-              </h4>
-            </div>
+                  ]
+                }
+              />
+            </Grid>
           </Grid>
-          <Grid item lg={6}>
-            <ActivityDetailsCard
-              posting={
-                this.props.store.postings.postingsForBrowsePage[
-                  this.state.postingIndex
-                ]
-              }
-            />
-          </Grid>
-        </Grid>
+        </Box>
       </Container>
     );
   }

@@ -49,8 +49,7 @@ router.get(
           // GET Active postings by org id
           pool.query(postingsQuery, [orgId]).then((resultPostings) => {
             const postings = resultPostings.rows;
-            const dbResponse = [];
-            dbResponse.push(organization, postings);
+            const dbResponse = { org: organization, post: postings };
             res.send(dbResponse);
           });
         })

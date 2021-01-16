@@ -15,8 +15,21 @@ function* getOrgProfile() {
   }
 }
 
+function* completeActivity(action) {
+  try {
+    yield put({ type: 'ERROR_RESET' });
+    yield axios.put(`/api/postings/active/${action.payload}`);
+    yield put({
+      type: 'GET_ORG_PROFILE',
+    });
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 function* orgProfileSaga() {
   yield takeLatest('GET_ORG_PROFILE', getOrgProfile);
+  yield takeLatest('PUT_ACTIVITY_COMPLETE', completeActivity);
 }
 
 export default orgProfileSaga;

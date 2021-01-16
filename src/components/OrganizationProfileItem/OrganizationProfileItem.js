@@ -10,73 +10,67 @@ import {
   Grid,
   Button,
 } from '@material-ui/core';
+import { DateTime } from 'luxon';
 
 class OrganizationProfileItem extends Component {
+  markComplete = (event) => {
+    this.props.dispatch({
+      type: 'PUT_ACTIVITY_COMPLETE',
+      payload: this.props.item.id,
+    });
+  };
+
   render() {
+    const datePosted = DateTime.fromISO(this.props.item.date_posted);
+    const humanReadablePostedDate = datePosted.toLocaleString(
+      DateTime.DATE_SHORT
+    );
+
     return (
       <div>
-        <Card
-          variant="outlined"
-          style={{
-            padding: '25px',
-            marginRight: '200px',
-            marginLeft: '200px',
-            marginBottom: '50px',
-          }}
-        >
-          <Grid container spacing={1}>
-            <Grid item xs={6}>
-              <Card
-                style={{
-                  height: '300px',
-                  width: '230px',
-                  marginLeft: '50px',
-                  marginTop: '25px',
-                }}
-              >
-                <CardHeader subheader="Logo" />
-                <CardActionArea>
-                  <img src={this.props.item.logo}></img>
-                </CardActionArea>
-              </Card>
-            </Grid>
-            <Grid item xs={6}>
-              <Card
-                style={{
-                  marginTop: '20px',
-                  marginRight: '50px',
-                  paddingBottom: '20px',
-                  padding: '20px',
-                }}
-              >
-                <CardHeader subheader="Organization Name" />
-                {this.props.item.organization_name}
-              </Card>
-              <Card
-                style={{
-                  marginTop: '20px',
-                  marginRight: '50px',
-                  paddingBottom: '20px',
-                  padding: '20px',
-                }}
-              >
-                <CardHeader subheader="Organization Type" />
-                {this.props.item.organization_type}
-              </Card>
-              <Card
-                style={{
-                  marginTop: '20px',
-                  marginRight: '50px',
-                  paddingBottom: '20px',
-                  padding: '20px',
-                }}
-              >
-                <CardHeader subheader="Summary" />
-                {this.props.item.summary}
-              </Card>
-            </Grid>
-          </Grid>
-        </Card>
+        {' '}
+        <Grid item lg={12}>
+          {/* use avatar to display the number in top left corner */}
+          <Card
+            variant="outlined"
+            style={{
+              marginBottom: '25px',
+              marginRight: '100px',
+              marginLeft: '100px',
+            }}
+          >
+            <CardActionArea onClick={this.handlePostingClick}>
+              <CardHeader
+                avatar={<Avatar>{this.props.item.id}</Avatar>} // adding 1 to postingId because array index starts at 0!
+                title={
+                  <Typography variant="h3" component="h3">
+                    {this.props.item.title}
+                  </Typography>
+                }
+              />
+              <CardContent>
+                <Typography variant="body1" component="p">
+                  {this.props.item.description}
+                </Typography>
+              </CardContent>
+              <CardContent>
+                <Typography variant="body2" component="p">
+                  {humanReadablePostedDate}
+                  {/* TODO need to fix the date!!! */}
+                  {/* {this.props.posting.date_posted} */}
+                </Typography>
+                <Button
+                  style={{ float: 'right', marginLeft: '20px' }}
+                  color="primary"
+                  onClick={this.markComplete}
+                >
+                  Mark as Complete
+                </Button>
+                <Button style={{ float: 'right' }}>Edit</Button>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+        </Grid>
       </div>
     );
   }
