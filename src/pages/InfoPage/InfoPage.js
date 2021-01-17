@@ -7,7 +7,10 @@ import React from 'react';
 
 const InfoPage = () => (
   <div>
-    <p>Info Page</p>
+    <img
+      src="https://kairos-images-bucket.s3.amazonaws.com/108a9951-68c3-4d40-8eb6-9c6345918125_kairoswaiver.png"
+      alt="waiver"
+    />
   </div>
 );
 
