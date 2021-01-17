@@ -274,3 +274,6 @@ VALUES (1, 1),
 (15, 3),
 (15, 4);
 
+-- adds an upcoming event to brad's profile page
+INSERT INTO "posting_volunteers" ("posting_id", "user_id", "waiver_agreement")
+VALUES (7, 2, true);
