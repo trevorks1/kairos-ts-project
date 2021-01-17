@@ -46,6 +46,8 @@ VALUES ('Admin', 10),
 ('Organization', 20),
 ('Volunteer', 30);
 
+
+-- one admin user, 1 volunteer user, 6 org users (5 set active to true, 1 set to false) USE encrypted PASS - it's shire
 INSERT INTO "user" ("username", "password", "first_name", "last_name", "email_address", "phone_number", "company", "company_name", "volunteer", "active", "access_level_id") 
 VALUES ('tommy', '$2a$10$4mBT3./JmnTWb.7pNqS4XuRsBlgbdgXE.0RnDRJtqe38Le.3ddI7K', 'Tom', 'Bombadil', 'tom.bombadil@theshire.com', '(555)555-1234', true, 'Kairos', false, true, 1),
 ('frodo', '$2a$10$4mBT3./JmnTWb.7pNqS4XuRsBlgbdgXE.0RnDRJtqe38Le.3ddI7K', 'Frodo', 'Baggins', 'frodo.baggins@theshire.com', '(555)555-1235', true, 'Kairos', true, true, 3),
@@ -54,6 +56,7 @@ VALUES ('tommy', '$2a$10$4mBT3./JmnTWb.7pNqS4XuRsBlgbdgXE.0RnDRJtqe38Le.3ddI7K',
 ('smeagol', '$2a$10$4mBT3./JmnTWb.7pNqS4XuRsBlgbdgXE.0RnDRJtqe38Le.3ddI7K', 'Smeagol', 'Gollum', 'smeagol.gollum@theshire.com', '(555)555-1238', true, 'Kairos', false, true, 2),
 ('treebeard', '$2a$10$4mBT3./JmnTWb.7pNqS4XuRsBlgbdgXE.0RnDRJtqe38Le.3ddI7K', 'Treebeard', 'Fangorn', 'treebeard.fangorn@theshire.com', '(555)555-1239', true, 'Kairos', false, true, 2);
 
+-- add a few values for the 1 volunteer user
 INSERT INTO "user_activity" ("activity_type_id", "user_id")
 VALUES (1, 2),
 (2, 2),
@@ -66,6 +69,7 @@ VALUES (1, 2),
 (9, 3),
 (11, 3);
 
+-- add 1 value
 INSERT INTO "user_ages" ("user_id", "ages_id")
 VALUES (2, 1),
 (2, 3),
@@ -73,7 +77,8 @@ VALUES (2, 1),
 (3, 2),
 (3, 4);
 
-INSERT INTO "organization" ("organization_name", "contact_title", "address", "mission", "summary", "website", "organization_type", "user_id")
+-- 6 orgs (one should be the user with active set to false)
+INSERT INTO "organization" ("organization_name", "contact_title", "address", "mission", "summary", "website", "organization_type", "user_id", "logo")
 VALUES ('The Prancing Pony', 'Wizard', '1 White Wizard Way, White Tower, Middle earth 77777', 'Make money, drink beer, smoke the shire herb', 'Its an Inn, what do you want?', 'prancingpony.com', 'Other', 4),
 ('Saurons Smithing', 'CEO', '1 Evil Wizard Way, Some Tower, Middle earth 77777', 'Kill hobbits, build armies, smoke the shire herb', 'All the evil', 'brokesmithy.org', 'Non-profit', 5),
 ('Shelobs Spin Class & Yoga', 'PR Manager', 'A cave in the forest, Middle earth 77777', 'Be flexible, lots of spinning, avoid the light', 'Best hobbit smoothies in the world', 'livehealthy.net', 'Community Group', 6),
@@ -100,6 +105,7 @@ VALUES ('The Prancing Pony', 'Wizard', '1 White Wizard Way, White Tower, Middle 
 ('Test Org 21', 'Tester', 'Middle Earth', 'Shire... Baggins!!!!', 'Itsa summary', 'prancingpony.org', 'Other', 6),
 ('Test Org 22', 'Tester', 'Middle Earth', 'Shire... Baggins!!!!', 'Itsa summary', 'prancingpony.org', 'Other', 4);
 
+-- 2-3 causes per org, but use best judgement 
 INSERT INTO "org_causes" ("org_id", "cause_id")
 VALUES (1, 2),
 (1, 3),
@@ -159,6 +165,7 @@ VALUES (1, 2),
 (25, 15),
 (25, 5);
 
+-- 30 is a good number to have
 INSERT INTO "postings" ("org_id", "date_posted", "date_to_attend", "start_time", "end_time", "location", "description", "repeating", "frequency", "people_needed", "active")
 VALUES (1, '2021-01-04', '2021-01-09', '12:30', '4:30', 'Shire', 'Help pack Frodos house', false, '', 6, true),
 (1, '2021-01-04', '2021-01-09', '4:30', '7:00', 'Shire', 'Setup Frodo going away party', false, '', 6, true),
@@ -193,6 +200,7 @@ VALUES (1, '2021-01-04', '2021-01-09', '12:30', '4:30', 'Shire', 'Help pack Frod
 (11, '2021-01-04', '2021-02-12', '12:30', '4:30', 'Test 28', 'Pack stuff', false, '', 6, true),
 (12, '2021-01-04', '2021-02-13', '12:30', '4:30', 'Test 29', 'Pack stuff', false, '', 6, true);
 
+-- up to 30 "posting_id" ... vary the "activity_type_id"
 INSERT INTO "posting_activity" ("posting_id", "activity_type_id")
 VALUES (1, 1),
 (1, 3),
@@ -234,6 +242,7 @@ VALUES (1, 1),
 (31, 13),
 (32, 14);
 
+-- up to 30 "posting_id"
 INSERT INTO "posting_ages" ("posting_id", "ages_id")
 VALUES (1, 3),
 (1, 4),
