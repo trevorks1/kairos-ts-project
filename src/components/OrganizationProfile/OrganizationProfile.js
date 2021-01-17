@@ -18,6 +18,8 @@ import {
   DialogTitle,
   Select,
   FormControl,
+  FormControlLabel,
+  Checkbox,
   InputLabel,
 } from '@material-ui/core';
 import OrganizationProfileItem from '../OrganizationProfileItem/OrganizationProfileItem';
@@ -25,6 +27,8 @@ import OrganizationProfileItem from '../OrganizationProfileItem/OrganizationProf
 class OrganizationProfile extends Component {
   state = {
     newPost: false,
+    editActivitiesSelected: [],
+    editAgesSelected: [],
     postData: {
       title: '',
       date_to_attend: '',
@@ -36,8 +40,8 @@ class OrganizationProfile extends Component {
       frequency: '',
       people_needed: '',
       org_id: '',
-      ages_id: [1, 2],
-      activity_type_id: [1, 2],
+      ages_id: [],
+      activity_type_id: [],
     },
   };
 
@@ -63,19 +67,88 @@ class OrganizationProfile extends Component {
     }
   };
 
+  handleCheckBoxesAge = (event) => {
+    let newAge = parseInt(event.target.value);
+    const isSelected = event.target.checked;
+
+    if (isSelected === true) {
+      this.setState({
+        ...this.state,
+        postData: {
+          ...this.state.postData,
+          ages_id: [...this.state.postData.ages_id, newAge],
+        },
+      });
+    } else if (isSelected === false) {
+      const actArray = this.state.postData.ages_id;
+      const updatedAges = actArray.filter((item) => {
+        return item !== newAge;
+      });
+      this.setState({
+        ...this.state,
+        postData: {
+          ...this.state.postData,
+          ages_id: updatedAges,
+        },
+      });
+    }
+  };
+
+  handleCheckBoxesAct = (event) => {
+    let newActivity = parseInt(event.target.value);
+    const isSelected = event.target.checked;
+
+    if (isSelected === true) {
+      this.setState({
+        ...this.state,
+        postData: {
+          ...this.state.postData,
+          activity_type_id: [
+            ...this.state.postData.activity_type_id,
+            newActivity,
+          ],
+        },
+      });
+    } else if (isSelected === false) {
+      const actArray = this.state.postData.activity_type_id;
+      const updatedActivities = actArray.filter((item) => {
+        return item !== newActivity;
+      });
+      this.setState({
+        ...this.state,
+        postData: {
+          ...this.state.postData,
+          activity_type_id: updatedActivities,
+        },
+      });
+    }
+  };
+
   handleSubmit = (event) => {
     console.log('New Activity: ', this.state.postData);
     this.props.dispatch({
       type: 'POST_ACTIVITY',
       payload: this.state.postData,
     });
+    this.props.dispatch({ type: 'GET_ORG_PROFILE' });
     this.setState({
       newPost: false,
+      postData: {
+        ...this.state.postData,
+        ages_id: [],
+        activity_type_id: [],
+      },
     });
   };
 
   componentDidMount() {
     this.props.dispatch({ type: 'GET_ORG_PROFILE' });
+    this.props.dispatch({
+      type: 'GET_ACTIVITIES',
+    });
+    this.props.dispatch({
+      type: 'GET_AGES',
+    });
   }
 
   render() {
@@ -112,7 +185,7 @@ class OrganizationProfile extends Component {
                     marginTop: '25px',
                   }}
                 >
-                  <CardHeader subheader="Logo" />
+                  <CardHeader />
                   <CardActionArea>
                     <img src={org.logo}></img>
                   </CardActionArea>
@@ -138,8 +211,8 @@ class OrganizationProfile extends Component {
                     padding: '20px',
                   }}
                 >
-                  <CardHeader subheader="Organization Type" />
-                  {org.organization_type}
+                  <CardHeader subheader="Mission Statement" />
+                  {org.mission}
                 </Card>
                 <Card
                   style={{
@@ -221,11 +294,10 @@ class OrganizationProfile extends Component {
                     required
                     type="number"
                     onChange={this.handleChangeFor('people_needed')}
-                    id="standard-textarea"
+                    id="standard-number"
                     variant="outlined"
                     label="People Needed"
                     placeholder="People Needed"
-                    multiline
                     style={{
                       width: '90%',
                       marginBottom: '20px',
@@ -303,68 +375,6 @@ class OrganizationProfile extends Component {
                     </Select>
                   </FormControl>
                 </Grid>
-
-                {/* <Grid item xs={6}>
-                  <FormControl className="size" variant="outlined">
-                    <InputLabel htmlFor="outlined-age-native-simple">
-                      Age Range
-                    </InputLabel>
-                    <Select
-                      required
-                      onChange={this.handleChangeFor('age_id')}
-                      native
-                      label="Repeating"
-                      value={this.state.age_id}
-                      inputProps={{
-                        name: 'age',
-                        id: 'outlined-age-native-simple',
-                      }}
-                      style={{ width: '410px' }}
-                    >
-                      <option value=""></option>
-                      <option value="1">0-4</option>
-                      <option value="2">5-12</option>
-                      <option value="3">13-17</option>
-                      <option value="4">Adult</option>
-                      <option value="5">Adult 55+</option>
-                    </Select>
-                  </FormControl>
-                </Grid>
-                <Grid item xs={6}>
-                  <FormControl className="size" variant="outlined">
-                    <InputLabel htmlFor="outlined-age-native-simple">
-                      Activity Type
-                    </InputLabel>
-                    <Select
-                      required
-                      onChange={this.handleChangeFor('activity_type_id')}
-                      native
-                      label="Activity Types"
-                      value={this.state.activity_type_id}
-                      inputProps={{
-                        name: 'age',
-                        id: 'outlined-age-native-simple',
-                      }}
-                      style={{ width: '410px' }}
-                    >
-                      <option value=""></option>
-                      <option value="1">Arts & Crafts</option>
-                      <option value="2">Canvassing</option>
-                      <option value="3">Cleaning</option>
-                      <option value="4">Dog Walking</option>
-                      <option value="5">Event Help</option>
-                      <option value="6">Gardening</option>
-                      <option value="7">Landscaping</option>
-                      <option value="8">Litter Pickup</option>
-                      <option value="9">Moving</option>
-                      <option value="10">Other</option>
-                      <option value="11">Packing</option>
-                      <option value="12">Painting</option>
-                      <option value="13">Reading</option>
-                      <option value="14">Sorting</option>
-                    </Select>
-                  </FormControl>
-                </Grid> */}
                 <Grid item xs={12}>
                   <TextField
                     required
@@ -383,6 +393,60 @@ class OrganizationProfile extends Component {
                     }}
                   />
                 </Grid>
+                <div>
+                  <h4>Select Activity Types: </h4>
+                </div>
+                <Grid container spacing={2} item xs={12}>
+                  {this.props.store.activities.activityList.map(
+                    (item, index) => {
+                      return (
+                        <Grid item xs={3} key={index}>
+                          <FormControlLabel
+                            control={
+                              <Checkbox
+                                checked={
+                                  this.state.postData.activity_type_id.indexOf(
+                                    item.id
+                                  ) !== -1
+                                }
+                                value={item.id}
+                                onChange={this.handleCheckBoxesAct}
+                                color="primary"
+                              />
+                            }
+                            label={item.activity_name}
+                          />
+                        </Grid>
+                      );
+                    }
+                  )}
+                </Grid>
+                <div>
+                  <h4>Select Age Ranges: </h4>
+                </div>
+                <Grid container spacing={2} item xs={12}>
+                  {this.props.store.ages.map((item, index) => {
+                    return (
+                      <Grid item xs={3} key={index}>
+                        <FormControlLabel
+                          control={
+                            <Checkbox
+                              checked={
+                                this.state.postData.ages_id.indexOf(item.id) !==
+                                -1
+                              }
+                              value={item.id}
+                              onChange={this.handleCheckBoxesAge}
+                              color="primary"
+                            />
+                          }
+                          label={item.range}
+                        />
+                      </Grid>
+                    );
+                  })}
+                </Grid>
+
                 <Grid item xs={2}>
                   <Button variant="contained" onClick={this.makeActivity}>
                     Cancel
