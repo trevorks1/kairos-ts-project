@@ -78,3 +78,13 @@ Grid
   flex-basis: 100%;
   max-width: 100%;
 }
+
+.heading-lp {
+  text-align: center;
+  margin: 0px 0px 45px 0px;
+}
+
+.heading-kairos {
+  color: #ff4d53;
+  text-shadow: 0px 1px 1px #0f0f0f;
+}
