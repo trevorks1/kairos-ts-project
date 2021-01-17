@@ -14,6 +14,9 @@ import {
   Card,
   CardContent,
   CardMedia,
+  Dialog,
+  DialogTitle,
+  DialogContent,
 } from '@material-ui/core';
 
 import { withStyles, createStyles } from '@material-ui/core/styles';
@@ -29,6 +32,10 @@ const muiStyle = (theme) =>
   });
 
 class ActivityDetailsPage extends Component {
+  state = {
+    wantToHelp: false,
+  };
+
   componentDidMount() {
     this.props.dispatch({
       type: 'GET_POSTING',
@@ -40,6 +47,18 @@ class ActivityDetailsPage extends Component {
     // pushes user back to previous page - list of postings
     // OR pushes volunteer back to their profile page if they are viewing an 'upcoming posting' they have signed up for
     this.props.history.goBack();
+  };
+
+  wantToHelp = () => {
+    if (this.state.wantToHelp === false) {
+      this.setState({
+        wantToHelp: true,
+      });
+    } else {
+      this.setState({
+        wantToHelp: false,
+      });
+    }
   };
   render() {
     return (
@@ -73,7 +92,20 @@ class ActivityDetailsPage extends Component {
                   </Button>
                 </Grid>
                 <Grid item>
-                  <Button variant="contained">I WANT TO HELP</Button>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={this.wantToHelp}
+                  >
+                    I WANT TO HELP
+                  </Button>
+                  <Dialog
+                    onClose={this.wantToHelp}
+                    open={this.state.wantToHelp}
+                  >
+                    <DialogTitle>Are you sure?</DialogTitle>
+                    <DialogContent></DialogContent>
+                  </Dialog>
                 </Grid>
               </Grid>
             </Grid>
