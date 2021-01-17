@@ -24,7 +24,7 @@ function eventNotifications() {
     const today = new Date();
     const maxDate = new Date();
     maxDate.setDate(today.getDate() + 2);
-    console.log(today, maxDate);
+    // console.log(today, maxDate);
 
     pool
       .query(queryText, [maxDate, today])
