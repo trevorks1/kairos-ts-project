@@ -162,7 +162,7 @@ router.post(
     try {
       // POST route code here
       const post: any = req.body;
-      const queryText: string = `INSERT INTO "postings" ("org_id", "title, "date_posted", "date_to_attend", 
+      const queryText: string = `INSERT INTO "postings" ("org_id", "title", "date_to_attend", 
       "start_time", "end_time", "location", "description", "repeating", "frequency", "people_needed", 
       "active")
       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, 't')
@@ -170,7 +170,6 @@ router.post(
       const queryArray = [
         post.org_id,
         post.title,
-        post.date_posted,
         post.date_to_attend,
         post.start_time,
         post.end_time,

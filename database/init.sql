@@ -60,7 +60,7 @@ CREATE TABLE "postings" (
   "title" VARCHAR (120),
   "org_id" INT,
   "date_posted" date,
-  "date_to_attend" date,
+  "date_to_attend" VARCHAR(200),
   "start_time" VARCHAR (20),
   "end_time" VARCHAR (20),
   "location" VARCHAR (80),

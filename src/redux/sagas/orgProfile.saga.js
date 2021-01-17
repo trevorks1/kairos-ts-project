@@ -27,9 +27,35 @@ function* completeActivity(action) {
   }
 }
 
+function* newActivity(action) {
+  try {
+    yield put({ type: 'ERROR_RESET' });
+    yield axios.post('/api/postings', action.payload);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+function* updateActivity(action) {
+  try {
+    yield put({ type: 'ERROR_RESET' });
+    const requestedList = yield axios.put(
+      `/api/postings/edit/${action.payload.id}`,
+      action.payload
+    );
+    yield put({
+      type: 'GET_ORG_PROFILE',
+    });
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 function* orgProfileSaga() {
   yield takeLatest('GET_ORG_PROFILE', getOrgProfile);
   yield takeLatest('PUT_ACTIVITY_COMPLETE', completeActivity);
+  yield takeLatest('POST_ACTIVITY', newActivity);
+  yield takeLatest('UPDATE_ACTIVITY', updateActivity);
 }
 
 export default orgProfileSaga;
