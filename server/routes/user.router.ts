@@ -134,8 +134,8 @@ router.post(
         .then((result) => {
           const newUserId = result.rows[0].id;
           const insertOrgQuery = `INSERT INTO "organization" ("organization_name", "contact_title", "address", "mission",
-          "summary", "website", "organization_type", "user_id")
-          VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+          "summary", "website", "organization_type", "user_id", "logo")
+          VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
           RETURNING id;`;
           pool
             .query(insertOrgQuery, [
@@ -147,6 +147,7 @@ router.post(
               req.body.website,
               req.body.organization_type,
               parseInt(newUserId),
+              req.body.logo,
             ])
             .then((resultOrg) => {
               const newOrgId = resultOrg.rows[0].id;

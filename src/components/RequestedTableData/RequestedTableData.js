@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button } from '@material-ui/core';
 import { connect } from 'react-redux';
+import { TableRow, TableCell } from '@material-ui/core';
 
 class RequestedTableData extends Component {
   handleApprove = (event) => {
@@ -21,12 +22,12 @@ class RequestedTableData extends Component {
 
   render() {
     return (
-      <tr>
-        <td>{this.props.item.organization_name}</td>
-        <td>{this.props.item.phone_number}</td>
-        <td>{this.props.item.address}</td>
-        <td>{this.props.item.email_address}</td>
-        <td>
+      <TableRow>
+        <TableCell>{this.props.item.organization_name}</TableCell>
+        <TableCell>{this.props.item.phone_number}</TableCell>
+        <TableCell>{this.props.item.address}</TableCell>
+        <TableCell>{this.props.item.email_address}</TableCell>
+        <TableCell>
           <Button
             variant="contained"
             style={{
@@ -51,8 +52,8 @@ class RequestedTableData extends Component {
           >
             Deny
           </Button>
-        </td>
-      </tr>
+        </TableCell>
+      </TableRow>
     );
   }
 }

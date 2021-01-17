@@ -5,7 +5,6 @@ import causes from './causes.reducer';
 import activities from './activities.reducer';
 import postings from './postings.reducer';
 import ages from './ages.reducer';
-import backHistoryReducer from './back.history.reducer';
 import adminReducer from './admin.reducer';
 import adminApprovedReducer from './adminApproved.reducer';
 import orgSuccess from './registration.reducer';
@@ -25,7 +24,6 @@ const rootReducer = combineReducers({
   activities,
   postings,
   ages,
-  backHistoryReducer,
   adminReducer,
   adminApprovedReducer,
   orgSuccess,

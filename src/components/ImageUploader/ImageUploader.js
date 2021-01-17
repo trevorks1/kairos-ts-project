@@ -28,7 +28,7 @@ class ImageUploader extends Component {
 
     const innerEl = (
       <div>
-        <Button variant="contained">Upload Image</Button>
+        <Button variant="contained">Upload Logo</Button>
       </div>
     );
 

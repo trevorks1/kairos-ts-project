@@ -5,7 +5,6 @@ import userSaga from './user.saga';
 import causesSaga from './causes.saga';
 import activitiesSaga from './activities.saga';
 import agesSaga from './ages.saga';
-import backBtnHistorySaga from './back.history.saga';
 import postingsSaga from './postings.saga';
 import imageUploadSaga from './imageUpload.saga';
 import adminSaga from './admin.saga';
@@ -26,7 +25,6 @@ export default function* rootSaga() {
     causesSaga(),
     activitiesSaga(),
     agesSaga(),
-    backBtnHistorySaga(),
     postingsSaga(),
     imageUploadSaga(),
     adminSaga(),
