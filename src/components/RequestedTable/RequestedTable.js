@@ -26,11 +26,21 @@ class RequestedTable extends Component {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Organization Name</TableCell>
-              <TableCell>Phone Number</TableCell>
-              <TableCell>Address</TableCell>
-              <TableCell>Email</TableCell>
-              <TableCell>Approve/Deny</TableCell>
+              <TableCell>
+                <h4>Organization Name</h4>
+              </TableCell>
+              <TableCell>
+                <h4>Phone Number</h4>
+              </TableCell>
+              <TableCell>
+                <h4>Address</h4>
+              </TableCell>
+              <TableCell>
+                <h4>Email</h4>
+              </TableCell>
+              <TableCell>
+                <h4>Approve/Deny</h4>
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

@@ -59,7 +59,8 @@ CREATE TABLE "postings" (
   "id" SERIAL PRIMARY KEY,
   "title" VARCHAR (120),
   "org_id" INT,
-  "date_posted" date,
+  "date_posted" DATE NOT NULL
+                DEFAULT CURRENT_DATE,
   "date_to_attend" VARCHAR(200),
   "start_time" VARCHAR (20),
   "end_time" VARCHAR (20),
