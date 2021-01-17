@@ -127,7 +127,7 @@ class OrganizationProfileItem extends Component {
             </CardActionArea>
           </Card>
         </Grid>
-        <div style={{ textAlign: 'center', marginBottom: '100px' }}>
+        <div style={{ textAlign: 'center', marginBottom: '10px' }}>
           <Dialog
             onClose={this.makeActivity}
             open={this.state.editPost}

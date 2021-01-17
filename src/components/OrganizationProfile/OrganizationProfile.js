@@ -7,6 +7,7 @@ import {
   CardActionArea,
   CardContent,
   CardHeader,
+  Container,
   Typography,
   Grid,
   Button,
@@ -411,10 +412,12 @@ class OrganizationProfile extends Component {
         <h2 style={{ textAlign: 'center', fontSize: '2em' }}>
           Your Activities
         </h2>
-        {post &&
-          post.map((item, index) => (
-            <OrganizationProfileItem item={item} key={index} />
-          ))}
+        <Container>
+          {post &&
+            post.map((item, index) => (
+              <OrganizationProfileItem item={item} key={index} />
+            ))}
+        </Container>
       </div>
     );
   }
