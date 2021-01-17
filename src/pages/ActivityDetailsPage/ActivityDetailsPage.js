@@ -91,6 +91,10 @@ class ActivityDetailsPage extends Component {
     }
   };
   render() {
+    let posting;
+    if (this.props.store.postings.postingDetails[0] != undefined) {
+      posting = this.props.store.postings.postingDetails[0];
+    }
     return (
       <Container>
         <Paper>
@@ -98,19 +102,12 @@ class ActivityDetailsPage extends Component {
             <Grid item lg={6}>
               <Box ml={3}>
                 <Grid item>
-                  <h1>
-                    {this.props.store.postings.postingDetails[0] &&
-                      this.props.store.postings.postingDetails[0].title}
-                  </h1>
+                  <h1>{posting && posting.title}</h1>
                 </Grid>
               </Box>
               <Box ml={3}>
                 <Grid item>
-                  <h3>
-                    {this.props.store.postings.postingDetails[0] &&
-                      this.props.store.postings.postingDetails[0]
-                        .organization_name}
-                  </h3>
+                  <h3>{posting && posting.organization_name}</h3>
                 </Grid>
               </Box>
             </Grid>
@@ -274,28 +271,31 @@ class ActivityDetailsPage extends Component {
           <Grid container spacing={2}>
             <Grid item lg={6}>
               <Card>
-                <CardMedia
-                  image={process.env.PUBLIC_URL + '/org-placeholder.png'}
-                  title="org picture"
-                  className={this.props.classes.media}
-                />
+                {posting !== undefined ? (
+                  <CardMedia
+                    image={posting.logo}
+                    title="org picture"
+                    className={this.props.classes.media}
+                  />
+                ) : (
+                  <CardMedia
+                    image={process.env.PUBLIC_URL + '/org-placeholder.png'}
+                    title="org picture"
+                    className={this.props.classes.media}
+                  />
+                )}
                 <CardContent>
                   <Typography variant="h4" component="h4">
                     Description:
                   </Typography>
                   <Typography variant="body1" component="p">
-                    {this.props.store.postings.postingDetails[0] &&
-                      this.props.store.postings.postingDetails[0].description}
+                    {posting && posting.description}
                   </Typography>
                 </CardContent>
               </Card>
             </Grid>
             <Grid item lg={6}>
-              {this.props.store.postings.postingDetails[0] && (
-                <ActivityDetailsCard
-                  posting={this.props.store.postings.postingDetails[0]}
-                />
-              )}
+              {posting && <ActivityDetailsCard posting={posting} />}
             </Grid>
           </Grid>
         </Box>
