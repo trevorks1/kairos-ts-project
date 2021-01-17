@@ -13,7 +13,6 @@ import {
   Typography,
   Card,
   CardContent,
-  CardMedia,
   Dialog,
   DialogTitle,
   DialogContent,
@@ -272,17 +271,16 @@ class ActivityDetailsPage extends Component {
             <Grid item lg={6}>
               <Card>
                 {posting !== undefined ? (
-                  <CardMedia
-                    image={posting.logo}
-                    title="org picture"
-                    className={this.props.classes.media}
-                  />
+                  <CardContent>
+                    <img src={posting.logo} alt="org logo"></img>
+                  </CardContent>
                 ) : (
-                  <CardMedia
-                    image={process.env.PUBLIC_URL + '/org-placeholder.png'}
-                    title="org picture"
-                    className={this.props.classes.media}
-                  />
+                  <CardContent>
+                    <img
+                      src={process.env.PUBLIC_URL + '/org-placeholder.png'}
+                      alt="org logo"
+                    ></img>
+                  </CardContent>
                 )}
                 <CardContent>
                   <Typography variant="h4" component="h4">
