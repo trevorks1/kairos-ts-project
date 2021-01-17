@@ -59,7 +59,7 @@ VALUES ('admin', '$2a$10$4mBT3./JmnTWb.7pNqS4XuRsBlgbdgXE.0RnDRJtqe38Le.3ddI7K',
 ('kcurban', '$2a$10$4mBT3./JmnTWb.7pNqS4XuRsBlgbdgXE.0RnDRJtqe38Le.3ddI7K', 'Andrew', 'Thomas', 'athomas@kcurban.com', '(555)555-5783', true, 'KC Urban C', false, true, 2);
 
 -- add a few values for the 1 volunteer user
-INSERT INTO "user_activity" ("activity_type_id", "user_id")
+INSERT INTO "user_activity" ("user_id", "activity_type_id")
 VALUES (2, 1),
 (2, 3),
 (2, 6),
