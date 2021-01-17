@@ -14,12 +14,12 @@ class ApprovedTableData extends Component {
 
   render() {
     return (
-      <div>
+      <TableRow>
         <TableCell>{this.props.item.organization_name}</TableCell>
         <TableCell>{this.props.item.phone_number}</TableCell>
         <TableCell>{this.props.item.address}</TableCell>
         <TableCell>{this.props.item.email_address}</TableCell>
-      </div>
+      </TableRow>
     );
   }
 }

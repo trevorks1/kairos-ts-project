@@ -3,6 +3,17 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import RequestedTableData from '../RequestedTableData/RequestedTableData';
 import './RequestedTable.css';
+import {
+  Container,
+  TableContainer,
+  Table,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
+  Button,
+  Box,
+} from '@material-ui/core';
 
 class RequestedTable extends Component {
   componentDidMount() {
@@ -11,24 +22,24 @@ class RequestedTable extends Component {
 
   render() {
     return (
-      <div>
-        <table className="admin-table">
-          <thead>
-            <tr>
-              <th>Org. Name</th>
-              <th>Phone Number</th>
-              <th>Address</th>
-              <th>Email Address</th>
-              <th>Approve/Deny</th>
-            </tr>
-          </thead>
-          <tbody>
+      <TableContainer className="formPanel">
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Organization Name</TableCell>
+              <TableCell>Phone Number</TableCell>
+              <TableCell>Address</TableCell>
+              <TableCell>Email</TableCell>
+              <TableCell>Approve/Deny</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
             {this.props.store.adminReducer.map((item, index) => (
               <RequestedTableData item={item} key={index} />
             ))}
-          </tbody>
-        </table>
-      </div>
+          </TableBody>
+        </Table>
+      </TableContainer>
     );
   }
 }

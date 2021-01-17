@@ -29,11 +29,7 @@ function AdminPanel(props) {
 
   return (
     <Container>
-      <div>
-        <h1 id="welcome">
-          Welcome to the Admin Panel, {props.store.user.username}!
-        </h1>
-      </div>
+      <h2 style={{ marginLeft: '32px', fontSize: '2.2em' }}>Admin Panel</h2>
       <Grid container>
         <Grid item>
           <Tabs value={selectedTab} onChange={handleTabChange}>
