@@ -50,9 +50,15 @@ class ActivityDetailsPage extends Component {
   };
 
   wantToHelp = () => {
-    this.setState({
-      wantToHelp: true,
-    });
+    if (this.state.wantToHelp === false) {
+      this.setState({
+        wantToHelp: true,
+      });
+    } else {
+      this.setState({
+        wantToHelp: false,
+      });
+    }
   };
   render() {
     return (
@@ -86,14 +92,19 @@ class ActivityDetailsPage extends Component {
                   </Button>
                 </Grid>
                 <Grid item>
-                  <Button variant="contained" onClick={this.wantToHelp}>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={this.wantToHelp}
+                  >
                     I WANT TO HELP
                   </Button>
                   <Dialog
                     onClose={this.wantToHelp}
                     open={this.state.wantToHelp}
                   >
-                    <DialogTitle>TEST!</DialogTitle>
+                    <DialogTitle>Are you sure?</DialogTitle>
+                    <DialogContent></DialogContent>
                   </Dialog>
                 </Grid>
               </Grid>
