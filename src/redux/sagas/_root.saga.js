@@ -9,6 +9,7 @@ import postingsSaga from './postings.saga';
 import imageUploadSaga from './imageUpload.saga';
 import adminSaga from './admin.saga';
 import orgProfileSaga from './orgProfile.saga';
+import wantToHelpSaga from './wantToHelp.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -29,5 +30,6 @@ export default function* rootSaga() {
     imageUploadSaga(),
     adminSaga(),
     orgProfileSaga(),
+    wantToHelpSaga(),
   ]);
 }

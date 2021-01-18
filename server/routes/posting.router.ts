@@ -223,7 +223,7 @@ router.post(
 
 // POST volunteer volunteering for posting /api/postings/avol
 router.post(
-  '/avol',
+  '/avol/:posting_id',
   rejectUnauthenticated,
   (req: any, res: Response, next: express.NextFunction): void => {
     const queryText = `INSERT INTO "group" (number_of_people)
@@ -235,7 +235,7 @@ router.post(
 
         const postQuery = `INSERT INTO "posting_volunteers" (user_id, posting_id, group_id, waiver_agreement) 
         VALUES ($1, $2, $3, true);`;
-        pool.query(postQuery, [req.user['id'], req.body.posting_id, groupId]);
+        pool.query(postQuery, [req.user['id'], req.params.posting_id, groupId]);
       })
       .then(() => {
         res.sendStatus(201);
