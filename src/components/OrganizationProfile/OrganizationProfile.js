@@ -201,7 +201,7 @@ class OrganizationProfile extends Component {
                   }}
                 >
                   <CardHeader subheader="Organization Name" />
-                  {org.organization_name}
+                  <h3>{org.organization_name}</h3>
                 </Card>
                 <Card
                   style={{
@@ -214,12 +214,16 @@ class OrganizationProfile extends Component {
                   <CardHeader subheader="Mission Statement" />
                   {org.mission}
                 </Card>
+              </Grid>
+              <Grid item xs={12}>
                 <Card
                   style={{
                     marginTop: '20px',
                     marginRight: '50px',
                     paddingBottom: '20px',
                     padding: '20px',
+                    marginLeft: '50px',
+                    width: '86%',
                   }}
                 >
                   <CardHeader subheader="Summary" />
