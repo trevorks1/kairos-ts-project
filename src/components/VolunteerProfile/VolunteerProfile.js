@@ -52,8 +52,21 @@ class VolunteerProfile extends Component {
       type: 'GET_POSTINGS_FOR_VOLUNTEER',
     });
   }
-
   handleEditActivities = () => {
+    const selected = [];
+    for (
+      let i = 0;
+      i < this.props.store.activities.prefActivityList.length;
+      i++
+    ) {
+      selected.push(
+        this.props.store.activities.prefActivityList[i].activity_type_id
+      );
+    }
+    this.setState({
+      editActivitiesSelected: selected,
+    });
+
     this.setState({
       editActivitiesBtnSelected: true,
     });
