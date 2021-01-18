@@ -165,21 +165,33 @@ class VolunteerProfile extends Component {
       <Container>
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <Paper elevation={2}>
-              <Typography variant="h2" component="h2" align="center">
-                Thank you for being a volunteer
-              </Typography>
-              <Typography variant="h2" component="h2" align="center">
-                We appreciate you!
-              </Typography>
-            </Paper>
+            <Box mt={6}>
+              <Paper
+                elevation={2}
+                style={{
+                  backgroundColor: '#FF4D53',
+                  color: 'white',
+                  padding: '10px',
+                  textShadow: '1px 1px 1px black',
+                }}
+              >
+                <Typography variant="h2" component="h2" align="center">
+                  Thank you for being a volunteer
+                </Typography>
+                <Typography variant="h2" component="h2" align="center">
+                  We appreciate you!
+                </Typography>
+              </Paper>
+            </Box>
           </Grid>
           <Grid item xs={12}>
             <Grid container>
               <Grid item>
-                <Typography variant="h3" component="h3">
-                  Hello {this.props.store.user.first_name}
-                </Typography>
+                <Box mb={1}>
+                  <Typography variant="h4" component="h4">
+                    Hello {this.props.store.user.first_name}!
+                  </Typography>
+                </Box>
               </Grid>
             </Grid>
             <Grid container>
