@@ -267,35 +267,37 @@ class ActivityDetailsPage extends Component {
           </Grid>
         </Paper>
         <Box mt={6}>
-          <Grid container spacing={2}>
-            <Grid item lg={6}>
-              <Card>
-                {posting !== undefined ? (
+          {posting !== undefined && (
+            <Grid container spacing={2}>
+              <Grid item lg={6}>
+                <Card>
+                  {posting !== undefined ? (
+                    <CardContent>
+                      <img src={posting.logo} alt="org logo"></img>
+                    </CardContent>
+                  ) : (
+                    <CardContent>
+                      <img
+                        src={process.env.PUBLIC_URL + '/org-placeholder.png'}
+                        alt="org logo"
+                      ></img>
+                    </CardContent>
+                  )}
                   <CardContent>
-                    <img src={posting.logo} alt="org logo"></img>
+                    <Typography variant="h4" component="h4">
+                      Description:
+                    </Typography>
+                    <Typography variant="body1" component="p">
+                      {posting && posting.description}
+                    </Typography>
                   </CardContent>
-                ) : (
-                  <CardContent>
-                    <img
-                      src={process.env.PUBLIC_URL + '/org-placeholder.png'}
-                      alt="org logo"
-                    ></img>
-                  </CardContent>
-                )}
-                <CardContent>
-                  <Typography variant="h4" component="h4">
-                    Description:
-                  </Typography>
-                  <Typography variant="body1" component="p">
-                    {posting && posting.description}
-                  </Typography>
-                </CardContent>
-              </Card>
+                </Card>
+              </Grid>
+              <Grid item lg={6}>
+                {posting && <ActivityDetailsCard posting={posting} />}
+              </Grid>
             </Grid>
-            <Grid item lg={6}>
-              {posting && <ActivityDetailsCard posting={posting} />}
-            </Grid>
-          </Grid>
+          )}
         </Box>
       </Container>
     );

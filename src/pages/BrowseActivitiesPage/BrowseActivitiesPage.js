@@ -60,6 +60,9 @@ class BrowseActivitiesPage extends Component {
         payload: this.state,
       });
     }
+    this.props.dispatch({
+      type: 'CLEAR_POSTING_DETAILS',
+    });
   }
 
   // combining handleChange functions!
