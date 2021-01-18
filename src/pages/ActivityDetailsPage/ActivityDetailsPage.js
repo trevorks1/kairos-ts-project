@@ -281,13 +281,13 @@ class ActivityDetailsPage extends Component {
                   {/* thank you msg dialog */}
                   <Dialog onClose={this.thanksMsg} open={this.state.signedUp}>
                     <DialogContent>
-                      {this.props.store.user.first_name !== null ? (
+                      {this.props.store.user.first_name !== undefined ? (
                         <Typography variant="h3" component="h3" align="center">
                           Thanks for signing up to help,{' '}
                           {this.props.store.user.first_name}!
                         </Typography>
                       ) : (
-                        <Typography variant="h3" component="h3">
+                        <Typography variant="h3" component="h3" align="center">
                           Thanks for signing up to help!
                         </Typography>
                       )}
