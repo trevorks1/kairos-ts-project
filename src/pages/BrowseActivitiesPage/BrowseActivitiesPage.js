@@ -85,7 +85,7 @@ class BrowseActivitiesPage extends Component {
         <Grid container spacing={2} alignItems="center">
           <Grid item lg={3}>
             <FormControl fullWidth>
-              <InputLabel>Cause Type</InputLabel>
+              <InputLabel style={{ marginLeft: '15px' }}>Cause Type</InputLabel>
               <Select
                 value={this.state.selectedCauseId}
                 onChange={this.handleChangeFor('cause_id')}
@@ -101,7 +101,9 @@ class BrowseActivitiesPage extends Component {
           </Grid>
           <Grid item lg={3}>
             <FormControl fullWidth>
-              <InputLabel>Activity Type</InputLabel>
+              <InputLabel style={{ marginLeft: '15px' }}>
+                Activity Type
+              </InputLabel>
               <Select
                 value={this.state.selectedActivityId}
                 onChange={this.handleChangeFor('activity_id')}
@@ -119,7 +121,7 @@ class BrowseActivitiesPage extends Component {
           </Grid>
           <Grid item lg={3}>
             <FormControl fullWidth>
-              <InputLabel>Age Range</InputLabel>
+              <InputLabel style={{ marginLeft: '15px' }}>Age Range</InputLabel>
               <Select
                 value={this.state.selectedAgeRangeId}
                 onChange={this.handleChangeFor('age_id')}
