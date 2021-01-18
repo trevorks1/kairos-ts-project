@@ -350,7 +350,7 @@ class VolunteerProfile extends Component {
           </Grid>
 
           <Box mt={10}>
-            <Grid container>
+            <Grid container spacing={2}>
               <Grid item xs={10}>
                 <Typography variant="h3" component="h3">
                   My Upcoming Events
@@ -366,15 +366,11 @@ class VolunteerProfile extends Component {
                 </Button>
               </Grid>
 
-              <Grid item xs={12}>
-                <Box mt={3}>
-                  {this.props.store.postings.postingsForVolunteerUser.map(
-                    (item, index) => {
-                      return <PostingCard posting={item} postingId={index} />;
-                    }
-                  )}
-                </Box>
-              </Grid>
+              {this.props.store.postings.postingsForVolunteerUser.map(
+                (item, index) => {
+                  return <PostingCard posting={item} postingId={index} />;
+                }
+              )}
             </Grid>
           </Box>
         </Grid>
