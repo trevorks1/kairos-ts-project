@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Button } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { TableRow, TableCell } from '@material-ui/core';
+import DeleteForeverOutlinedIcon from '@material-ui/icons/DeleteForeverOutlined';
+import CheckIcon from '@material-ui/icons/Check';
 
 class RequestedTableData extends Component {
   handleApprove = (event) => {
@@ -27,31 +29,13 @@ class RequestedTableData extends Component {
         <TableCell>{this.props.item.phone_number}</TableCell>
         <TableCell>{this.props.item.address}</TableCell>
         <TableCell>{this.props.item.email_address}</TableCell>
-        <TableCell>
-          <Button
-            variant="contained"
-            style={{
-              height: '20px',
-              width: '40px',
-              fontSize: '.8em',
-              marginRight: '20px',
-            }}
-            onClick={this.handleApprove}
-          >
-            Approve
-          </Button>
-          <Button
-            variant="contained"
+        <TableCell style={{ width: '100px' }}>
+          <DeleteForeverOutlinedIcon
             color="primary"
-            style={{
-              height: '20px',
-              width: '40px',
-              fontSize: '.8em',
-            }}
+            style={{ float: 'right', marginLeft: '15px', marginRight: '20px' }}
             onClick={this.handleDelete}
-          >
-            Deny
-          </Button>
+          />
+          <CheckIcon style={{ float: 'right' }} onClick={this.handleApprove} />
         </TableCell>
       </TableRow>
     );
