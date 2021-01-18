@@ -18,7 +18,16 @@ import {
   FormControl,
   InputLabel,
 } from '@material-ui/core';
+import { FavoriteBorder } from '@material-ui/icons';
+import { withStyles, createStyles } from '@material-ui/core/styles';
 import { DateTime } from 'luxon';
+
+const muiStyles = (theme) =>
+  createStyles({
+    icons: {
+      backgroundColor: theme.palette.primary.main,
+    },
+  });
 
 class OrganizationProfileItem extends Component {
   state = {
@@ -76,7 +85,7 @@ class OrganizationProfileItem extends Component {
   };
 
   render() {
-    const datePosted = DateTime.fromISO(this.props.item.date_posted);
+    const datePosted = DateTime.fromISO(this.props.item.date_to_attend);
     const humanReadablePostedDate = datePosted.toLocaleString(
       DateTime.DATE_SHORT
     );
@@ -95,7 +104,11 @@ class OrganizationProfileItem extends Component {
           >
             <CardActionArea onClick={this.handlePostingClick}>
               <CardHeader
-                avatar={<Avatar>{this.props.item.id}</Avatar>} // adding 1 to postingId because array index starts at 0!
+                avatar={
+                  <Avatar className={this.props.classes.icons}>
+                    <FavoriteBorder></FavoriteBorder>
+                  </Avatar>
+                } // adding 1 to postingId because array index starts at 0!
                 title={
                   <Typography variant="h3" component="h3">
                     {this.props.item.title}
@@ -109,7 +122,7 @@ class OrganizationProfileItem extends Component {
               </CardContent>
               <CardContent>
                 <Typography variant="body2" component="p">
-                  {humanReadablePostedDate}
+                  Attend Date: {humanReadablePostedDate}
                   {/* TODO need to fix the date!!! */}
                   {/* {this.props.posting.date_posted} */}
                 </Typography>
@@ -316,4 +329,4 @@ class OrganizationProfileItem extends Component {
   }
 }
 
-export default connect()(OrganizationProfileItem);
+export default connect()(withStyles(muiStyles)(OrganizationProfileItem));
