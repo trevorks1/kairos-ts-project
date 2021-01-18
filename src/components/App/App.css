@@ -28,9 +28,9 @@ Chocolate Red - #5E3334
 Banner
 -------------------------------------------------------------------------------- */
 .banner {
-  border: black, solid, 1px;
-  background-color: #ac3438;
   text-align: center;
+  text-shadow: 1px 1px 1px;
+  color: #ed484d;
 }
 
 /* --------------------------------------------------------------------------------
