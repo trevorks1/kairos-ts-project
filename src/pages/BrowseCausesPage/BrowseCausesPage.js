@@ -33,7 +33,7 @@ class BrowseCausesPage extends Component {
     return (
       <div>
         <div className="banner">
-          <h1>Find Your Cause</h1>
+          <h1 className="browse-heading">Find Your Cause</h1>
         </div>
         <Container>
           <Grid container spacing={2}>
