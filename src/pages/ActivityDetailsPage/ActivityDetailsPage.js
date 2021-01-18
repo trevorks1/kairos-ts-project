@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import { connect, shallowEqual } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import { Link, withRouter } from 'react-router-dom';
 
@@ -40,6 +40,7 @@ const muiStyle = (theme) =>
 class ActivityDetailsPage extends Component {
   state = {
     wantToHelp: false,
+    signedUp: false,
     email: '',
     member_name: '',
     age_id: 0,
@@ -80,6 +81,19 @@ class ActivityDetailsPage extends Component {
     this.setState({
       wantToHelp: false,
     });
+    this.thanksMsg();
+  };
+
+  thanksMsg = () => {
+    if (this.state.signedUp === false) {
+      this.setState({
+        signedUp: true,
+      });
+    } else {
+      this.setState({
+        signedUp: false,
+      });
+    }
   };
 
   wantToHelp = () => {
@@ -262,6 +276,21 @@ class ActivityDetailsPage extends Component {
                           I'll see you there! {'(SAVE)'}
                         </Button>
                       </div>
+                    </DialogContent>
+                  </Dialog>
+                  {/* thank you msg dialog */}
+                  <Dialog onClose={this.thanksMsg} open={this.state.signedUp}>
+                    <DialogContent>
+                      {this.props.store.user.first_name !== null ? (
+                        <Typography variant="h3" component="h3" align="center">
+                          Thanks for signing up to help,{' '}
+                          {this.props.store.user.first_name}!
+                        </Typography>
+                      ) : (
+                        <Typography variant="h3" component="h3">
+                          Thanks for signing up to help!
+                        </Typography>
+                      )}
                     </DialogContent>
                   </Dialog>
                 </Grid>
