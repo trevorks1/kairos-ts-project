@@ -19,15 +19,6 @@ import {
   TextField,
 } from '@material-ui/core';
 
-// material-ui for dummy card
-import {
-  Avatar,
-  Card,
-  CardHeader,
-  CardContent,
-  CardActionArea,
-} from '@material-ui/core';
-
 class VolunteerProfile extends Component {
   state = {
     editActivitiesBtnSelected: false,
