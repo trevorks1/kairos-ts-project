@@ -24,3 +24,7 @@
 .nav-right {
   text-align: right;
 }
+
+img {
+  border-radius: 10px;
+}
