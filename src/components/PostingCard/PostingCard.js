@@ -22,9 +22,9 @@ class PostingCard extends Component {
   };
 
   render() {
-    const datePosted = DateTime.fromISO(this.props.posting.date_posted);
-    const humanReadablePostedDate = datePosted.toLocaleString(
-      DateTime.DATE_SHORT
+    const dateToAttend = DateTime.fromISO(this.props.posting.date_to_attend);
+    const humanReadableAttendDate = dateToAttend.toLocaleString(
+      DateTime.DATE_FULL
     );
 
     return (
@@ -49,7 +49,7 @@ class PostingCard extends Component {
             </CardContent>
             <CardContent>
               <Typography variant="body2" component="p">
-                {humanReadablePostedDate}
+                Date To Attend: {humanReadableAttendDate}
                 {/* TODO need to fix the date!!! */}
                 {/* {this.props.posting.date_posted} */}
               </Typography>
