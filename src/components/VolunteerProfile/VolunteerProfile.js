@@ -331,26 +331,30 @@ class VolunteerProfile extends Component {
             </Grid>
           </Grid>
 
-          <Grid container>
-            <Grid item xs={10}>
-              <Typography variant="h3" component="h3">
-                My Upcoming Events
-              </Typography>
-            </Grid>
-            <Grid item xs={2}>
-              <Button variant="contained" onClick={this.eventsForMeClick}>
-                EVENTS FOR ME
-              </Button>
-            </Grid>
+          <Box mt={10}>
+            <Grid container>
+              <Grid item xs={10}>
+                <Typography variant="h3" component="h3">
+                  My Upcoming Events
+                </Typography>
+              </Grid>
+              <Grid item xs={2}>
+                <Button variant="contained" onClick={this.eventsForMeClick}>
+                  EVENTS FOR ME
+                </Button>
+              </Grid>
 
-            <Grid item xs={12}>
-              {this.props.store.postings.postingsForVolunteerUser.map(
-                (item, index) => {
-                  return <PostingCard posting={item} postingId={index} />;
-                }
-              )}
+              <Grid item xs={12}>
+                <Box mt={3}>
+                  {this.props.store.postings.postingsForVolunteerUser.map(
+                    (item, index) => {
+                      return <PostingCard posting={item} postingId={index} />;
+                    }
+                  )}
+                </Box>
+              </Grid>
             </Grid>
-          </Grid>
+          </Box>
         </Grid>
       </Container>
     );
