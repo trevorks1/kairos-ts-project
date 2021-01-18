@@ -70,6 +70,9 @@ class ActivityDetailsPage extends Component {
     // pushes user back to previous page - list of postings
     // OR pushes volunteer back to their profile page if they are viewing an 'upcoming posting' they have signed up for
     this.props.history.goBack();
+    this.props.dispatch({
+      type: 'CLEAR_POSTING_DETAILS',
+    });
   };
 
   handleSave = () => {

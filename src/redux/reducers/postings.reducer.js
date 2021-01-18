@@ -24,6 +24,8 @@ const postingDetails = (state = [], action) => {
   switch (action.type) {
     case 'SET_POSTING_DETAILS':
       return action.payload;
+    case 'CLEAR_POSTING_DETAILS':
+      return [];
     default:
       return state;
   }
