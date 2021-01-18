@@ -255,6 +255,7 @@ class VolunteerProfile extends Component {
                           <Button
                             variant="contained"
                             onClick={this.handleSubmitContact}
+                            color="primary"
                           >
                             SUBMIT
                           </Button>
@@ -303,7 +304,7 @@ class VolunteerProfile extends Component {
                                     checked={
                                       this.state.editActivitiesSelected.indexOf(
                                         item.id
-                                      ) !== -1
+                                      ) > -1
                                     }
                                     value={item.id}
                                     onChange={this.handleCheckBoxes}
@@ -331,6 +332,7 @@ class VolunteerProfile extends Component {
                           <Button
                             variant="contained"
                             onClick={this.handleSubmitActivities}
+                            color="primary"
                           >
                             SUBMIT
                           </Button>
@@ -351,7 +353,11 @@ class VolunteerProfile extends Component {
                 </Typography>
               </Grid>
               <Grid item xs={2}>
-                <Button variant="contained" onClick={this.eventsForMeClick}>
+                <Button
+                  variant="contained"
+                  onClick={this.eventsForMeClick}
+                  color="primary"
+                >
                   EVENTS FOR ME
                 </Button>
               </Grid>
