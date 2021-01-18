@@ -73,6 +73,10 @@ class ActivityDetailsPage extends Component {
   };
 
   handleSave = () => {
+    this.props.dispatch({
+      type: 'WANT_TO_HELP_SINGLE',
+      payload: this.props.store.postings.postingDetails[0].id,
+    });
     this.setState({
       wantToHelp: false,
     });

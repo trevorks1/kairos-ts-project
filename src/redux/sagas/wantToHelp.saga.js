@@ -1,8 +1,9 @@
 import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 
-function* wantToHelpSingle() {
+function* wantToHelpSingle(action) {
   try {
+    yield axios.post(`/api/postings/avol/${action.payload}`);
   } catch (err) {
     console.log('could not register volunteer to this event', err);
   }
