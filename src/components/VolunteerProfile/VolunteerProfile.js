@@ -19,15 +19,6 @@ import {
   TextField,
 } from '@material-ui/core';
 
-// material-ui for dummy card
-import {
-  Avatar,
-  Card,
-  CardHeader,
-  CardContent,
-  CardActionArea,
-} from '@material-ui/core';
-
 class VolunteerProfile extends Component {
   state = {
     editActivitiesBtnSelected: false,
@@ -52,8 +43,21 @@ class VolunteerProfile extends Component {
       type: 'GET_POSTINGS_FOR_VOLUNTEER',
     });
   }
-
   handleEditActivities = () => {
+    const selected = [];
+    for (
+      let i = 0;
+      i < this.props.store.activities.prefActivityList.length;
+      i++
+    ) {
+      selected.push(
+        this.props.store.activities.prefActivityList[i].activity_type_id
+      );
+    }
+    this.setState({
+      editActivitiesSelected: selected,
+    });
+
     this.setState({
       editActivitiesBtnSelected: true,
     });
@@ -165,21 +169,33 @@ class VolunteerProfile extends Component {
       <Container>
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <Paper elevation={2}>
-              <Typography variant="h2" component="h2" align="center">
-                Thank you for being a volunteer
-              </Typography>
-              <Typography variant="h2" component="h2" align="center">
-                We appreciate you!
-              </Typography>
-            </Paper>
+            <Box mt={6}>
+              <Paper
+                elevation={2}
+                style={{
+                  backgroundColor: '#FF4D53',
+                  color: 'white',
+                  padding: '10px',
+                  textShadow: '1px 1px 1px black',
+                }}
+              >
+                <Typography variant="h2" component="h2" align="center">
+                  Thank you for being a volunteer
+                </Typography>
+                <Typography variant="h2" component="h2" align="center">
+                  We appreciate you!
+                </Typography>
+              </Paper>
+            </Box>
           </Grid>
           <Grid item xs={12}>
             <Grid container>
               <Grid item>
-                <Typography variant="h3" component="h3">
-                  Hello {this.props.store.user.first_name}
-                </Typography>
+                <Box mb={1}>
+                  <Typography variant="h4" component="h4">
+                    Hello {this.props.store.user.first_name}!
+                  </Typography>
+                </Box>
               </Grid>
             </Grid>
             <Grid container>
@@ -243,6 +259,7 @@ class VolunteerProfile extends Component {
                           <Button
                             variant="contained"
                             onClick={this.handleSubmitContact}
+                            color="primary"
                           >
                             SUBMIT
                           </Button>
@@ -291,7 +308,7 @@ class VolunteerProfile extends Component {
                                     checked={
                                       this.state.editActivitiesSelected.indexOf(
                                         item.id
-                                      ) !== -1
+                                      ) > -1
                                     }
                                     value={item.id}
                                     onChange={this.handleCheckBoxes}
@@ -319,6 +336,7 @@ class VolunteerProfile extends Component {
                           <Button
                             variant="contained"
                             onClick={this.handleSubmitActivities}
+                            color="primary"
                           >
                             SUBMIT
                           </Button>
@@ -331,26 +349,34 @@ class VolunteerProfile extends Component {
             </Grid>
           </Grid>
 
-          <Grid container>
-            <Grid item xs={10}>
-              <Typography variant="h3" component="h3">
-                My Upcoming Events
-              </Typography>
-            </Grid>
-            <Grid item xs={2}>
-              <Button variant="contained" onClick={this.eventsForMeClick}>
-                EVENTS FOR ME
-              </Button>
-            </Grid>
+          <Box mt={10}>
+            <Grid container>
+              <Grid item xs={10}>
+                <Typography variant="h3" component="h3">
+                  My Upcoming Events
+                </Typography>
+              </Grid>
+              <Grid item xs={2}>
+                <Button
+                  variant="contained"
+                  onClick={this.eventsForMeClick}
+                  color="primary"
+                >
+                  EVENTS FOR ME
+                </Button>
+              </Grid>
 
-            <Grid item xs={12}>
-              {this.props.store.postings.postingsForVolunteerUser.map(
-                (item, index) => {
-                  return <PostingCard posting={item} postingId={index} />;
-                }
-              )}
+              <Grid item xs={12}>
+                <Box mt={3}>
+                  {this.props.store.postings.postingsForVolunteerUser.map(
+                    (item, index) => {
+                      return <PostingCard posting={item} postingId={index} />;
+                    }
+                  )}
+                </Box>
+              </Grid>
             </Grid>
-          </Grid>
+          </Box>
         </Grid>
       </Container>
     );
