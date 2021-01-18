@@ -31,8 +31,13 @@ function AdminPanel(props) {
     <Container>
       <h2 style={{ marginLeft: '32px', fontSize: '2.2em' }}>Admin Panel</h2>
       <Grid container>
-        <Grid item>
-          <Tabs value={selectedTab} onChange={handleTabChange}>
+        <Grid item className="tabs">
+          <Tabs
+            indicatorColor="primary"
+            textColor="primary"
+            value={selectedTab}
+            onChange={handleTabChange}
+          >
             {/* Each of the tabs below should get a component - one that displays
             requested orgs and one that displays approved orgs */}
             <Tab label="Requested" />

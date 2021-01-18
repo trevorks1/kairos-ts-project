@@ -91,8 +91,8 @@ Button
 
 .btn_asLink:hover {
   background-color: transparent;
-  border-color: #008183;
-  color: #008183;
+  border-color: #ac3438;
+  color: #ac3438;
 }
 
 /* --------------------------------------------------------------------------------
@@ -132,4 +132,11 @@ Form Treatment
 input {
   margin: 5px;
   margin-bottom: 10px;
+}
+
+/* 
+  Admin tabs ---------------------------
+*/
+.tabs {
+  background-color: #faf8f8;
 }
