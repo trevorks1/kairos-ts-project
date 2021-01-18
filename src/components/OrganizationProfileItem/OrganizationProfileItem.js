@@ -76,7 +76,7 @@ class OrganizationProfileItem extends Component {
   };
 
   render() {
-    const datePosted = DateTime.fromISO(this.props.item.date_posted);
+    const datePosted = DateTime.fromISO(this.props.item.date_to_attend);
     const humanReadablePostedDate = datePosted.toLocaleString(
       DateTime.DATE_SHORT
     );
@@ -109,7 +109,7 @@ class OrganizationProfileItem extends Component {
               </CardContent>
               <CardContent>
                 <Typography variant="body2" component="p">
-                  {humanReadablePostedDate}
+                  Attend Date: {humanReadablePostedDate}
                   {/* TODO need to fix the date!!! */}
                   {/* {this.props.posting.date_posted} */}
                 </Typography>

@@ -166,7 +166,7 @@ class OrganizationProfile extends Component {
     return (
       <div>
         {org && (
-          <Card
+          <div
             variant="outlined"
             style={{
               padding: '25px',
@@ -227,7 +227,7 @@ class OrganizationProfile extends Component {
                 </Card>
               </Grid>
             </Grid>
-          </Card>
+          </div>
         )}
         <div style={{ textAlign: 'center', marginBottom: '100px' }}>
           <Dialog
