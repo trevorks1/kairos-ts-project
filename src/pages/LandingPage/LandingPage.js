@@ -64,24 +64,17 @@ class LandingPage extends Component {
               <Card>
                 <CardContent>
                   <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Aenean vel elit scelerisque mauris pellentesque
-                    pulvinar pellentesque habitant morbi. Pharetra magna ac
-                    placerat vestibulum. Praesent tristique magna sit amet purus
-                    gravida quis blandit. Aenean euismod elementum nisi quis
-                    eleifend quam adipiscing. Mauris augue neque gravida in
-                    fermentum et sollicitudin. Pharetra sit amet aliquam id diam
-                    maecenas. Sed viverra tellus in hac. Fermentum posuere urna
-                    nec tincidunt praesent semper. Dictumst vestibulum rhoncus
-                    est pellentesque elit. Dolor magna eget est lorem ipsum.
-                    Ipsum suspendisse ultrices gravida dictum fusce ut placerat
-                    orci. Ut tellus elementum sagittis vitae et. Eget felis eget
-                    nunc lobortis. Lorem ipsum dolor sit amet consectetur
-                    adipiscing elit. Ut ornare lectus sit amet. Tellus
-                    pellentesque eu tincidunt tortor aliquam nulla facilisi
-                    cras. Morbi quis commodo odio aenean sed adipiscing diam
-                    donec adipiscing.
+                    Maybe it’s because I like everything to be super organized,
+                    but I love when nonprofit websites have a Get Involved
+                    section. There’s something to be said for giving people
+                    options, and for keeping them all in one place. It makes
+                    life so much easier. Basically, the mission is the purpose
+                    for which the agency exists. It is not a list of what you do
+                    but is rather a declaration of what you want to accomplish
+                    (e.g., eradicate hunger in our community, end violence among
+                    our youth). Being clear about the organization’s mission is
+                    critical to deciding how volunteers will be involved to
+                    support that mission.
                   </p>
                 </CardContent>
               </Card>
